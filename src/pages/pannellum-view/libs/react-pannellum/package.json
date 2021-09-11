@@ -1,0 +1,98 @@
+{
+  "_args": [
+    [
+      "react-pannellum@0.2.6",
+      "D:\\React Projects\\pannellum"
+    ]
+  ],
+  "_from": "react-pannellum@0.2.6",
+  "_id": "react-pannellum@0.2.6",
+  "_inBundle": false,
+  "_integrity": "sha512-i+GP0pU1C1HKVS53Gb6XNZpS0VSuGm4DGdfSk8BvMHgACyohhEE0Ji+8FF+X/eHD8jI7Zb/qj9yuLAGDd4gIOA==",
+  "_location": "/react-pannellum",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-pannellum@0.2.6",
+    "name": "react-pannellum",
+    "escapedName": "react-pannellum",
+    "rawSpec": "0.2.6",
+    "saveSpec": null,
+    "fetchSpec": "0.2.6"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-pannellum/-/react-pannellum-0.2.6.tgz",
+  "_spec": "0.2.6",
+  "_where": "D:\\React Projects\\pannellum",
+  "author": {
+    "name": "hoaiduyit"
+  },
+  "bugs": {
+    "url": "https://github.com/hoaiduyit/react-pannellum/issues"
+  },
+  "dependencies": {
+    "postcss": "8.2.10"
+  },
+  "description": "A library show panorama image for react",
+  "devDependencies": {
+    "@babel/cli": "7.13.14",
+    "@babel/core": "7.13.14",
+    "@babel/plugin-proposal-class-properties": "7.13.0",
+    "@babel/plugin-proposal-decorators": "7.13.5",
+    "@babel/preset-env": "7.13.12",
+    "@babel/preset-react": "7.13.13",
+    "@rollup/plugin-url": "6.0.0",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.23.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-config-standard-react": "11.0.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.3.1",
+    "eslint-plugin-react": "7.23.1",
+    "eslint-plugin-standard": "5.0.0",
+    "gh-pages": "3.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "rollup": "2.44.0",
+    "rollup-plugin-babel": "4.4.0",
+    "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-peer-deps-external": "2.2.4",
+    "rollup-plugin-postcss": "4.0.0"
+  },
+  "engines": {
+    "node": ">=11.14",
+    "npm": ">=6"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/hoaiduyit/react-pannellum#readme",
+  "jsnext:main": "dist/index.es.js",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "name": "react-pannellum",
+  "peerDependencies": {
+    "postcss": "^8.1.0",
+    "prop-types": "^15.5.4",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoaiduyit/react-pannellum.git"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w",
+    "test": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom"
+  },
+  "version": "0.2.6"
+}
