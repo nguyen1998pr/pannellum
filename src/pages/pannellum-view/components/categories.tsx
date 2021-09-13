@@ -17,6 +17,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Divider from "@material-ui/core/Divider";
 import Switch from "@material-ui/core/Switch";
+import ComposedIcon from 'material-ui-mix-icon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -111,7 +112,7 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 0)}
       >
         <ListItemIcon>
-          <InfoIcon />
+          <InfoIcon fontSize="large"/>
         </ListItemIcon>
         <ListItemText primary="Add Info" />
       </ListItem>
@@ -121,7 +122,7 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 1)}
       >
         <ListItemIcon>
-          <ViewCarouselIcon />
+          <ViewCarouselIcon fontSize="large"/>
         </ListItemIcon>
         <ListItemText primary="Add Scene" />
       </ListItem>
@@ -132,7 +133,12 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 2)}
       >
         <ListItemIcon>
-          <EditIcon />
+        <ComposedIcon
+                position='bottom-end'
+                color="default"
+                size="medium"
+                icon='info-circle'
+                extraIcon='user-edit'/>
         </ListItemIcon>
         <ListItemText primary="Edit Info" />
       </ListItem>
@@ -142,7 +148,12 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 3)}
       >
         <ListItemIcon>
-          <EditIcon />
+        <ComposedIcon
+                position='bottom-end'
+                color="default"
+                size="medium"
+                icon='photo-video'
+                extraIcon='user-edit'/>
         </ListItemIcon>
         <ListItemText primary="Edit Scene" />
       </ListItem>
@@ -153,7 +164,12 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 4)}
       >
         <ListItemIcon>
-          <DeleteIcon />
+          <ComposedIcon
+                position='bottom-end'
+                color="default"
+                size="medium"
+                icon='info-circle'
+                extraIcon='times'/>
         </ListItemIcon>
         <ListItemText primary="Delete Info" />
       </ListItem>
@@ -163,7 +179,12 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 5)}
       >
         <ListItemIcon>
-          <DeleteIcon />
+        <ComposedIcon
+                position='bottom-end'
+                color="default"
+                size="medium"
+                icon='photo-video'
+                extraIcon='times'/>
         </ListItemIcon>
         <ListItemText primary="Delete Scene" />
       </ListItem>
@@ -174,7 +195,7 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 6)}
       >
         <ListItemIcon>
-          <CategoryIcon />
+          <CategoryIcon fontSize="large"/>
         </ListItemIcon>
         <ListItemText primary="More" />
         {state.selectedIndex === 6 ? <ExpandLess /> : <ExpandMore />}
