@@ -10,14 +10,13 @@ import List from "@material-ui/core/List";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ViewCarouselIcon from "@material-ui/icons/ViewCarousel";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Divider from "@material-ui/core/Divider";
 import Switch from "@material-ui/core/Switch";
-import ComposedIcon from 'material-ui-mix-icon';
+import ComposedIcon from "material-ui-mix-icon";
+import ImageSearchIcon from "@material-ui/icons/ImageSearch";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,20 +66,24 @@ export const MainListItems = (props) => {
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 2:
+        props.isLoadScene(true, index);
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 3:
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 4:
-        props.isDeleteInfo(true, index);
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 5:
-        props.isDeleteScene(true, index);
+        props.isDeleteInfo(true, index);
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 6:
+        props.isDeleteScene(true, index);
+        setState((s) => ({ ...s, selectedIndex: index }));
+        break;
+      case 7:
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       default:
@@ -107,12 +110,13 @@ export const MainListItems = (props) => {
   return (
     <div>
       <ListItem
+        disabled={props.disable}
         button
         selected={state.selectedIndex === 0}
         onClick={(event) => handleListItemClick(event, 0)}
       >
         <ListItemIcon>
-          <InfoIcon fontSize="large"/>
+          <InfoIcon fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Add Info" />
       </ListItem>
@@ -122,85 +126,105 @@ export const MainListItems = (props) => {
         onClick={(event) => handleListItemClick(event, 1)}
       >
         <ListItemIcon>
-          <ViewCarouselIcon fontSize="large"/>
+          <ViewCarouselIcon fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="Add Scene" />
       </ListItem>
-      <Divider />
       <ListItem
+        disabled={props.disable}
         button
         selected={state.selectedIndex === 2}
         onClick={(event) => handleListItemClick(event, 2)}
       >
         <ListItemIcon>
-        <ComposedIcon
-                position='bottom-end'
-                color="default"
-                size="medium"
-                icon='info-circle'
-                extraIcon='user-edit'/>
+          <ImageSearchIcon fontSize="large" />
         </ListItemIcon>
-        <ListItemText primary="Edit Info" />
+        <ListItemText primary="Load Scene" />
       </ListItem>
+      <Divider />
       <ListItem
+        disabled={props.disable}
         button
         selected={state.selectedIndex === 3}
         onClick={(event) => handleListItemClick(event, 3)}
       >
         <ListItemIcon>
-        <ComposedIcon
-                position='bottom-end'
-                color="default"
-                size="medium"
-                icon='photo-video'
-                extraIcon='user-edit'/>
+          <ComposedIcon
+            position="bottom-end"
+            color="default"
+            size="medium"
+            icon="info-circle"
+            extraIcon="user-edit"
+          />
         </ListItemIcon>
-        <ListItemText primary="Edit Scene" />
+        <ListItemText primary="Edit Info" />
       </ListItem>
-      <Divider />
       <ListItem
+        disabled={props.disable}
         button
         selected={state.selectedIndex === 4}
         onClick={(event) => handleListItemClick(event, 4)}
       >
         <ListItemIcon>
           <ComposedIcon
-                position='bottom-end'
-                color="default"
-                size="medium"
-                icon='info-circle'
-                extraIcon='times'/>
+            position="bottom-end"
+            color="default"
+            size="medium"
+            icon="photo-video"
+            extraIcon="user-edit"
+          />
         </ListItemIcon>
-        <ListItemText primary="Delete Info" />
+        <ListItemText primary="Edit Scene" />
       </ListItem>
+      <Divider />
       <ListItem
+        disabled={props.disable}
         button
         selected={state.selectedIndex === 5}
         onClick={(event) => handleListItemClick(event, 5)}
       >
         <ListItemIcon>
-        <ComposedIcon
-                position='bottom-end'
-                color="default"
-                size="medium"
-                icon='photo-video'
-                extraIcon='times'/>
+          <ComposedIcon
+            position="bottom-end"
+            color="default"
+            size="medium"
+            icon="info-circle"
+            extraIcon="times"
+          />
         </ListItemIcon>
-        <ListItemText primary="Delete Scene" />
+        <ListItemText primary="Delete Info" />
       </ListItem>
-      <Divider />
       <ListItem
+        disabled={props.disable}
         button
         selected={state.selectedIndex === 6}
         onClick={(event) => handleListItemClick(event, 6)}
       >
         <ListItemIcon>
-          <CategoryIcon fontSize="large"/>
+          <ComposedIcon
+            position="bottom-end"
+            color="default"
+            size="medium"
+            icon="photo-video"
+            extraIcon="times"
+          />
+        </ListItemIcon>
+        <ListItemText primary="Delete Scene" />
+      </ListItem>
+      <Divider />
+      <ListItem
+        disabled={props.disable}
+        button
+        selected={state.selectedIndex === 7}
+        onClick={(event) => handleListItemClick(event, 7)}
+      >
+        <ListItemIcon>
+          <CategoryIcon fontSize="large" />
         </ListItemIcon>
         <ListItemText primary="More" />
-        {state.selectedIndex === 6 ? <ExpandLess /> : <ExpandMore />}
+        {state.selectedIndex === 7 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={state.selectedIndex === 6} timeout="auto" unmountOnExit>
+      <Collapse in={state.selectedIndex === 7} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <FormControl className={classes.nested} component="fieldset">
             <FormGroup>
