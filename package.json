@@ -12,6 +12,7 @@
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react-dom": "^17.0.0",
+    "material-ui-mix-icon": "^0.2.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-pannellum": "^0.2.6",

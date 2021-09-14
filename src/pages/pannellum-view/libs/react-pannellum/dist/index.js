@@ -1,14 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', { value: true });
+Object.defineProperty(exports, "__esModule", { value: true });
 
-var React = require('react');
-var PropTypes = require('prop-types');
+var React = require("react");
+var PropTypes = require("prop-types");
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+function _interopDefaultLegacy(e) {
+  return e && typeof e === "object" && "default" in e ? e : { default: e };
+}
 
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
-var PropTypes__default = /*#__PURE__*/_interopDefaultLegacy(PropTypes);
+var React__default = /*#__PURE__*/ _interopDefaultLegacy(React);
+var PropTypes__default = /*#__PURE__*/ _interopDefaultLegacy(PropTypes);
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -38,7 +40,7 @@ function _defineProperty(obj, key, value) {
       value: value,
       enumerable: true,
       configurable: true,
-      writable: true
+      writable: true,
     });
   } else {
     obj[key] = value;
@@ -52,9 +54,10 @@ function ownKeys(object, enumerableOnly) {
 
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
+    if (enumerableOnly)
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
     keys.push.apply(keys, symbols);
   }
 
@@ -73,7 +76,11 @@ function _objectSpread2(target) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
       ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        Object.defineProperty(
+          target,
+          key,
+          Object.getOwnPropertyDescriptor(source, key)
+        );
       });
     }
   }
@@ -90,24 +97,28 @@ function _inherits(subClass, superClass) {
     constructor: {
       value: subClass,
       writable: true,
-      configurable: true
-    }
+      configurable: true,
+    },
   });
   if (superClass) _setPrototypeOf(subClass, superClass);
 }
 
 function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
+  _getPrototypeOf = Object.setPrototypeOf
+    ? Object.getPrototypeOf
+    : function _getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+      };
   return _getPrototypeOf(o);
 }
 
 function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
+  _setPrototypeOf =
+    Object.setPrototypeOf ||
+    function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
 
   return _setPrototypeOf(o, p);
 }
@@ -118,7 +129,9 @@ function _isNativeReflectConstruct() {
   if (typeof Proxy === "function") return true;
 
   try {
-    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    Boolean.prototype.valueOf.call(
+      Reflect.construct(Boolean, [], function () {})
+    );
     return true;
   } catch (e) {
     return false;
@@ -127,7 +140,9 @@ function _isNativeReflectConstruct() {
 
 function _assertThisInitialized(self) {
   if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    throw new ReferenceError(
+      "this hasn't been initialised - super() hasn't been called"
+    );
   }
 
   return self;
@@ -146,7 +161,7 @@ function _createSuper(Derived) {
 
   return function _createSuperInternal() {
     var Super = _getPrototypeOf(Derived),
-        result;
+      result;
 
     if (hasNativeReflectConstruct) {
       var NewTarget = _getPrototypeOf(this).constructor;
@@ -195,14 +210,27 @@ var libpannellum = (function (window, document, undefined$1) {
      * @param {Object} [params] - Other configuration parameters (`horizonPitch`, `horizonRoll`, `backgroundColor`).
      */
 
-    this.init = function (_image, _imageType, _dynamic, haov, vaov, voffset, callback, params) {
+    this.init = function (
+      _image,
+      _imageType,
+      _dynamic,
+      haov,
+      vaov,
+      voffset,
+      callback,
+      params
+    ) {
       // Default argument for image type
       if (_imageType === undefined$1) _imageType = "equirectangular";
 
-      if (_imageType != "equirectangular" && _imageType != "cubemap" && _imageType != "multires") {
+      if (
+        _imageType != "equirectangular" &&
+        _imageType != "cubemap" &&
+        _imageType != "multires"
+      ) {
         console.log("Error: invalid image type specified!");
         throw {
-          type: "config error"
+          type: "config error",
         };
       }
 
@@ -225,9 +253,10 @@ var libpannellum = (function (window, document, undefined$1) {
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
         if (program.texture) gl.deleteTexture(program.texture);
-        if (program.nodeCache) for (var i = 0; i < program.nodeCache.length; i++) {
-          gl.deleteTexture(program.nodeCache[i].texture);
-        }
+        if (program.nodeCache)
+          for (var i = 0; i < program.nodeCache.length; i++) {
+            gl.deleteTexture(program.nodeCache[i].texture);
+          }
         gl.deleteProgram(program);
         program = undefined$1;
       }
@@ -241,7 +270,13 @@ var libpannellum = (function (window, document, undefined$1) {
         for (s = 0; s < 6; s++) {
           if (image[s].width > 0) {
             if (cubeImgWidth === undefined$1) cubeImgWidth = image[s].width;
-            if (cubeImgWidth != image[s].width) console.log("Cube faces have inconsistent widths: " + cubeImgWidth + " vs. " + image[s].width);
+            if (cubeImgWidth != image[s].width)
+              console.log(
+                "Cube faces have inconsistent widths: " +
+                  cubeImgWidth +
+                  " vs. " +
+                  image[s].width
+              );
           } else faceMissing = true;
         }
       }
@@ -277,13 +312,28 @@ var libpannellum = (function (window, document, undefined$1) {
       // NPOT cubemaps, and the CSS 3D transform fallback renderer is used
       // instead.
 
-
-      if (!(imageType == "cubemap" && (cubeImgWidth & cubeImgWidth - 1) !== 0 && (navigator.userAgent.toLowerCase().match(/(iphone|ipod|ipad).* os 8_/) || navigator.userAgent.toLowerCase().match(/(iphone|ipod|ipad).* os 9_/) || navigator.userAgent.toLowerCase().match(/(iphone|ipod|ipad).* os 10_/) || navigator.userAgent.match(/Trident.*rv[ :]*11\./)))) {
+      if (
+        !(
+          imageType == "cubemap" &&
+          (cubeImgWidth & (cubeImgWidth - 1)) !== 0 &&
+          (navigator.userAgent
+            .toLowerCase()
+            .match(/(iphone|ipod|ipad).* os 8_/) ||
+            navigator.userAgent
+              .toLowerCase()
+              .match(/(iphone|ipod|ipad).* os 9_/) ||
+            navigator.userAgent
+              .toLowerCase()
+              .match(/(iphone|ipod|ipad).* os 10_/) ||
+            navigator.userAgent.match(/Trident.*rv[ :]*11\./))
+        )
+      ) {
         // Enable WebGL on canvas
-        if (!gl) gl = canvas.getContext("experimental-webgl", {
-          alpha: false,
-          depth: false
-        });
+        if (!gl)
+          gl = canvas.getContext("experimental-webgl", {
+            alpha: false,
+            depth: false,
+          });
         if (gl && gl.getError() == 1286) handleWebGLError1286();
       } // If there is no WebGL, fall back to CSS 3D transform renderer.
       // This will discard the image loaded so far and load the fallback image.
@@ -291,13 +341,18 @@ var libpannellum = (function (window, document, undefined$1) {
       // fallback viewer only really works with WebKit/Blink and IE 10/11
       // (it doesn't work properly in Firefox).
 
-
-      if (!gl && (imageType == "multires" && image.hasOwnProperty("fallbackPath") || imageType == "cubemap") && ("WebkitAppearance" in document.documentElement.style || navigator.userAgent.match(/Trident.*rv[ :]*11\./) || navigator.appVersion.indexOf("MSIE 10") !== -1)) {
+      if (
+        !gl &&
+        ((imageType == "multires" && image.hasOwnProperty("fallbackPath")) ||
+          imageType == "cubemap") &&
+        ("WebkitAppearance" in document.documentElement.style ||
+          navigator.userAgent.match(/Trident.*rv[ :]*11\./) ||
+          navigator.appVersion.indexOf("MSIE 10") !== -1)
+      ) {
         // Remove old world if it exists
         if (world) {
           container.removeChild(world);
         } // Initialize renderer
-
 
         world = document.createElement("div");
         world.className = "pnlm-world"; // Add images
@@ -324,7 +379,12 @@ var libpannellum = (function (window, document, undefined$1) {
           faceCanvas.width = this.width + 4;
           faceCanvas.height = this.height + 4;
           faceContext.drawImage(this, 2, 2);
-          var imgData = faceContext.getImageData(0, 0, faceCanvas.width, faceCanvas.height);
+          var imgData = faceContext.getImageData(
+            0,
+            0,
+            faceCanvas.width,
+            faceCanvas.height
+          );
           var data = imgData.data; // Duplicate edge pixels
 
           var i;
@@ -332,46 +392,59 @@ var libpannellum = (function (window, document, undefined$1) {
 
           for (i = 2; i < faceCanvas.width - 2; i++) {
             for (j = 0; j < 4; j++) {
-              data[(i + faceCanvas.width) * 4 + j] = data[(i + faceCanvas.width * 2) * 4 + j];
-              data[(i + faceCanvas.width * (faceCanvas.height - 2)) * 4 + j] = data[(i + faceCanvas.width * (faceCanvas.height - 3)) * 4 + j];
+              data[(i + faceCanvas.width) * 4 + j] =
+                data[(i + faceCanvas.width * 2) * 4 + j];
+              data[(i + faceCanvas.width * (faceCanvas.height - 2)) * 4 + j] =
+                data[(i + faceCanvas.width * (faceCanvas.height - 3)) * 4 + j];
             }
           }
 
           for (i = 2; i < faceCanvas.height - 2; i++) {
             for (j = 0; j < 4; j++) {
-              data[(i * faceCanvas.width + 1) * 4 + j] = data[(i * faceCanvas.width + 2) * 4 + j];
-              data[((i + 1) * faceCanvas.width - 2) * 4 + j] = data[((i + 1) * faceCanvas.width - 3) * 4 + j];
+              data[(i * faceCanvas.width + 1) * 4 + j] =
+                data[(i * faceCanvas.width + 2) * 4 + j];
+              data[((i + 1) * faceCanvas.width - 2) * 4 + j] =
+                data[((i + 1) * faceCanvas.width - 3) * 4 + j];
             }
           }
 
           for (j = 0; j < 4; j++) {
-            data[(faceCanvas.width + 1) * 4 + j] = data[(faceCanvas.width * 2 + 2) * 4 + j];
-            data[(faceCanvas.width * 2 - 2) * 4 + j] = data[(faceCanvas.width * 3 - 3) * 4 + j];
-            data[(faceCanvas.width * (faceCanvas.height - 2) + 1) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 3) + 2) * 4 + j];
-            data[(faceCanvas.width * (faceCanvas.height - 1) - 2) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 2) - 3) * 4 + j];
+            data[(faceCanvas.width + 1) * 4 + j] =
+              data[(faceCanvas.width * 2 + 2) * 4 + j];
+            data[(faceCanvas.width * 2 - 2) * 4 + j] =
+              data[(faceCanvas.width * 3 - 3) * 4 + j];
+            data[(faceCanvas.width * (faceCanvas.height - 2) + 1) * 4 + j] =
+              data[(faceCanvas.width * (faceCanvas.height - 3) + 2) * 4 + j];
+            data[(faceCanvas.width * (faceCanvas.height - 1) - 2) * 4 + j] =
+              data[(faceCanvas.width * (faceCanvas.height - 2) - 3) * 4 + j];
           }
 
           for (i = 1; i < faceCanvas.width - 1; i++) {
             for (j = 0; j < 4; j++) {
               data[i * 4 + j] = data[(i + faceCanvas.width) * 4 + j];
-              data[(i + faceCanvas.width * (faceCanvas.height - 1)) * 4 + j] = data[(i + faceCanvas.width * (faceCanvas.height - 2)) * 4 + j];
+              data[(i + faceCanvas.width * (faceCanvas.height - 1)) * 4 + j] =
+                data[(i + faceCanvas.width * (faceCanvas.height - 2)) * 4 + j];
             }
           }
 
           for (i = 1; i < faceCanvas.height - 1; i++) {
             for (j = 0; j < 4; j++) {
-              data[i * faceCanvas.width * 4 + j] = data[(i * faceCanvas.width + 1) * 4 + j];
-              data[((i + 1) * faceCanvas.width - 1) * 4 + j] = data[((i + 1) * faceCanvas.width - 2) * 4 + j];
+              data[i * faceCanvas.width * 4 + j] =
+                data[(i * faceCanvas.width + 1) * 4 + j];
+              data[((i + 1) * faceCanvas.width - 1) * 4 + j] =
+                data[((i + 1) * faceCanvas.width - 2) * 4 + j];
             }
           }
 
           for (j = 0; j < 4; j++) {
             data[j] = data[(faceCanvas.width + 1) * 4 + j];
-            data[(faceCanvas.width - 1) * 4 + j] = data[(faceCanvas.width * 2 - 2) * 4 + j];
-            data[faceCanvas.width * (faceCanvas.height - 1) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 2) + 1) * 4 + j];
-            data[(faceCanvas.width * faceCanvas.height - 1) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 1) - 2) * 4 + j];
+            data[(faceCanvas.width - 1) * 4 + j] =
+              data[(faceCanvas.width * 2 - 2) * 4 + j];
+            data[faceCanvas.width * (faceCanvas.height - 1) * 4 + j] =
+              data[(faceCanvas.width * (faceCanvas.height - 2) + 1) * 4 + j];
+            data[(faceCanvas.width * faceCanvas.height - 1) * 4 + j] =
+              data[(faceCanvas.width * (faceCanvas.height - 1) - 2) * 4 + j];
           } // Draw image width duplicated edge pixels on canvas
-
 
           faceContext.putImageData(imgData, 0, 0);
           incLoaded.call(this);
@@ -380,7 +453,13 @@ var libpannellum = (function (window, document, undefined$1) {
         var incLoaded = function incLoaded() {
           if (this.width > 0) {
             if (fallbackImgSize === undefined$1) fallbackImgSize = this.width;
-            if (fallbackImgSize != this.width) console.log("Fallback faces have inconsistent widths: " + fallbackImgSize + " vs. " + this.width);
+            if (fallbackImgSize != this.width)
+              console.log(
+                "Fallback faces have inconsistent widths: " +
+                  fallbackImgSize +
+                  " vs. " +
+                  this.width
+              );
           } else faceMissing = true;
 
           loaded++;
@@ -396,7 +475,9 @@ var libpannellum = (function (window, document, undefined$1) {
 
         for (s = 0; s < 6; s++) {
           var faceImg = new Image();
-          faceImg.crossOrigin = globalParams.crossOrigin ? globalParams.crossOrigin : "anonymous";
+          faceImg.crossOrigin = globalParams.crossOrigin
+            ? globalParams.crossOrigin
+            : "anonymous";
           faceImg.side = s;
           faceImg.onload = onLoad;
           faceImg.onerror = incLoaded; // ignore missing face to support partial fallback image
@@ -413,7 +494,7 @@ var libpannellum = (function (window, document, undefined$1) {
       } else if (!gl) {
         console.log("Error: no WebGL support detected!");
         throw {
-          type: "no webgl"
+          type: "no webgl",
         };
       }
 
@@ -434,47 +515,69 @@ var libpannellum = (function (window, document, undefined$1) {
         vertices = createCube();
       } // Make sure image isn't too big
 
-
       var maxWidth = 0;
 
       if (imageType == "equirectangular") {
         maxWidth = gl.getParameter(gl.MAX_TEXTURE_SIZE);
 
         if (Math.max(image.width / 2, image.height) > maxWidth) {
-          console.log("Error: The image is too big; it's " + image.width + "px wide, " + "but this device's maximum supported size is " + maxWidth * 2 + "px.");
+          console.log(
+            "Error: The image is too big; it's " +
+              image.width +
+              "px wide, " +
+              "but this device's maximum supported size is " +
+              maxWidth * 2 +
+              "px."
+          );
           throw {
             type: "webgl size error",
             width: image.width,
-            maxWidth: maxWidth * 2
+            maxWidth: maxWidth * 2,
           };
         }
       } else if (imageType == "cubemap") {
         if (cubeImgWidth > gl.getParameter(gl.MAX_CUBE_MAP_TEXTURE_SIZE)) {
-          console.log("Error: The image is too big; it's " + cubeImgWidth + "px wide, " + "but this device's maximum supported size is " + maxWidth + "px.");
+          console.log(
+            "Error: The image is too big; it's " +
+              cubeImgWidth +
+              "px wide, " +
+              "but this device's maximum supported size is " +
+              maxWidth +
+              "px."
+          );
           throw {
             type: "webgl size error",
             width: cubeImgWidth,
-            maxWidth: maxWidth
+            maxWidth: maxWidth,
           };
         }
       } // Store horizon pitch and roll if applicable
 
-
-      if (params !== undefined$1 && (params.horizonPitch !== undefined$1 || params.horizonRoll !== undefined$1)) pose = [params.horizonPitch == undefined$1 ? 0 : params.horizonPitch, params.horizonRoll == undefined$1 ? 0 : params.horizonRoll]; // Set 2d texture binding
+      if (
+        params !== undefined$1 &&
+        (params.horizonPitch !== undefined$1 ||
+          params.horizonRoll !== undefined$1)
+      )
+        pose = [
+          params.horizonPitch == undefined$1 ? 0 : params.horizonPitch,
+          params.horizonRoll == undefined$1 ? 0 : params.horizonRoll,
+        ]; // Set 2d texture binding
 
       var glBindType = gl.TEXTURE_2D; // Create viewport for entire canvas
 
       gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight); // Check precision support
 
       if (gl.getShaderPrecisionFormat) {
-        var precision = gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.HIGH_FLOAT);
+        var precision = gl.getShaderPrecisionFormat(
+          gl.FRAGMENT_SHADER,
+          gl.HIGH_FLOAT
+        );
 
         if (precision && precision.precision < 1) {
           // `highp` precision not supported; https://stackoverflow.com/a/33308927
           fragEquiCubeBase = fragEquiCubeBase.replace("highp", "mediump");
         }
       } // Create vertex shader
-
 
       vs = gl.createShader(gl.VERTEX_SHADER);
       var vertexSrc = v;
@@ -504,9 +607,12 @@ var libpannellum = (function (window, document, undefined$1) {
       gl.attachShader(program, fs);
       gl.linkProgram(program); // Log errors
 
-      if (!gl.getShaderParameter(vs, gl.COMPILE_STATUS)) console.log(gl.getShaderInfoLog(vs));
-      if (!gl.getShaderParameter(fs, gl.COMPILE_STATUS)) console.log(gl.getShaderInfoLog(fs));
-      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) console.log(gl.getProgramInfoLog(program)); // Use WebGL program
+      if (!gl.getShaderParameter(vs, gl.COMPILE_STATUS))
+        console.log(gl.getShaderInfoLog(vs));
+      if (!gl.getShaderParameter(fs, gl.COMPILE_STATUS))
+        console.log(gl.getShaderInfoLog(fs));
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS))
+        console.log(gl.getProgramInfoLog(program)); // Use WebGL program
 
       gl.useProgram(program);
       program.drawInProgress = false; // Set background clear color (does not apply to cubemap/fallback image)
@@ -522,11 +628,25 @@ var libpannellum = (function (window, document, undefined$1) {
         // Provide texture coordinates for rectangle
         if (!texCoordBuffer) texCoordBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, 1, 1, 1, 1, -1, -1, 1, 1, -1, -1, -1]), gl.STATIC_DRAW);
-        gl.vertexAttribPointer(program.texCoordLocation, 2, gl.FLOAT, false, 0, 0); // Pass aspect ratio
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array([-1, 1, 1, 1, 1, -1, -1, 1, 1, -1, -1, -1]),
+          gl.STATIC_DRAW
+        );
+        gl.vertexAttribPointer(
+          program.texCoordLocation,
+          2,
+          gl.FLOAT,
+          false,
+          0,
+          0
+        ); // Pass aspect ratio
 
         program.aspectRatio = gl.getUniformLocation(program, "u_aspectRatio");
-        gl.uniform1f(program.aspectRatio, gl.drawingBufferWidth / gl.drawingBufferHeight); // Locate psi, theta, focal length, horizontal extent, vertical extent, and vertical offset
+        gl.uniform1f(
+          program.aspectRatio,
+          gl.drawingBufferWidth / gl.drawingBufferHeight
+        ); // Locate psi, theta, focal length, horizontal extent, vertical extent, and vertical offset
 
         program.psi = gl.getUniformLocation(program, "u_psi");
         program.theta = gl.getUniformLocation(program, "u_theta");
@@ -538,30 +658,81 @@ var libpannellum = (function (window, document, undefined$1) {
 
         gl.uniform1f(program.h, haov / (Math.PI * 2.0));
         gl.uniform1f(program.v, vaov / Math.PI);
-        gl.uniform1f(program.vo, voffset / Math.PI * 2); // Set background color
+        gl.uniform1f(program.vo, (voffset / Math.PI) * 2); // Set background color
 
         if (imageType == "equirectangular") {
-          program.backgroundColor = gl.getUniformLocation(program, "u_backgroundColor");
+          program.backgroundColor = gl.getUniformLocation(
+            program,
+            "u_backgroundColor"
+          );
           gl.uniform4fv(program.backgroundColor, color.concat([1]));
         } // Create texture
-
 
         program.texture = gl.createTexture();
         gl.bindTexture(glBindType, program.texture); // Upload images to texture depending on type
 
         if (imageType == "cubemap") {
           // Load all six sides of the cube map
-          gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image[1]);
-          gl.texImage2D(gl.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image[3]);
-          gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image[4]);
-          gl.texImage2D(gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image[5]);
-          gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_Z, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image[0]);
-          gl.texImage2D(gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image[2]);
+          gl.texImage2D(
+            gl.TEXTURE_CUBE_MAP_POSITIVE_X,
+            0,
+            gl.RGB,
+            gl.RGB,
+            gl.UNSIGNED_BYTE,
+            image[1]
+          );
+          gl.texImage2D(
+            gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
+            0,
+            gl.RGB,
+            gl.RGB,
+            gl.UNSIGNED_BYTE,
+            image[3]
+          );
+          gl.texImage2D(
+            gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
+            0,
+            gl.RGB,
+            gl.RGB,
+            gl.UNSIGNED_BYTE,
+            image[4]
+          );
+          gl.texImage2D(
+            gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
+            0,
+            gl.RGB,
+            gl.RGB,
+            gl.UNSIGNED_BYTE,
+            image[5]
+          );
+          gl.texImage2D(
+            gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
+            0,
+            gl.RGB,
+            gl.RGB,
+            gl.UNSIGNED_BYTE,
+            image[0]
+          );
+          gl.texImage2D(
+            gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
+            0,
+            gl.RGB,
+            gl.RGB,
+            gl.UNSIGNED_BYTE,
+            image[2]
+          );
         } else {
           if (image.width <= maxWidth) {
             gl.uniform1i(gl.getUniformLocation(program, "u_splitImage"), 0); // Upload image to the texture
 
-            gl.texImage2D(glBindType, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
+            gl.texImage2D(
+              glBindType,
+              0,
+              gl.RGB,
+              gl.RGB,
+              gl.UNSIGNED_BYTE,
+              image
+            );
           } else {
             // Image needs to be split into two parts due to texture size limits
             gl.uniform1i(gl.getUniformLocation(program, "u_splitImage"), 1); // Draw image on canvas
@@ -572,8 +743,20 @@ var libpannellum = (function (window, document, undefined$1) {
             var cropContext = cropCanvas.getContext("2d");
             cropContext.drawImage(image, 0, 0); // Upload first half of image to the texture
 
-            var cropImage = cropContext.getImageData(0, 0, image.width / 2, image.height);
-            gl.texImage2D(glBindType, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, cropImage); // Create and bind texture for second half of image
+            var cropImage = cropContext.getImageData(
+              0,
+              0,
+              image.width / 2,
+              image.height
+            );
+            gl.texImage2D(
+              glBindType,
+              0,
+              gl.RGB,
+              gl.RGB,
+              gl.UNSIGNED_BYTE,
+              cropImage
+            ); // Create and bind texture for second half of image
 
             program.texture2 = gl.createTexture();
             gl.activeTexture(gl.TEXTURE1);
@@ -581,8 +764,20 @@ var libpannellum = (function (window, document, undefined$1) {
             gl.uniform1i(gl.getUniformLocation(program, "u_image1"), 1); // Upload second half of image to the texture
 
             cropContext.drawImage(image, -image.width / 2, 0);
-            cropImage = cropContext.getImageData(0, 0, image.width / 2, image.height);
-            gl.texImage2D(glBindType, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, cropImage); // Set parameters for rendering any size
+            cropImage = cropContext.getImageData(
+              0,
+              0,
+              image.width / 2,
+              image.height
+            );
+            gl.texImage2D(
+              glBindType,
+              0,
+              gl.RGB,
+              gl.RGB,
+              gl.UNSIGNED_BYTE,
+              cropImage
+            ); // Set parameters for rendering any size
 
             gl.texParameteri(glBindType, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
             gl.texParameteri(glBindType, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -592,7 +787,6 @@ var libpannellum = (function (window, document, undefined$1) {
             gl.activeTexture(gl.TEXTURE0);
           }
         } // Set parameters for rendering any size
-
 
         gl.texParameteri(glBindType, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(glBindType, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -608,10 +802,18 @@ var libpannellum = (function (window, document, undefined$1) {
         if (!cubeVertIndBuf) cubeVertIndBuf = gl.createBuffer(); // Bind texture coordinate buffer and pass coordinates to WebGL
 
         gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertTexCoordBuf);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]), gl.STATIC_DRAW); // Bind square index buffer and pass indicies to WebGL
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]),
+          gl.STATIC_DRAW
+        ); // Bind square index buffer and pass indicies to WebGL
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertIndBuf);
-        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW); // Find uniforms
+        gl.bufferData(
+          gl.ELEMENT_ARRAY_BUFFER,
+          new Uint16Array([0, 1, 2, 0, 2, 3]),
+          gl.STATIC_DRAW
+        ); // Find uniforms
 
         program.perspUniform = gl.getUniformLocation(program, "u_perspMatrix");
         program.cubeUniform = gl.getUniformLocation(program, "u_cubeMatrix"); //program.colorUniform = gl.getUniformLocation(program, 'u_color');
@@ -622,13 +824,12 @@ var libpannellum = (function (window, document, undefined$1) {
         program.nodeCacheTimestamp = 0;
       } // Check if there was an error
 
-
       var err = gl.getError();
 
       if (err !== 0) {
         console.log("Error: Something went wrong with WebGL!", err);
         throw {
-          type: "webgl error"
+          type: "webgl error",
         };
       }
 
@@ -639,7 +840,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @memberof Renderer
      * @instance
      */
-
 
     this.destroy = function () {
       if (container !== undefined$1) {
@@ -665,7 +865,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @instance
      */
 
-
     this.resize = function () {
       var pixelRatio = window.devicePixelRatio || 1;
       canvas.width = canvas.clientWidth * pixelRatio;
@@ -676,11 +875,13 @@ var libpannellum = (function (window, document, undefined$1) {
         gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 
         if (imageType != "multires") {
-          gl.uniform1f(program.aspectRatio, canvas.clientWidth / canvas.clientHeight);
+          gl.uniform1f(
+            program.aspectRatio,
+            canvas.clientWidth / canvas.clientHeight
+          );
         }
       }
     }; // Initialize canvas size
-
 
     this.resize();
     /**
@@ -704,49 +905,127 @@ var libpannellum = (function (window, document, undefined$1) {
      * @param {boolean} [params.returnImage] - Return rendered image?
      */
 
-
     this.render = function (pitch, yaw, hfov, params) {
       var focal,
-          i,
-          s,
-          roll = 0;
+        i,
+        s,
+        roll = 0;
       if (params === undefined$1) params = {};
       if (params.roll) roll = params.roll; // Apply pitch and roll transformation if applicable
 
       if (pose !== undefined$1) {
         var horizonPitch = pose[0],
-            horizonRoll = pose[1]; // Calculate new pitch and yaw
+          horizonRoll = pose[1]; // Calculate new pitch and yaw
 
         var orig_pitch = pitch,
-            orig_yaw = yaw,
-            x = Math.cos(horizonRoll) * Math.sin(pitch) * Math.sin(horizonPitch) + Math.cos(pitch) * (Math.cos(horizonPitch) * Math.cos(yaw) + Math.sin(horizonRoll) * Math.sin(horizonPitch) * Math.sin(yaw)),
-            y = -Math.sin(pitch) * Math.sin(horizonRoll) + Math.cos(pitch) * Math.cos(horizonRoll) * Math.sin(yaw),
-            z = Math.cos(horizonRoll) * Math.cos(horizonPitch) * Math.sin(pitch) + Math.cos(pitch) * (-Math.cos(yaw) * Math.sin(horizonPitch) + Math.cos(horizonPitch) * Math.sin(horizonRoll) * Math.sin(yaw));
+          orig_yaw = yaw,
+          x =
+            Math.cos(horizonRoll) * Math.sin(pitch) * Math.sin(horizonPitch) +
+            Math.cos(pitch) *
+              (Math.cos(horizonPitch) * Math.cos(yaw) +
+                Math.sin(horizonRoll) * Math.sin(horizonPitch) * Math.sin(yaw)),
+          y =
+            -Math.sin(pitch) * Math.sin(horizonRoll) +
+            Math.cos(pitch) * Math.cos(horizonRoll) * Math.sin(yaw),
+          z =
+            Math.cos(horizonRoll) * Math.cos(horizonPitch) * Math.sin(pitch) +
+            Math.cos(pitch) *
+              (-Math.cos(yaw) * Math.sin(horizonPitch) +
+                Math.cos(horizonPitch) * Math.sin(horizonRoll) * Math.sin(yaw));
         pitch = Math.asin(Math.max(Math.min(z, 1), -1));
         yaw = Math.atan2(y, x); // Calculate roll
 
-        var v = [Math.cos(orig_pitch) * (Math.sin(horizonRoll) * Math.sin(horizonPitch) * Math.cos(orig_yaw) - Math.cos(horizonPitch) * Math.sin(orig_yaw)), Math.cos(orig_pitch) * Math.cos(horizonRoll) * Math.cos(orig_yaw), Math.cos(orig_pitch) * (Math.cos(horizonPitch) * Math.sin(horizonRoll) * Math.cos(orig_yaw) + Math.sin(orig_yaw) * Math.sin(horizonPitch))],
-            w = [-Math.cos(pitch) * Math.sin(yaw), Math.cos(pitch) * Math.cos(yaw)];
-        var roll_adj = Math.acos(Math.max(Math.min((v[0] * w[0] + v[1] * w[1]) / (Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]) * Math.sqrt(w[0] * w[0] + w[1] * w[1])), 1), -1));
+        var v = [
+            Math.cos(orig_pitch) *
+              (Math.sin(horizonRoll) *
+                Math.sin(horizonPitch) *
+                Math.cos(orig_yaw) -
+                Math.cos(horizonPitch) * Math.sin(orig_yaw)),
+            Math.cos(orig_pitch) * Math.cos(horizonRoll) * Math.cos(orig_yaw),
+            Math.cos(orig_pitch) *
+              (Math.cos(horizonPitch) *
+                Math.sin(horizonRoll) *
+                Math.cos(orig_yaw) +
+                Math.sin(orig_yaw) * Math.sin(horizonPitch)),
+          ],
+          w = [
+            -Math.cos(pitch) * Math.sin(yaw),
+            Math.cos(pitch) * Math.cos(yaw),
+          ];
+        var roll_adj = Math.acos(
+          Math.max(
+            Math.min(
+              (v[0] * w[0] + v[1] * w[1]) /
+                (Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]) *
+                  Math.sqrt(w[0] * w[0] + w[1] * w[1])),
+              1
+            ),
+            -1
+          )
+        );
         if (v[2] < 0) roll_adj = 2 * Math.PI - roll_adj;
         roll += roll_adj;
       } // If no WebGL
-
 
       if (!gl && (imageType == "multires" || imageType == "cubemap")) {
         // Determine face transforms
         s = fallbackImgSize / 2;
         var transforms = {
-          f: "translate3d(-" + (s + 2) + "px, -" + (s + 2) + "px, -" + s + "px)",
-          b: "translate3d(" + (s + 2) + "px, -" + (s + 2) + "px, " + s + "px) rotateX(180deg) rotateZ(180deg)",
-          u: "translate3d(-" + (s + 2) + "px, -" + s + "px, " + (s + 2) + "px) rotateX(270deg)",
-          d: "translate3d(-" + (s + 2) + "px, " + s + "px, -" + (s + 2) + "px) rotateX(90deg)",
-          l: "translate3d(-" + s + "px, -" + (s + 2) + "px, " + (s + 2) + "px) rotateX(180deg) rotateY(90deg) rotateZ(180deg)",
-          r: "translate3d(" + s + "px, -" + (s + 2) + "px, -" + (s + 2) + "px) rotateY(270deg)"
+          f:
+            "translate3d(-" + (s + 2) + "px, -" + (s + 2) + "px, -" + s + "px)",
+          b:
+            "translate3d(" +
+            (s + 2) +
+            "px, -" +
+            (s + 2) +
+            "px, " +
+            s +
+            "px) rotateX(180deg) rotateZ(180deg)",
+          u:
+            "translate3d(-" +
+            (s + 2) +
+            "px, -" +
+            s +
+            "px, " +
+            (s + 2) +
+            "px) rotateX(270deg)",
+          d:
+            "translate3d(-" +
+            (s + 2) +
+            "px, " +
+            s +
+            "px, -" +
+            (s + 2) +
+            "px) rotateX(90deg)",
+          l:
+            "translate3d(-" +
+            s +
+            "px, -" +
+            (s + 2) +
+            "px, " +
+            (s + 2) +
+            "px) rotateX(180deg) rotateY(90deg) rotateZ(180deg)",
+          r:
+            "translate3d(" +
+            s +
+            "px, -" +
+            (s + 2) +
+            "px, -" +
+            (s + 2) +
+            "px) rotateY(270deg)",
         };
         focal = 1 / Math.tan(hfov / 2);
-        var zoom = focal * canvas.clientWidth / 2 + "px";
-        var transform = "perspective(" + zoom + ") translateZ(" + zoom + ") rotateX(" + pitch + "rad) rotateY(" + yaw + "rad) "; // Apply face transforms
+        var zoom = (focal * canvas.clientWidth) / 2 + "px";
+        var transform =
+          "perspective(" +
+          zoom +
+          ") translateZ(" +
+          zoom +
+          ") rotateX(" +
+          pitch +
+          "rad) rotateY(" +
+          yaw +
+          "rad) "; // Apply face transforms
 
         var faces = Object.keys(transforms);
 
@@ -763,7 +1042,12 @@ var libpannellum = (function (window, document, undefined$1) {
 
       if (imageType != "multires") {
         // Calculate focal length from vertical field of view
-        var vfov = 2 * Math.atan(Math.tan(hfov * 0.5) / (gl.drawingBufferWidth / gl.drawingBufferHeight));
+        var vfov =
+          2 *
+          Math.atan(
+            Math.tan(hfov * 0.5) /
+              (gl.drawingBufferWidth / gl.drawingBufferHeight)
+          );
         focal = 1 / Math.tan(vfov * 0.5); // Pass psi, theta, roll, and focal length
 
         gl.uniform1f(program.psi, yaw);
@@ -775,15 +1059,26 @@ var libpannellum = (function (window, document, undefined$1) {
           // Update texture if dynamic
           if (imageType == "equirectangular") {
             gl.bindTexture(gl.TEXTURE_2D, program.texture);
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
+            gl.texImage2D(
+              gl.TEXTURE_2D,
+              0,
+              gl.RGB,
+              gl.RGB,
+              gl.UNSIGNED_BYTE,
+              image
+            );
           }
         } // Draw using current buffer
-
 
         gl.drawArrays(gl.TRIANGLES, 0, 6);
       } else {
         // Create perspective matrix
-        var perspMatrix = makePersp(hfov, gl.drawingBufferWidth / gl.drawingBufferHeight, 0.1, 100.0); // Find correct zoom level
+        var perspMatrix = makePersp(
+          hfov,
+          gl.drawingBufferWidth / gl.drawingBufferHeight,
+          0.1,
+          100.0
+        ); // Find correct zoom level
 
         checkZoom(hfov); // Create rotation matrix
 
@@ -793,15 +1088,29 @@ var libpannellum = (function (window, document, undefined$1) {
         matrix = rotateMatrix(matrix, yaw, "y");
         matrix = makeMatrix4(matrix); // Set matrix uniforms
 
-        gl.uniformMatrix4fv(program.perspUniform, false, new Float32Array(transposeMatrix4(perspMatrix)));
-        gl.uniformMatrix4fv(program.cubeUniform, false, new Float32Array(transposeMatrix4(matrix))); // Find current nodes
+        gl.uniformMatrix4fv(
+          program.perspUniform,
+          false,
+          new Float32Array(transposeMatrix4(perspMatrix))
+        );
+        gl.uniformMatrix4fv(
+          program.cubeUniform,
+          false,
+          new Float32Array(transposeMatrix4(matrix))
+        ); // Find current nodes
 
         var rotPersp = rotatePersp(perspMatrix, matrix);
         program.nodeCache.sort(multiresNodeSort);
 
-        if (program.nodeCache.length > 200 && program.nodeCache.length > program.currentNodes.length + 50) {
+        if (
+          program.nodeCache.length > 200 &&
+          program.nodeCache.length > program.currentNodes.length + 50
+        ) {
           // Remove older nodes from cache
-          var removed = program.nodeCache.splice(200, program.nodeCache.length - 200);
+          var removed = program.nodeCache.splice(
+            200,
+            program.nodeCache.length - 200
+          );
 
           for (var j = 0; j < removed.length; j++) {
             // Explicitly delete textures
@@ -813,19 +1122,27 @@ var libpannellum = (function (window, document, undefined$1) {
         var sides = ["f", "b", "u", "d", "l", "r"];
 
         for (s = 0; s < 6; s++) {
-          var ntmp = new MultiresNode(vtmps[s], sides[s], 1, 0, 0, image.fullpath);
+          var ntmp = new MultiresNode(
+            vtmps[s],
+            sides[s],
+            1,
+            0,
+            0,
+            image.fullpath
+          );
           testMultiresNode(rotPersp, ntmp, pitch, yaw);
         }
 
         program.currentNodes.sort(multiresNodeRenderSort); // Unqueue any pending requests for nodes that are no longer visible
 
         for (i = pendingTextureRequests.length - 1; i >= 0; i--) {
-          if (program.currentNodes.indexOf(pendingTextureRequests[i].node) === -1) {
+          if (
+            program.currentNodes.indexOf(pendingTextureRequests[i].node) === -1
+          ) {
             pendingTextureRequests[i].node.textureLoad = false;
             pendingTextureRequests.splice(i, 1);
           }
         } // Allow one request to be pending, so that we can create a texture buffer for that in advance of loading actually beginning
-
 
         if (pendingTextureRequests.length === 0) {
           for (i = 0; i < program.currentNodes.length; i++) {
@@ -840,7 +1157,6 @@ var libpannellum = (function (window, document, undefined$1) {
           }
         } // Draw tiles
 
-
         multiresDraw();
       }
 
@@ -854,7 +1170,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {boolean} Whether or not images are loading.
      */
-
 
     this.isLoading = function () {
       if (gl && imageType == "multires") {
@@ -874,7 +1189,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {HTMLElement} Renderer's canvas.
      */
 
-
     this.getCanvas = function () {
       return canvas;
     };
@@ -886,7 +1200,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number} Base tiles first, then higher timestamp first.
      */
 
-
     function multiresNodeSort(a, b) {
       // Base tiles are always first
       if (a.level == 1 && b.level != 1) {
@@ -896,7 +1209,6 @@ var libpannellum = (function (window, document, undefined$1) {
       if (b.level == 1 && a.level != 1) {
         return 1;
       } // Higher timestamp first
-
 
       return b.timestamp - a.timestamp;
     }
@@ -908,13 +1220,11 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number} Lower zoom levels first, then closest to center first.
      */
 
-
     function multiresNodeRenderSort(a, b) {
       // Lower zoom levels first
       if (a.level != b.level) {
         return a.level - b.level;
       } // Lower distance from center first
-
 
       return a.diff - b.diff;
     }
@@ -922,7 +1232,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * Draws multires nodes.
      * @private
      */
-
 
     function multiresDraw() {
       if (!program.drawInProgress) {
@@ -935,11 +1244,29 @@ var libpannellum = (function (window, document, undefined$1) {
             //gl.uniform4f(program.colorUniform, color[0], color[1], color[2], 1.0);
             // Bind vertex buffer and pass vertices to WebGL
             gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertBuf);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(program.currentNodes[i].vertices), gl.STATIC_DRAW);
-            gl.vertexAttribPointer(program.vertPosLocation, 3, gl.FLOAT, false, 0, 0); // Prep for texture
+            gl.bufferData(
+              gl.ARRAY_BUFFER,
+              new Float32Array(program.currentNodes[i].vertices),
+              gl.STATIC_DRAW
+            );
+            gl.vertexAttribPointer(
+              program.vertPosLocation,
+              3,
+              gl.FLOAT,
+              false,
+              0,
+              0
+            ); // Prep for texture
 
             gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertTexCoordBuf);
-            gl.vertexAttribPointer(program.texCoordLocation, 2, gl.FLOAT, false, 0, 0); // Bind texture and draw tile
+            gl.vertexAttribPointer(
+              program.texCoordLocation,
+              2,
+              gl.FLOAT,
+              false,
+              0,
+              0
+            ); // Bind texture and draw tile
 
             gl.bindTexture(gl.TEXTURE_2D, program.currentNodes[i].texture); // Bind program.currentNodes[i].texture to TEXTURE0
 
@@ -962,14 +1289,17 @@ var libpannellum = (function (window, document, undefined$1) {
      * @param {string} path - Node's path.
      */
 
-
     function MultiresNode(vertices, side, level, x, y, path) {
       this.vertices = vertices;
       this.side = side;
       this.level = level;
       this.x = x;
       this.y = y;
-      this.path = path.replace("%s", side).replace("%l", level).replace("%x", x).replace("%y", y);
+      this.path = path
+        .replace("%s", side)
+        .replace("%l", level)
+        .replace("%x", x)
+        .replace("%y", y);
     }
     /**
      * Test if multires node is visible. If it is, add it to current nodes,
@@ -982,7 +1312,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @param {number} hfov - Horizontal field of view to check at.
      */
 
-
     function testMultiresNode(rotPersp, node, pitch, yaw, hfov) {
       if (checkSquareInView(rotPersp, node.vertices)) {
         // Calculate central angle between center of view and center of tile
@@ -994,9 +1323,13 @@ var libpannellum = (function (window, document, undefined$1) {
         var theta = Math.asin(z / r);
         var phi = Math.atan2(y, x);
         var ydiff = phi - yaw;
-        ydiff += ydiff > Math.PI ? -2 * Math.PI : ydiff < -Math.PI ? 2 * Math.PI : 0;
+        ydiff +=
+          ydiff > Math.PI ? -2 * Math.PI : ydiff < -Math.PI ? 2 * Math.PI : 0;
         ydiff = Math.abs(ydiff);
-        node.diff = Math.acos(Math.sin(pitch) * Math.sin(theta) + Math.cos(pitch) * Math.cos(theta) * Math.cos(ydiff)); // Add node to current nodes and load texture if needed
+        node.diff = Math.acos(
+          Math.sin(pitch) * Math.sin(theta) +
+            Math.cos(pitch) * Math.cos(theta) * Math.cos(ydiff)
+        ); // Add node to current nodes and load texture if needed
 
         var inCurrent = false;
 
@@ -1018,12 +1351,12 @@ var libpannellum = (function (window, document, undefined$1) {
         } // TODO: Test error
         // Create child nodes
 
-
         if (node.level < program.level) {
-          var cubeSize = image.cubeResolution * Math.pow(2, node.level - image.maxLevel);
+          var cubeSize =
+            image.cubeResolution * Math.pow(2, node.level - image.maxLevel);
           var numTiles = Math.ceil(cubeSize * image.invTileResolution) - 1;
-          var doubleTileSize = cubeSize % image.tileResolution * 2;
-          var lastTileSize = cubeSize * 2 % image.tileResolution;
+          var doubleTileSize = (cubeSize % image.tileResolution) * 2;
+          var lastTileSize = (cubeSize * 2) % image.tileResolution;
 
           if (lastTileSize === 0) {
             lastTileSize = image.tileResolution;
@@ -1036,18 +1369,20 @@ var libpannellum = (function (window, document, undefined$1) {
           var f = 0.5;
 
           if (node.x == numTiles || node.y == numTiles) {
-            f = 1.0 - image.tileResolution / (image.tileResolution + lastTileSize);
+            f =
+              1.0 -
+              image.tileResolution / (image.tileResolution + lastTileSize);
           }
 
           var i = 1.0 - f;
           var children = [];
           var vtmp, ntmp;
           var f1 = f,
-              f2 = f,
-              f3 = f,
-              i1 = i,
-              i2 = i,
-              i3 = i; // Handle non-symmetric tiles
+            f2 = f,
+            f3 = f,
+            i1 = i,
+            i2 = i,
+            i3 = i; // Handle non-symmetric tiles
 
           if (lastTileSize < image.tileResolution) {
             if (node.x == numTiles && node.y != numTiles) {
@@ -1068,7 +1403,6 @@ var libpannellum = (function (window, document, undefined$1) {
               }
             }
           } // Handle small tiles that have fewer than four children
-
 
           if (doubleTileSize <= image.tileResolution) {
             if (node.x == numTiles) {
@@ -1092,25 +1426,108 @@ var libpannellum = (function (window, document, undefined$1) {
             }
           }
 
-          vtmp = [v[0], v[1], v[2], v[0] * f1 + v[3] * i1, v[1] * f + v[4] * i, v[2] * f3 + v[5] * i3, v[0] * f1 + v[6] * i1, v[1] * f2 + v[7] * i2, v[2] * f3 + v[8] * i3, v[0] * f + v[9] * i, v[1] * f2 + v[10] * i2, v[2] * f3 + v[11] * i3];
-          ntmp = new MultiresNode(vtmp, node.side, node.level + 1, node.x * 2, node.y * 2, image.fullpath);
+          vtmp = [
+            v[0],
+            v[1],
+            v[2],
+            v[0] * f1 + v[3] * i1,
+            v[1] * f + v[4] * i,
+            v[2] * f3 + v[5] * i3,
+            v[0] * f1 + v[6] * i1,
+            v[1] * f2 + v[7] * i2,
+            v[2] * f3 + v[8] * i3,
+            v[0] * f + v[9] * i,
+            v[1] * f2 + v[10] * i2,
+            v[2] * f3 + v[11] * i3,
+          ];
+          ntmp = new MultiresNode(
+            vtmp,
+            node.side,
+            node.level + 1,
+            node.x * 2,
+            node.y * 2,
+            image.fullpath
+          );
           children.push(ntmp);
 
           if (!(node.x == numTiles && doubleTileSize <= image.tileResolution)) {
-            vtmp = [v[0] * f1 + v[3] * i1, v[1] * f + v[4] * i, v[2] * f3 + v[5] * i3, v[3], v[4], v[5], v[3] * f + v[6] * i, v[4] * f2 + v[7] * i2, v[5] * f3 + v[8] * i3, v[0] * f1 + v[6] * i1, v[1] * f2 + v[7] * i2, v[2] * f3 + v[8] * i3];
-            ntmp = new MultiresNode(vtmp, node.side, node.level + 1, node.x * 2 + 1, node.y * 2, image.fullpath);
+            vtmp = [
+              v[0] * f1 + v[3] * i1,
+              v[1] * f + v[4] * i,
+              v[2] * f3 + v[5] * i3,
+              v[3],
+              v[4],
+              v[5],
+              v[3] * f + v[6] * i,
+              v[4] * f2 + v[7] * i2,
+              v[5] * f3 + v[8] * i3,
+              v[0] * f1 + v[6] * i1,
+              v[1] * f2 + v[7] * i2,
+              v[2] * f3 + v[8] * i3,
+            ];
+            ntmp = new MultiresNode(
+              vtmp,
+              node.side,
+              node.level + 1,
+              node.x * 2 + 1,
+              node.y * 2,
+              image.fullpath
+            );
             children.push(ntmp);
           }
 
-          if (!(node.x == numTiles && doubleTileSize <= image.tileResolution) && !(node.y == numTiles && doubleTileSize <= image.tileResolution)) {
-            vtmp = [v[0] * f1 + v[6] * i1, v[1] * f2 + v[7] * i2, v[2] * f3 + v[8] * i3, v[3] * f + v[6] * i, v[4] * f2 + v[7] * i2, v[5] * f3 + v[8] * i3, v[6], v[7], v[8], v[9] * f1 + v[6] * i1, v[10] * f + v[7] * i, v[11] * f3 + v[8] * i3];
-            ntmp = new MultiresNode(vtmp, node.side, node.level + 1, node.x * 2 + 1, node.y * 2 + 1, image.fullpath);
+          if (
+            !(node.x == numTiles && doubleTileSize <= image.tileResolution) &&
+            !(node.y == numTiles && doubleTileSize <= image.tileResolution)
+          ) {
+            vtmp = [
+              v[0] * f1 + v[6] * i1,
+              v[1] * f2 + v[7] * i2,
+              v[2] * f3 + v[8] * i3,
+              v[3] * f + v[6] * i,
+              v[4] * f2 + v[7] * i2,
+              v[5] * f3 + v[8] * i3,
+              v[6],
+              v[7],
+              v[8],
+              v[9] * f1 + v[6] * i1,
+              v[10] * f + v[7] * i,
+              v[11] * f3 + v[8] * i3,
+            ];
+            ntmp = new MultiresNode(
+              vtmp,
+              node.side,
+              node.level + 1,
+              node.x * 2 + 1,
+              node.y * 2 + 1,
+              image.fullpath
+            );
             children.push(ntmp);
           }
 
           if (!(node.y == numTiles && doubleTileSize <= image.tileResolution)) {
-            vtmp = [v[0] * f + v[9] * i, v[1] * f2 + v[10] * i2, v[2] * f3 + v[11] * i3, v[0] * f1 + v[6] * i1, v[1] * f2 + v[7] * i2, v[2] * f3 + v[8] * i3, v[9] * f1 + v[6] * i1, v[10] * f + v[7] * i, v[11] * f3 + v[8] * i3, v[9], v[10], v[11]];
-            ntmp = new MultiresNode(vtmp, node.side, node.level + 1, node.x * 2, node.y * 2 + 1, image.fullpath);
+            vtmp = [
+              v[0] * f + v[9] * i,
+              v[1] * f2 + v[10] * i2,
+              v[2] * f3 + v[11] * i3,
+              v[0] * f1 + v[6] * i1,
+              v[1] * f2 + v[7] * i2,
+              v[2] * f3 + v[8] * i3,
+              v[9] * f1 + v[6] * i1,
+              v[10] * f + v[7] * i,
+              v[11] * f3 + v[8] * i3,
+              v[9],
+              v[10],
+              v[11],
+            ];
+            ntmp = new MultiresNode(
+              vtmp,
+              node.side,
+              node.level + 1,
+              node.x * 2,
+              node.y * 2 + 1,
+              image.fullpath
+            );
             children.push(ntmp);
           }
 
@@ -1126,14 +1543,80 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number[]} Cube vertex array.
      */
 
-
     function createCube() {
-      return [-1, 1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, // Front face
-      1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, // Back face
-      -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, // Up face
-      -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, 1, // Down face
-      -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, -1, 1, // Left face
-      1, 1, -1, 1, 1, 1, 1, -1, 1, 1, -1, -1 // Right face
+      return [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1, // Front face
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1, // Back face
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        -1, // Up face
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1, // Down face
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1, // Left face
+        1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1, // Right face
       ];
     }
     /**
@@ -1141,7 +1624,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @private
      * @returns {number[]} Identity matrix.
      */
-
 
     function identityMatrix3() {
       return [1, 0, 0, 0, 1, 0, 0, 0, 1];
@@ -1155,21 +1637,50 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number[]} Rotated matrix.
      */
 
-
     function rotateMatrix(m, angle, axis) {
       var s = Math.sin(angle);
       var c = Math.cos(angle);
 
       if (axis == "x") {
-        return [m[0], c * m[1] + s * m[2], c * m[2] - s * m[1], m[3], c * m[4] + s * m[5], c * m[5] - s * m[4], m[6], c * m[7] + s * m[8], c * m[8] - s * m[7]];
+        return [
+          m[0],
+          c * m[1] + s * m[2],
+          c * m[2] - s * m[1],
+          m[3],
+          c * m[4] + s * m[5],
+          c * m[5] - s * m[4],
+          m[6],
+          c * m[7] + s * m[8],
+          c * m[8] - s * m[7],
+        ];
       }
 
       if (axis == "y") {
-        return [c * m[0] - s * m[2], m[1], c * m[2] + s * m[0], c * m[3] - s * m[5], m[4], c * m[5] + s * m[3], c * m[6] - s * m[8], m[7], c * m[8] + s * m[6]];
+        return [
+          c * m[0] - s * m[2],
+          m[1],
+          c * m[2] + s * m[0],
+          c * m[3] - s * m[5],
+          m[4],
+          c * m[5] + s * m[3],
+          c * m[6] - s * m[8],
+          m[7],
+          c * m[8] + s * m[6],
+        ];
       }
 
       if (axis == "z") {
-        return [c * m[0] + s * m[1], c * m[1] - s * m[0], m[2], c * m[3] + s * m[4], c * m[4] - s * m[3], m[5], c * m[6] + s * m[7], c * m[7] - s * m[6], m[8]];
+        return [
+          c * m[0] + s * m[1],
+          c * m[1] - s * m[0],
+          m[2],
+          c * m[3] + s * m[4],
+          c * m[4] - s * m[3],
+          m[5],
+          c * m[6] + s * m[7],
+          c * m[7] - s * m[6],
+          m[8],
+        ];
       }
     }
     /**
@@ -1179,9 +1690,25 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number[]} Expanded matrix.
      */
 
-
     function makeMatrix4(m) {
-      return [m[0], m[1], m[2], 0, m[3], m[4], m[5], 0, m[6], m[7], m[8], 0, 0, 0, 0, 1];
+      return [
+        m[0],
+        m[1],
+        m[2],
+        0,
+        m[3],
+        m[4],
+        m[5],
+        0,
+        m[6],
+        m[7],
+        m[8],
+        0,
+        0,
+        0,
+        0,
+        1,
+      ];
     }
     /**
      * Transposes a 4x4 matrix.
@@ -1190,9 +1717,25 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number[]} Transposed matrix.
      */
 
-
     function transposeMatrix4(m) {
-      return [m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]];
+      return [
+        m[0],
+        m[4],
+        m[8],
+        m[12],
+        m[1],
+        m[5],
+        m[9],
+        m[13],
+        m[2],
+        m[6],
+        m[10],
+        m[14],
+        m[3],
+        m[7],
+        m[11],
+        m[15],
+      ];
     }
     /**
      * Creates a perspective matrix.
@@ -1204,11 +1747,31 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number[]} Generated perspective matrix.
      */
 
-
     function makePersp(hfov, aspect, znear, zfar) {
-      var fovy = 2 * Math.atan(Math.tan(hfov / 2) * gl.drawingBufferHeight / gl.drawingBufferWidth);
+      var fovy =
+        2 *
+        Math.atan(
+          (Math.tan(hfov / 2) * gl.drawingBufferHeight) / gl.drawingBufferWidth
+        );
       var f = 1 / Math.tan(fovy / 2);
-      return [f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (zfar + znear) / (znear - zfar), 2 * zfar * znear / (znear - zfar), 0, 0, -1, 0];
+      return [
+        f / aspect,
+        0,
+        0,
+        0,
+        0,
+        f,
+        0,
+        0,
+        0,
+        0,
+        (zfar + znear) / (znear - zfar),
+        (2 * zfar * znear) / (znear - zfar),
+        0,
+        0,
+        -1,
+        0,
+      ];
     }
     /**
      * Processes a loaded texture image into a WebGL texture.
@@ -1216,7 +1779,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @param {Image} img - Input image.
      * @param {WebGLTexture} tex - Texture to bind image to.
      */
-
 
     function processLoadedTexture(img, tex) {
       gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -1230,7 +1792,7 @@ var libpannellum = (function (window, document, undefined$1) {
 
     var pendingTextureRequests = []; // Based on http://blog.tojicode.com/2012/03/javascript-memory-optimization-and.html
 
-    var loadTexture = function () {
+    var loadTexture = (function () {
       var cacheTop = 4; // Maximum number of concurrents loads
 
       var textureImageCache = {};
@@ -1258,7 +1820,11 @@ var libpannellum = (function (window, document, undefined$1) {
         this.image.addEventListener("error", loadFn); // ignore missing tile file to support partial image, otherwise retry loop causes high CPU load
       }
 
-      TextureImageLoader.prototype.loadTexture = function (src, texture, callback) {
+      TextureImageLoader.prototype.loadTexture = function (
+        src,
+        texture,
+        callback
+      ) {
         this.texture = texture;
         this.callback = callback;
         this.image.src = src;
@@ -1285,22 +1851,31 @@ var libpannellum = (function (window, document, undefined$1) {
       return function (node, src, callback, _crossOrigin) {
         crossOrigin = _crossOrigin;
         var texture = gl.createTexture();
-        if (cacheTop) textureImageCache[--cacheTop].loadTexture(src, texture, callback);else pendingTextureRequests.push(new PendingTextureRequest(node, src, texture, callback));
+        if (cacheTop)
+          textureImageCache[--cacheTop].loadTexture(src, texture, callback);
+        else
+          pendingTextureRequests.push(
+            new PendingTextureRequest(node, src, texture, callback)
+          );
         return texture;
       };
-    }();
+    })();
     /**
      * Loads image and creates texture for a multires node / tile.
      * @private
      * @param {MultiresNode} node - Input node.
      */
 
-
     function processNextTile(node) {
-      loadTexture(node, node.path + "." + image.extension, function (texture, loaded) {
-        node.texture = texture;
-        node.textureLoaded = loaded ? 2 : 1;
-      }, globalParams.crossOrigin);
+      loadTexture(
+        node,
+        node.path + "." + image.extension,
+        function (texture, loaded) {
+          node.texture = texture;
+          node.textureLoaded = loaded ? 2 : 1;
+        },
+        globalParams.crossOrigin
+      );
     }
     /**
      * Finds and applies optimal multires zoom level.
@@ -1308,15 +1883,20 @@ var libpannellum = (function (window, document, undefined$1) {
      * @param {number} hfov - Horizontal field of view to check at.
      */
 
-
     function checkZoom(hfov) {
       // Find optimal level
       var newLevel = 1;
 
-      while (newLevel < image.maxLevel && gl.drawingBufferWidth > image.tileResolution * Math.pow(2, newLevel - 1) * Math.tan(hfov / 2) * 0.707) {
+      while (
+        newLevel < image.maxLevel &&
+        gl.drawingBufferWidth >
+          image.tileResolution *
+            Math.pow(2, newLevel - 1) *
+            Math.tan(hfov / 2) *
+            0.707
+      ) {
         newLevel++;
       } // Apply change
-
 
       program.level = newLevel;
     }
@@ -1328,9 +1908,25 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number[]} Rotated matrix.
      */
 
-
     function rotatePersp(p, r) {
-      return [p[0] * r[0], p[0] * r[1], p[0] * r[2], 0, p[5] * r[4], p[5] * r[5], p[5] * r[6], 0, p[10] * r[8], p[10] * r[9], p[10] * r[10], p[11], -r[8], -r[9], -r[10], 0];
+      return [
+        p[0] * r[0],
+        p[0] * r[1],
+        p[0] * r[2],
+        0,
+        p[5] * r[4],
+        p[5] * r[5],
+        p[5] * r[6],
+        0,
+        p[10] * r[8],
+        p[10] * r[9],
+        p[10] * r[10],
+        p[11],
+        -r[8],
+        -r[9],
+        -r[10],
+        0,
+      ];
     }
     /**
      * Applies rotated perspective matrix to a 3-vector
@@ -1341,9 +1937,13 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number[]} Resulting 4-vector.
      */
 
-
     function applyRotPerspToVec(m, v) {
-      return [m[0] * v[0] + m[1] * v[1] + m[2] * v[2], m[4] * v[0] + m[5] * v[1] + m[6] * v[2], m[11] + m[8] * v[0] + m[9] * v[1] + m[10] * v[2], 1 / (m[12] * v[0] + m[13] * v[1] + m[14] * v[2])];
+      return [
+        m[0] * v[0] + m[1] * v[1] + m[2] * v[2],
+        m[4] * v[0] + m[5] * v[1] + m[6] * v[2],
+        m[11] + m[8] * v[0] + m[9] * v[1] + m[10] * v[2],
+        1 / (m[12] * v[0] + m[13] * v[1] + m[14] * v[2]),
+      ];
     }
     /**
      * Checks if a vertex is visible.
@@ -1353,7 +1953,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {number} 1 or -1 if the vertex is or is not visible,
      *      respectively.
      */
-
 
     function checkInView(m, v) {
       var vpp = applyRotPerspToVec(m, v);
@@ -1376,7 +1975,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @returns {boolean} Whether or not the square is visible.
      */
 
-
     function checkSquareInView(m, v) {
       var check1 = checkInView(m, v.slice(0, 3));
       var check2 = checkInView(m, v.slice(3, 6));
@@ -1396,7 +1994,6 @@ var libpannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function handleWebGLError1286() {
       console.log("Reducing canvas size due to error 1286!");
       canvas.width = Math.round(canvas.width / 2);
@@ -1404,86 +2001,149 @@ var libpannellum = (function (window, document, undefined$1) {
     }
   } // Vertex shader for equirectangular and cube
 
+  var v = [
+    "attribute vec2 a_texCoord;",
+    "varying vec2 v_texCoord;",
+    "void main() {", // Set position
+    "gl_Position = vec4(a_texCoord, 0.0, 1.0);", // Pass the coordinates to the fragment shader
+    "v_texCoord = a_texCoord;",
+    "}",
+  ].join(""); // Vertex shader for multires
 
-  var v = ["attribute vec2 a_texCoord;", "varying vec2 v_texCoord;", "void main() {", // Set position
-  "gl_Position = vec4(a_texCoord, 0.0, 1.0);", // Pass the coordinates to the fragment shader
-  "v_texCoord = a_texCoord;", "}"].join(""); // Vertex shader for multires
+  var vMulti = [
+    "attribute vec3 a_vertCoord;",
+    "attribute vec2 a_texCoord;",
+    "uniform mat4 u_cubeMatrix;",
+    "uniform mat4 u_perspMatrix;",
+    "varying mediump vec2 v_texCoord;",
+    "void main(void) {", // Set position
+    "gl_Position = u_perspMatrix * u_cubeMatrix * vec4(a_vertCoord, 1.0);", // Pass the coordinates to the fragment shader
+    "v_texCoord = a_texCoord;",
+    "}",
+  ].join(""); // Fragment shader
 
-  var vMulti = ["attribute vec3 a_vertCoord;", "attribute vec2 a_texCoord;", "uniform mat4 u_cubeMatrix;", "uniform mat4 u_perspMatrix;", "varying mediump vec2 v_texCoord;", "void main(void) {", // Set position
-  "gl_Position = u_perspMatrix * u_cubeMatrix * vec4(a_vertCoord, 1.0);", // Pass the coordinates to the fragment shader
-  "v_texCoord = a_texCoord;", "}"].join(""); // Fragment shader
+  var fragEquiCubeBase = [
+    "precision highp float;", // mediump looks bad on some mobile devices
+    "uniform float u_aspectRatio;",
+    "uniform float u_psi;",
+    "uniform float u_theta;",
+    "uniform float u_f;",
+    "uniform float u_h;",
+    "uniform float u_v;",
+    "uniform float u_vo;",
+    "uniform float u_rot;",
+    "const float PI = 3.14159265358979323846264;", // Texture
+    "uniform sampler2D u_image0;",
+    "uniform sampler2D u_image1;",
+    "uniform bool u_splitImage;",
+    "uniform samplerCube u_imageCube;", // Coordinates passed in from vertex shader
+    "varying vec2 v_texCoord;", // Background color (display for partial panoramas)
+    "uniform vec4 u_backgroundColor;",
+    "void main() {", // Map canvas/camera to sphere
+    "float x = v_texCoord.x * u_aspectRatio;",
+    "float y = v_texCoord.y;",
+    "float sinrot = sin(u_rot);",
+    "float cosrot = cos(u_rot);",
+    "float rot_x = x * cosrot - y * sinrot;",
+    "float rot_y = x * sinrot + y * cosrot;",
+    "float sintheta = sin(u_theta);",
+    "float costheta = cos(u_theta);",
+    "float a = u_f * costheta - rot_y * sintheta;",
+    "float root = sqrt(rot_x * rot_x + a * a);",
+    "float lambda = atan(rot_x / root, a / root) + u_psi;",
+    "float phi = atan((rot_y * costheta + u_f * sintheta) / root);",
+  ].join("\n"); // Fragment shader
 
-  var fragEquiCubeBase = ["precision highp float;", // mediump looks bad on some mobile devices
-  "uniform float u_aspectRatio;", "uniform float u_psi;", "uniform float u_theta;", "uniform float u_f;", "uniform float u_h;", "uniform float u_v;", "uniform float u_vo;", "uniform float u_rot;", "const float PI = 3.14159265358979323846264;", // Texture
-  "uniform sampler2D u_image0;", "uniform sampler2D u_image1;", "uniform bool u_splitImage;", "uniform samplerCube u_imageCube;", // Coordinates passed in from vertex shader
-  "varying vec2 v_texCoord;", // Background color (display for partial panoramas)
-  "uniform vec4 u_backgroundColor;", "void main() {", // Map canvas/camera to sphere
-  "float x = v_texCoord.x * u_aspectRatio;", "float y = v_texCoord.y;", "float sinrot = sin(u_rot);", "float cosrot = cos(u_rot);", "float rot_x = x * cosrot - y * sinrot;", "float rot_y = x * sinrot + y * cosrot;", "float sintheta = sin(u_theta);", "float costheta = cos(u_theta);", "float a = u_f * costheta - rot_y * sintheta;", "float root = sqrt(rot_x * rot_x + a * a);", "float lambda = atan(rot_x / root, a / root) + u_psi;", "float phi = atan((rot_y * costheta + u_f * sintheta) / root);"].join("\n"); // Fragment shader
+  var fragCube =
+    fragEquiCubeBase +
+    [
+      // Look up color from texture
+      "float cosphi = cos(phi);",
+      "gl_FragColor = textureCube(u_imageCube, vec3(cosphi*sin(lambda), sin(phi), cosphi*cos(lambda)));",
+      "}",
+    ].join("\n"); // Fragment shader
 
-  var fragCube = fragEquiCubeBase + [// Look up color from texture
-  "float cosphi = cos(phi);", "gl_FragColor = textureCube(u_imageCube, vec3(cosphi*sin(lambda), sin(phi), cosphi*cos(lambda)));", "}"].join("\n"); // Fragment shader
+  var fragEquirectangular =
+    fragEquiCubeBase +
+    [
+      // Wrap image
+      "lambda = mod(lambda + PI, PI * 2.0) - PI;", // Map texture to sphere
+      "vec2 coord = vec2(lambda / PI, phi / (PI / 2.0));", // Look up color from texture
+      // Map from [-1,1] to [0,1] and flip y-axis
+      "if(coord.x < -u_h || coord.x > u_h || coord.y < -u_v + u_vo || coord.y > u_v + u_vo)",
+      "gl_FragColor = u_backgroundColor;",
+      "else {",
+      "if(u_splitImage) {", // Image was split into two textures to work around texture size limits
+      "if(coord.x < 0.0)",
+      "gl_FragColor = texture2D(u_image0, vec2((coord.x + u_h) / u_h, (-coord.y + u_v + u_vo) / (u_v * 2.0)));",
+      "else",
+      "gl_FragColor = texture2D(u_image1, vec2((coord.x + u_h) / u_h - 1.0, (-coord.y + u_v + u_vo) / (u_v * 2.0)));",
+      "} else {",
+      "gl_FragColor = texture2D(u_image0, vec2((coord.x + u_h) / (u_h * 2.0), (-coord.y + u_v + u_vo) / (u_v * 2.0)));",
+      "}",
+      "}",
+      "}",
+    ].join("\n"); // Fragment shader
 
-  var fragEquirectangular = fragEquiCubeBase + [// Wrap image
-  "lambda = mod(lambda + PI, PI * 2.0) - PI;", // Map texture to sphere
-  "vec2 coord = vec2(lambda / PI, phi / (PI / 2.0));", // Look up color from texture
-  // Map from [-1,1] to [0,1] and flip y-axis
-  "if(coord.x < -u_h || coord.x > u_h || coord.y < -u_v + u_vo || coord.y > u_v + u_vo)", "gl_FragColor = u_backgroundColor;", "else {", "if(u_splitImage) {", // Image was split into two textures to work around texture size limits
-  "if(coord.x < 0.0)", "gl_FragColor = texture2D(u_image0, vec2((coord.x + u_h) / u_h, (-coord.y + u_v + u_vo) / (u_v * 2.0)));", "else", "gl_FragColor = texture2D(u_image1, vec2((coord.x + u_h) / u_h - 1.0, (-coord.y + u_v + u_vo) / (u_v * 2.0)));", "} else {", "gl_FragColor = texture2D(u_image0, vec2((coord.x + u_h) / (u_h * 2.0), (-coord.y + u_v + u_vo) / (u_v * 2.0)));", "}", "}", "}"].join("\n"); // Fragment shader
-
-  var fragMulti = ["varying mediump vec2 v_texCoord;", "uniform sampler2D u_sampler;", //'uniform mediump vec4 u_color;',
-  "void main(void) {", // Look up color from texture
-  "gl_FragColor = texture2D(u_sampler, v_texCoord);", //    'gl_FragColor = u_color;',
-  "}"].join("");
+  var fragMulti = [
+    "varying mediump vec2 v_texCoord;",
+    "uniform sampler2D u_sampler;", //'uniform mediump vec4 u_color;',
+    "void main(void) {", // Look up color from texture
+    "gl_FragColor = texture2D(u_sampler, v_texCoord);", //    'gl_FragColor = u_color;',
+    "}",
+  ].join("");
   return {
     renderer: function renderer(container, image, imagetype, dynamic) {
       return new Renderer(container, image, imagetype, dynamic);
-    }
+    },
   };
-})(typeof window === "undefined" ? null : window, typeof document === "undefined" ? null : document);
+})(
+  typeof window === "undefined" ? null : window,
+  typeof document === "undefined" ? null : document
+);
 
 var pannellum = (function (window, document, undefined$1) {
   function Viewer(container, initialConfig) {
     var _this = this; // Declare variables
 
-
     let config,
-        renderer,
-        preview,
-        isAdd = {},
-        isUserInteracting = false,
-        latestInteraction = Date.now(),
-        onPointerDownPointerX = 0,
-        onPointerDownPointerY = 0,
-        onPointerDownPointerDist = -1,
-        onPointerDownYaw = 0,
-        onPointerDownPitch = 0,
-        keysDown = new Array(10),
-        fullscreenActive = false,
-        loaded,
-        error = false,
-        listenersAdded = false,
-        panoImage,
-        prevTime,
-        speed = {
-      yaw: 0,
-      pitch: 0,
-      hfov: 0
-    },
-        animating = false,
-        orientation = false,
-        orientationYawOffset = 0,
-        autoRotateStart,
-        autoRotateSpeed = 0,
-        origHfov,
-        origPitch,
-        animatedMove = {},
-        externalEventListeners = {},
-        specifiedPhotoSphereExcludes = [],
-        update = false,
-        // Should we update when still to render dynamic content
-    eps = 1e-6,
-        hotspotsCreated = false,
-        destroyed = false;
+      renderer,
+      preview,
+      isAdd = {},
+      isUserInteracting = false,
+      latestInteraction = Date.now(),
+      onPointerDownPointerX = 0,
+      onPointerDownPointerY = 0,
+      onPointerDownPointerDist = -1,
+      onPointerDownYaw = 0,
+      onPointerDownPitch = 0,
+      keysDown = new Array(10),
+      fullscreenActive = false,
+      loaded,
+      error = false,
+      listenersAdded = false,
+      panoImage,
+      prevTime,
+      speed = {
+        yaw: 0,
+        pitch: 0,
+        hfov: 0,
+      },
+      animating = false,
+      orientation = false,
+      orientationYawOffset = 0,
+      autoRotateStart,
+      autoRotateSpeed = 0,
+      origHfov,
+      origPitch,
+      animatedMove = {},
+      externalEventListeners = {},
+      specifiedPhotoSphereExcludes = [],
+      update = false,
+      // Should we update when still to render dynamic content
+      eps = 1e-6,
+      hotspotsCreated = false,
+      destroyed = false;
     var defaultConfig = {
       hfov: 100,
       minHfov: 50,
@@ -1522,8 +2182,10 @@ var pannellum = (function (window, document, undefined$1) {
       disableKeyboardCtrl: false,
       crossOrigin: "anonymous",
       touchPanSpeedCoeffFactor: 1,
-      capturedKeyNumbers: [16, 17, 27, 37, 38, 39, 40, 61, 65, 68, 83, 87, 107, 109, 173, 187, 189],
-      friction: 0.15
+      capturedKeyNumbers: [
+        16, 17, 27, 37, 38, 39, 40, 61, 65, 68, 83, 87, 107, 109, 173, 187, 189,
+      ],
+      friction: 0.15,
     }; // Translatable / configurable strings
     // Some strings contain '%s', which is a placeholder for inserted values
     // When setting strings in external configuration, `\n` should be used instead of `<br>` to insert line breaks
@@ -1539,14 +2201,25 @@ var pannellum = (function (window, document, undefined$1) {
       fileAccessError: "The file %s could not be accessed.",
       // One substitution: file URL
       malformedURLError: "There is something wrong with the panorama URL.",
-      iOS8WebGLError: "Due to iOS 8's broken WebGL implementation, only " + "progressive encoded JPEGs work for your device (this " + "panorama uses standard encoding).",
-      genericWebGLError: "Your browser does not have the necessary WebGL support to display this panorama.",
-      textureSizeError: "This panorama is too big for your device! It's " + "%spx wide, but your device only supports images up to " + "%spx wide. Try another device." + " (If you're the author, try scaling down the image.)",
+      iOS8WebGLError:
+        "Due to iOS 8's broken WebGL implementation, only " +
+        "progressive encoded JPEGs work for your device (this " +
+        "panorama uses standard encoding).",
+      genericWebGLError:
+        "Your browser does not have the necessary WebGL support to display this panorama.",
+      textureSizeError:
+        "This panorama is too big for your device! It's " +
+        "%spx wide, but your device only supports images up to " +
+        "%spx wide. Try another device." +
+        " (If you're the author, try scaling down the image.)",
       // Two substitutions: image width, max image width
-      unknownError: "Unknown error. Check developer console."
+      unknownError: "Unknown error. Check developer console.",
     }; // Initialize container
 
-    container = typeof container === "string" ? document.getElementById(container) : container;
+    container =
+      typeof container === "string"
+        ? document.getElementById(container)
+        : container;
     container.classList.add("pnlm-container");
     container.tabIndex = 0; // Create container for ui
 
@@ -1563,14 +2236,16 @@ var pannellum = (function (window, document, undefined$1) {
 
     var aboutMsg = document.createElement("span");
     aboutMsg.className = "pnlm-about-msg";
-    aboutMsg.innerHTML = '<a href="https://pannellum.org/" target="_blank">Pannellum</a>';
+    aboutMsg.innerHTML =
+      '<a href="https://pannellum.org/" target="_blank">Pannellum</a>';
     uiContainer.appendChild(aboutMsg);
     dragFix.addEventListener("contextmenu", aboutMessage); // Create info display
 
     var infoDisplay = {}; // Hot spot debug indicator
 
     var hotSpotDebugIndicator = document.createElement("div");
-    hotSpotDebugIndicator.className = "pnlm-sprite pnlm-hot-spot-debug-indicator";
+    hotSpotDebugIndicator.className =
+      "pnlm-sprite pnlm-hot-spot-debug-indicator";
     uiContainer.appendChild(hotSpotDebugIndicator); // Panorama info
 
     infoDisplay.container = document.createElement("div");
@@ -1637,12 +2312,20 @@ var pannellum = (function (window, document, undefined$1) {
 
     controls.fullscreen = document.createElement("div");
     controls.fullscreen.addEventListener("click", toggleFullscreen);
-    controls.fullscreen.className = "pnlm-fullscreen-toggle-button pnlm-sprite pnlm-fullscreen-toggle-button-inactive pnlm-controls pnlm-control";
-    if (document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled) controls.container.appendChild(controls.fullscreen); // Device orientation toggle
+    controls.fullscreen.className =
+      "pnlm-fullscreen-toggle-button pnlm-sprite pnlm-fullscreen-toggle-button-inactive pnlm-controls pnlm-control";
+    if (
+      document.fullscreenEnabled ||
+      document.mozFullScreenEnabled ||
+      document.webkitFullscreenEnabled ||
+      document.msFullscreenEnabled
+    )
+      controls.container.appendChild(controls.fullscreen); // Device orientation toggle
 
     controls.orientation = document.createElement("div");
     controls.orientation.addEventListener("click", function (e) {
-      if (orientation) stopOrientation();else startOrientation();
+      if (orientation) stopOrientation();
+      else startOrientation();
     });
     controls.orientation.addEventListener("mousedown", function (e) {
       e.stopPropagation();
@@ -1653,10 +2336,15 @@ var pannellum = (function (window, document, undefined$1) {
     controls.orientation.addEventListener("pointerdown", function (e) {
       e.stopPropagation();
     });
-    controls.orientation.className = "pnlm-orientation-button pnlm-orientation-button-inactive pnlm-sprite pnlm-controls pnlm-control";
+    controls.orientation.className =
+      "pnlm-orientation-button pnlm-orientation-button-inactive pnlm-sprite pnlm-controls pnlm-control";
     var orientationSupport = false;
 
-    if (window.DeviceOrientationEvent && location.protocol === "https:" && navigator.userAgent.toLowerCase().indexOf("mobi") >= 0) {
+    if (
+      window.DeviceOrientationEvent &&
+      location.protocol === "https:" &&
+      navigator.userAgent.toLowerCase().indexOf("mobi") >= 0
+    ) {
       // This user agent check is here because there's no way to check if a
       // device has an inertia measurement unit. We used to be able to check if a
       // DeviceOrientationEvent had non-null values, but with iOS 13 requiring a
@@ -1665,7 +2353,6 @@ var pannellum = (function (window, document, undefined$1) {
       orientationSupport = true;
     } // Compass
 
-
     var compass = document.createElement("div");
     compass.className = "pnlm-compass pnlm-controls pnlm-control";
     uiContainer.appendChild(compass); // Load and process configuration
@@ -1673,7 +2360,10 @@ var pannellum = (function (window, document, undefined$1) {
     if (initialConfig.firstScene) {
       // Activate first scene if specified in URL
       mergeConfig(initialConfig.firstScene);
-    } else if (initialConfig["default"] && initialConfig["default"].firstScene) {
+    } else if (
+      initialConfig["default"] &&
+      initialConfig["default"].firstScene
+    ) {
       // Activate first scene if specified in file
       mergeConfig(initialConfig["default"].firstScene);
     } else {
@@ -1717,7 +2407,11 @@ var pannellum = (function (window, document, undefined$1) {
         // Avoid "undefined" in path, check (optional) multiRes.basePath, too
         // Use only multiRes.basePath if it's an absolute URL
 
-        if (config.basePath && config.multiRes.basePath && !/^(?:[a-z]+:)?\/\//i.test(config.multiRes.basePath)) {
+        if (
+          config.basePath &&
+          config.multiRes.basePath &&
+          !/^(?:[a-z]+:)?\/\//i.test(config.multiRes.basePath)
+        ) {
           c.basePath = config.basePath + config.multiRes.basePath;
         } else if (config.multiRes.basePath) {
           c.basePath = config.multiRes.basePath;
@@ -1738,7 +2432,6 @@ var pannellum = (function (window, document, undefined$1) {
           panoImage = new Image();
         }
       } // Configure image loading
-
 
       if (config.type === "cubemap") {
         // Quick loading counter for synchronous loading
@@ -1766,7 +2459,9 @@ var pannellum = (function (window, document, undefined$1) {
 
           if (p === "null") {
             // support partial cubemap image with explicitly empty faces
-            console.log("Will use background instead of missing cubemap face " + i);
+            console.log(
+              "Will use background instead of missing cubemap face " + i
+            );
             onLoad();
           } else {
             if (config.basePath && !absoluteURL(p)) {
@@ -1789,7 +2484,9 @@ var pannellum = (function (window, document, undefined$1) {
 
         if (config.dynamic !== true) {
           // Still image
-          p = absoluteURL(config.imageSource) ? config.imageSource : p + config.imageSource;
+          p = absoluteURL(config.imageSource)
+            ? config.imageSource
+            : p + config.imageSource;
 
           panoImage.onload = function () {
             window.URL.revokeObjectURL(this.src); // Clean up
@@ -1816,7 +2513,7 @@ var pannellum = (function (window, document, undefined$1) {
           xhr.onprogress = function (e) {
             if (e.lengthComputable) {
               // Display progress
-              var percent = e.loaded / e.total * 100;
+              var percent = (e.loaded / e.total) * 100;
               infoDisplay.load.lbarFill.style.width = percent + "%";
               var unit, numerator, denominator;
 
@@ -1834,7 +2531,8 @@ var pannellum = (function (window, document, undefined$1) {
                 denominator = e.total;
               }
 
-              infoDisplay.load.msg.innerHTML = numerator + " / " + denominator + " " + unit;
+              infoDisplay.load.msg.innerHTML =
+                numerator + " / " + denominator + " " + unit;
             } else {
               // Display loading spinner
               infoDisplay.load.lbox.style.display = "block";
@@ -1873,16 +2571,18 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {boolean} True if absolute, else false
      */
 
-
     function absoluteURL(url) {
       // From http://stackoverflow.com/a/19709846
-      return new RegExp("^(?:[a-z]+:)?//", "i").test(url) || url[0] === "/" || url.slice(0, 5) === "blob:";
+      return (
+        new RegExp("^(?:[a-z]+:)?//", "i").test(url) ||
+        url[0] === "/" ||
+        url.slice(0, 5) === "blob:"
+      );
     }
     /**
      * Create renderer and initialize event listeners once image is loaded.
      * @private
      */
-
 
     function onImageLoad() {
       if (!renderer) renderer = new libpannellum.renderer(renderContainer); // Only add event listeners once
@@ -1894,18 +2594,42 @@ var pannellum = (function (window, document, undefined$1) {
         document.addEventListener("mouseup", onDocumentMouseUp, false);
 
         if (config.mouseZoom) {
-          uiContainer.addEventListener("mousewheel", onDocumentMouseWheel, false);
-          uiContainer.addEventListener("DOMMouseScroll", onDocumentMouseWheel, false);
+          uiContainer.addEventListener(
+            "mousewheel",
+            onDocumentMouseWheel,
+            false
+          );
+          uiContainer.addEventListener(
+            "DOMMouseScroll",
+            onDocumentMouseWheel,
+            false
+          );
         }
 
         if (config.doubleClickZoom) {
           dragFix.addEventListener("dblclick", onDocumentDoubleClick, false);
         }
 
-        container.addEventListener("mozfullscreenchange", onFullScreenChange, false);
-        container.addEventListener("webkitfullscreenchange", onFullScreenChange, false);
-        container.addEventListener("msfullscreenchange", onFullScreenChange, false);
-        container.addEventListener("fullscreenchange", onFullScreenChange, false);
+        container.addEventListener(
+          "mozfullscreenchange",
+          onFullScreenChange,
+          false
+        );
+        container.addEventListener(
+          "webkitfullscreenchange",
+          onFullScreenChange,
+          false
+        );
+        container.addEventListener(
+          "msfullscreenchange",
+          onFullScreenChange,
+          false
+        );
+        container.addEventListener(
+          "fullscreenchange",
+          onFullScreenChange,
+          false
+        );
         window.addEventListener("resize", onDocumentResize, false);
         window.addEventListener("orientationchange", onDocumentResize, false);
 
@@ -1917,7 +2641,10 @@ var pannellum = (function (window, document, undefined$1) {
 
         document.addEventListener("mouseleave", onDocumentMouseUp, false);
 
-        if (document.documentElement.style.pointerAction === "" && document.documentElement.style.touchAction === "") {
+        if (
+          document.documentElement.style.pointerAction === "" &&
+          document.documentElement.style.touchAction === ""
+        ) {
           dragFix.addEventListener("pointerdown", onDocumentPointerDown, false);
           dragFix.addEventListener("pointermove", onDocumentPointerMove, false);
           dragFix.addEventListener("pointerup", onDocumentPointerUp, false);
@@ -1928,15 +2655,14 @@ var pannellum = (function (window, document, undefined$1) {
           dragFix.addEventListener("touchend", onDocumentTouchEnd, false);
         } // Deal with MS pointer events
 
-
-        if (window.navigator.pointerEnabled) container.style.touchAction = "none";
+        if (window.navigator.pointerEnabled)
+          container.style.touchAction = "none";
       }
 
       renderInit();
       setHfov(config.hfov); // possibly adapt hfov after configuration and canvas is complete; prevents empty space on top or bottom by zomming out too much
 
-      setTimeout(function () {
-      }, 500);
+      setTimeout(function () {}, 500);
     }
     /**
      * Parses Google Photo Sphere XMP Metadata.
@@ -1945,16 +2671,18 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {Image} image - Image to read XMP metadata from.
      */
 
-
     function parseGPanoXMP(image) {
       var reader = new FileReader();
       reader.addEventListener("loadend", function () {
         var img = reader.result; // This awful browser specific test exists because iOS 8 does not work
         // with non-progressive encoded JPEGs.
 
-        if (navigator.userAgent.toLowerCase().match(/(iphone|ipod|ipad).* os 8_/)) {
+        if (
+          navigator.userAgent.toLowerCase().match(/(iphone|ipod|ipad).* os 8_/)
+        ) {
           var flagIndex = img.indexOf("\xff\xc2");
-          if (flagIndex < 0 || flagIndex > 65536) anError(config.uiText.iOS8WebGLError);
+          if (flagIndex < 0 || flagIndex > 65536)
+            anError(config.uiText.iOS8WebGLError);
         }
 
         var start = img.indexOf("<x:xmpmeta");
@@ -1966,10 +2694,14 @@ var pannellum = (function (window, document, undefined$1) {
             var result;
 
             if (xmpData.indexOf(tag + '="') >= 0) {
-              result = xmpData.substring(xmpData.indexOf(tag + '="') + tag.length + 2);
+              result = xmpData.substring(
+                xmpData.indexOf(tag + '="') + tag.length + 2
+              );
               result = result.substring(0, result.indexOf('"'));
             } else if (xmpData.indexOf(tag + ">") >= 0) {
-              result = xmpData.substring(xmpData.indexOf(tag + ">") + tag.length + 1);
+              result = xmpData.substring(
+                xmpData.indexOf(tag + ">") + tag.length + 1
+              );
               result = result.substring(0, result.indexOf("<"));
             }
 
@@ -1980,7 +2712,6 @@ var pannellum = (function (window, document, undefined$1) {
             return null;
           }; // Relevant XMP data
 
-
           var xmp = {
             fullWidth: getTag("GPano:FullPanoWidthPixels"),
             croppedWidth: getTag("GPano:CroppedAreaImageWidthPixels"),
@@ -1989,16 +2720,31 @@ var pannellum = (function (window, document, undefined$1) {
             topPixels: getTag("GPano:CroppedAreaTopPixels"),
             heading: getTag("GPano:PoseHeadingDegrees"),
             horizonPitch: getTag("GPano:PosePitchDegrees"),
-            horizonRoll: getTag("GPano:PoseRollDegrees")
+            horizonRoll: getTag("GPano:PoseRollDegrees"),
           };
 
-          if (xmp.fullWidth !== null && xmp.croppedWidth !== null && xmp.fullHeight !== null && xmp.croppedHeight !== null && xmp.topPixels !== null) {
+          if (
+            xmp.fullWidth !== null &&
+            xmp.croppedWidth !== null &&
+            xmp.fullHeight !== null &&
+            xmp.croppedHeight !== null &&
+            xmp.topPixels !== null
+          ) {
             // Set up viewer using GPano XMP data
-            if (specifiedPhotoSphereExcludes.indexOf("haov") < 0) config.haov = xmp.croppedWidth / xmp.fullWidth * 360;
-            if (specifiedPhotoSphereExcludes.indexOf("vaov") < 0) config.vaov = xmp.croppedHeight / xmp.fullHeight * 180;
-            if (specifiedPhotoSphereExcludes.indexOf("vOffset") < 0) config.vOffset = ((xmp.topPixels + xmp.croppedHeight / 2) / xmp.fullHeight - 0.5) * -180;
+            if (specifiedPhotoSphereExcludes.indexOf("haov") < 0)
+              config.haov = (xmp.croppedWidth / xmp.fullWidth) * 360;
+            if (specifiedPhotoSphereExcludes.indexOf("vaov") < 0)
+              config.vaov = (xmp.croppedHeight / xmp.fullHeight) * 180;
+            if (specifiedPhotoSphereExcludes.indexOf("vOffset") < 0)
+              config.vOffset =
+                ((xmp.topPixels + xmp.croppedHeight / 2) / xmp.fullHeight -
+                  0.5) *
+                -180;
 
-            if (xmp.heading !== null && specifiedPhotoSphereExcludes.indexOf("northOffset") < 0) {
+            if (
+              xmp.heading !== null &&
+              specifiedPhotoSphereExcludes.indexOf("northOffset") < 0
+            ) {
               // TODO: make sure this works correctly for partial panoramas
               config.northOffset = xmp.heading;
 
@@ -2008,17 +2754,19 @@ var pannellum = (function (window, document, undefined$1) {
             }
 
             if (xmp.horizonPitch !== null && xmp.horizonRoll !== null) {
-              if (specifiedPhotoSphereExcludes.indexOf("horizonPitch") < 0) config.horizonPitch = xmp.horizonPitch;
-              if (specifiedPhotoSphereExcludes.indexOf("horizonRoll") < 0) config.horizonRoll = xmp.horizonRoll;
+              if (specifiedPhotoSphereExcludes.indexOf("horizonPitch") < 0)
+                config.horizonPitch = xmp.horizonPitch;
+              if (specifiedPhotoSphereExcludes.indexOf("horizonRoll") < 0)
+                config.horizonRoll = xmp.horizonRoll;
             } // TODO: add support for initial view settings
-
           }
         } // Load panorama
 
-
         panoImage.src = window.URL.createObjectURL(image);
       });
-      if (reader.readAsBinaryString !== undefined$1) reader.readAsBinaryString(image);else reader.readAsText(image);
+      if (reader.readAsBinaryString !== undefined$1)
+        reader.readAsBinaryString(image);
+      else reader.readAsText(image);
     }
     /**
      * Displays an error message.
@@ -2026,7 +2774,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {string} errorMsg - Error message to display. If not specified, a
      *      generic WebGL error is displayed.
      */
-
 
     function anError(errorMsg) {
       if (errorMsg === undefined$1) errorMsg = config.uiText.genericWebGLError;
@@ -2044,7 +2791,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function clearError() {
       if (error) {
         infoDisplay.load.box.style.display = "none";
@@ -2059,7 +2805,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      * @param {MouseEvent} event - Right click location
      */
-
 
     function aboutMessage(event) {
       var pos = mousePosition(event);
@@ -2084,7 +2829,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Object} Calculated X and Y coordinates
      */
 
-
     function mousePosition(event) {
       var bounds = container.getBoundingClientRect();
       var pos = {}; // pageX / pageY needed for iOS
@@ -2100,7 +2844,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {MouseEvent} event - Document mouse down event.
      */
 
-
     function onDocumentMouseDown(event) {
       // Override default action
       event.preventDefault(); // But not all of it
@@ -2112,14 +2855,23 @@ var pannellum = (function (window, document, undefined$1) {
         return;
       } // Calculate mouse position relative to top left of viewer container
 
-
       var pos = mousePosition(event); // Log pitch / yaw of mouse click when debugging / placing hot spots
 
       if (config.hotSpotDebug) {
         var coords = mouseEventToCoords(event);
-        console.log("Pitch: " + coords[0] + ", Yaw: " + coords[1] + ", Center Pitch: " + config.pitch + ", Center Yaw: " + config.yaw + ", HFOV: " + config.hfov);
+        console.log(
+          "Pitch: " +
+            coords[0] +
+            ", Yaw: " +
+            coords[1] +
+            ", Center Pitch: " +
+            config.pitch +
+            ", Center Yaw: " +
+            config.yaw +
+            ", HFOV: " +
+            config.hfov
+        );
       } // Turn off auto-rotation if enabled
-
 
       stopAnimation();
       stopOrientation();
@@ -2142,7 +2894,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {MouseEvent} event - Document mouse down event.
      */
 
-
     function onDocumentDoubleClick(event) {
       if (config.minHfov === config.hfov) {
         _this.setHfov(origHfov, 1000);
@@ -2154,13 +2905,12 @@ var pannellum = (function (window, document, undefined$1) {
     }
 
     function changeMouseCursor(event) {
-      isAdd = {...event};
-      if(isAdd.isAddInfo === true || isAdd.isAddScene === true) {
+      isAdd = { ...event };
+      if (isAdd.isAddInfo === true || isAdd.isAddScene === true) {
         config.draggable = false;
         uiContainer.classList.remove("pnlm-grab");
         uiContainer.classList.add("pnlm-custom");
-      }
-      else {
+      } else {
         config.draggable = true;
         uiContainer.classList.add("pnlm-grab");
         uiContainer.classList.remove("pnlm-custom");
@@ -2173,21 +2923,20 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {number[]} [pitch, yaw]
      */
 
-
     function mouseEventToCoords(event) {
       var pos = mousePosition(event);
       var canvas = renderer.getCanvas();
       var canvasWidth = canvas.clientWidth,
-          canvasHeight = canvas.clientHeight;
-      var x = pos.x / canvasWidth * 2 - 1;
-      var y = (1 - pos.y / canvasHeight * 2) * canvasHeight / canvasWidth;
-      var focal = 1 / Math.tan(config.hfov * Math.PI / 360);
-      var s = Math.sin(config.pitch * Math.PI / 180);
-      var c = Math.cos(config.pitch * Math.PI / 180);
+        canvasHeight = canvas.clientHeight;
+      var x = (pos.x / canvasWidth) * 2 - 1;
+      var y = ((1 - (pos.y / canvasHeight) * 2) * canvasHeight) / canvasWidth;
+      var focal = 1 / Math.tan((config.hfov * Math.PI) / 360);
+      var s = Math.sin((config.pitch * Math.PI) / 180);
+      var c = Math.cos((config.pitch * Math.PI) / 180);
       var a = focal * c - y * s;
       var root = Math.sqrt(x * x + a * a);
-      var pitch = Math.atan((y * c + focal * s) / root) * 180 / Math.PI;
-      var yaw = Math.atan2(x / root, a / root) * 180 / Math.PI + config.yaw;
+      var pitch = (Math.atan((y * c + focal * s) / root) * 180) / Math.PI;
+      var yaw = (Math.atan2(x / root, a / root) * 180) / Math.PI + config.yaw;
       if (yaw < -180) yaw += 360;
       if (yaw > 180) yaw -= 360;
       return [pitch, yaw];
@@ -2198,20 +2947,40 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {MouseEvent} event - Document mouse move event.
      */
 
-
     function onDocumentMouseMove(event) {
       if (isUserInteracting && loaded) {
         latestInteraction = Date.now();
         var canvas = renderer.getCanvas();
         var canvasWidth = canvas.clientWidth,
-            canvasHeight = canvas.clientHeight;
+          canvasHeight = canvas.clientHeight;
         var pos = mousePosition(event); //TODO: This still isn't quite right
 
-        var yaw = (Math.atan(onPointerDownPointerX / canvasWidth * 2 - 1) - Math.atan(pos.x / canvasWidth * 2 - 1)) * 180 / Math.PI * config.hfov / 90 + onPointerDownYaw;
-        speed.yaw = (yaw - config.yaw) % 360 * 0.2;
+        var yaw =
+          ((((Math.atan((onPointerDownPointerX / canvasWidth) * 2 - 1) -
+            Math.atan((pos.x / canvasWidth) * 2 - 1)) *
+            180) /
+            Math.PI) *
+            config.hfov) /
+            90 +
+          onPointerDownYaw;
+        speed.yaw = ((yaw - config.yaw) % 360) * 0.2;
         config.yaw = yaw;
-        var vfov = 2 * Math.atan(Math.tan(config.hfov / 360 * Math.PI) * canvasHeight / canvasWidth) * 180 / Math.PI;
-        var pitch = (Math.atan(pos.y / canvasHeight * 2 - 1) - Math.atan(onPointerDownPointerY / canvasHeight * 2 - 1)) * 180 / Math.PI * vfov / 90 + onPointerDownPitch;
+        var vfov =
+          (2 *
+            Math.atan(
+              (Math.tan((config.hfov / 360) * Math.PI) * canvasHeight) /
+                canvasWidth
+            ) *
+            180) /
+          Math.PI;
+        var pitch =
+          ((((Math.atan((pos.y / canvasHeight) * 2 - 1) -
+            Math.atan((onPointerDownPointerY / canvasHeight) * 2 - 1)) *
+            180) /
+            Math.PI) *
+            vfov) /
+            90 +
+          onPointerDownPitch;
         speed.pitch = (pitch - config.pitch) * 0.2;
         config.pitch = pitch;
       }
@@ -2220,7 +2989,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Event handler for mouse up events. Stops panning.
      * @private
      */
-
 
     function onDocumentMouseUp(event) {
       if (!isUserInteracting) {
@@ -2247,13 +3015,11 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {TouchEvent} event - Document touch start event.
      */
 
-
     function onDocumentTouchStart(event) {
       // Only do something if the panorama is loaded
       if (!loaded || !config.draggable) {
         return;
       } // Turn off auto-rotation if enabled
-
 
       stopAnimation();
       stopOrientation();
@@ -2269,7 +3035,10 @@ var pannellum = (function (window, document, undefined$1) {
         var pos1 = mousePosition(event.targetTouches[1]);
         onPointerDownPointerX += (pos1.x - pos0.x) * 0.5;
         onPointerDownPointerY += (pos1.y - pos0.y) * 0.5;
-        onPointerDownPointerDist = Math.sqrt((pos0.x - pos1.x) * (pos0.x - pos1.x) + (pos0.y - pos1.y) * (pos0.y - pos1.y));
+        onPointerDownPointerDist = Math.sqrt(
+          (pos0.x - pos1.x) * (pos0.x - pos1.x) +
+            (pos0.y - pos1.y) * (pos0.y - pos1.y)
+        );
       }
 
       isUserInteracting = true;
@@ -2286,12 +3055,10 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {TouchEvent} event - Document touch move event.
      */
 
-
     function onDocumentTouchMove(event) {
       if (!config.draggable) {
         return;
       } // Override default action
-
 
       event.preventDefault();
 
@@ -2304,11 +3071,17 @@ var pannellum = (function (window, document, undefined$1) {
         var clientX = pos0.x;
         var clientY = pos0.y;
 
-        if (event.targetTouches.length === 2 && onPointerDownPointerDist != -1) {
+        if (
+          event.targetTouches.length === 2 &&
+          onPointerDownPointerDist != -1
+        ) {
           var pos1 = mousePosition(event.targetTouches[1]);
           clientX += (pos1.x - pos0.x) * 0.5;
           clientY += (pos1.y - pos0.y) * 0.5;
-          var clientDist = Math.sqrt((pos0.x - pos1.x) * (pos0.x - pos1.x) + (pos0.y - pos1.y) * (pos0.y - pos1.y));
+          var clientDist = Math.sqrt(
+            (pos0.x - pos1.x) * (pos0.x - pos1.x) +
+              (pos0.y - pos1.y) * (pos0.y - pos1.y)
+          );
           setHfov(config.hfov + (onPointerDownPointerDist - clientDist) * 0.1);
           onPointerDownPointerDist = clientDist;
         } // The smaller the config.hfov value (the more zoomed-in the user is), the faster
@@ -2319,12 +3092,16 @@ var pannellum = (function (window, document, undefined$1) {
         // Currently this seems to *roughly* keep initial drag/pan start position close to
         // the user's finger while panning regardless of zoom level / config.hfov value.
 
-
-        var touchmovePanSpeedCoeff = config.hfov / 360 * config.touchPanSpeedCoeffFactor;
-        var yaw = (onPointerDownPointerX - clientX) * touchmovePanSpeedCoeff + onPointerDownYaw;
-        speed.yaw = (yaw - config.yaw) % 360 * 0.2;
+        var touchmovePanSpeedCoeff =
+          (config.hfov / 360) * config.touchPanSpeedCoeffFactor;
+        var yaw =
+          (onPointerDownPointerX - clientX) * touchmovePanSpeedCoeff +
+          onPointerDownYaw;
+        speed.yaw = ((yaw - config.yaw) % 360) * 0.2;
         config.yaw = yaw;
-        var pitch = (clientY - onPointerDownPointerY) * touchmovePanSpeedCoeff + onPointerDownPitch;
+        var pitch =
+          (clientY - onPointerDownPointerY) * touchmovePanSpeedCoeff +
+          onPointerDownPitch;
         speed.pitch = (pitch - config.pitch) * 0.2;
         config.pitch = pitch;
       }
@@ -2333,7 +3110,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Event handler for end of touches. Stops panning and/or zooming.
      * @private
      */
-
 
     function onDocumentTouchEnd() {
       isUserInteracting = false;
@@ -2348,7 +3124,7 @@ var pannellum = (function (window, document, undefined$1) {
     }
 
     var pointerIDs = [],
-        pointerCoordinates = [];
+      pointerCoordinates = [];
     /**
      * Event handler for touch starts in IE / Edge.
      * @private
@@ -2362,7 +3138,7 @@ var pannellum = (function (window, document, undefined$1) {
         pointerIDs.push(event.pointerId);
         pointerCoordinates.push({
           clientX: event.clientX,
-          clientY: event.clientY
+          clientY: event.clientY,
         });
         event.targetTouches = pointerCoordinates;
         onDocumentTouchStart(event);
@@ -2374,7 +3150,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      * @param {PointerEvent} event - Document pointer move event.
      */
-
 
     function onDocumentPointerMove(event) {
       if (event.pointerType === "touch") {
@@ -2397,7 +3172,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      * @param {PointerEvent} event - Document pointer up event.
      */
-
 
     function onDocumentPointerUp(event) {
       if (event.pointerType === "touch") {
@@ -2423,10 +3197,12 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {WheelEvent} event - Document mouse wheel event.
      */
 
-
     function onDocumentMouseWheel(event) {
       // Only do something if the panorama is loaded and mouse wheel zoom is enabled
-      if (!loaded || config.mouseZoom === "fullscreenonly" && !fullscreenActive) {
+      if (
+        !loaded ||
+        (config.mouseZoom === "fullscreenonly" && !fullscreenActive)
+      ) {
         return;
       }
 
@@ -2457,7 +3233,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {KeyboardEvent} event - Document key press event.
      */
 
-
     function onDocumentKeyPress(event) {
       // Turn off auto-rotation if enabled
       stopAnimation();
@@ -2485,7 +3260,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function clearKeys() {
       for (var i = 0; i < 10; i++) {
         keysDown[i] = false;
@@ -2496,7 +3270,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      * @param {KeyboardEvent} event - Document key up event.
      */
-
 
     function onDocumentKeyUp(event) {
       // Record key pressed
@@ -2513,7 +3286,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {number} keynumber - Key number.
      * @param {boolean} value - Whether or not key is pressed.
      */
-
 
     function changeKey(keynumber, value) {
       var keyChanged = false;
@@ -2631,7 +3403,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function keyRepeat() {
       // Only do something if the panorama is loaded
       if (!loaded) {
@@ -2654,7 +3425,7 @@ var pannellum = (function (window, document, undefined$1) {
         prevTime = newTime;
       }
 
-      var diff = (newTime - prevTime) * config.hfov / 1700;
+      var diff = ((newTime - prevTime) * config.hfov) / 1700;
       diff = Math.min(diff, 1.0); // If minus key is down
 
       if (keysDown[0] && config.keyboardZoom === true) {
@@ -2662,12 +3433,10 @@ var pannellum = (function (window, document, undefined$1) {
         isKeyDown = true;
       } // If plus key is down
 
-
       if (keysDown[1] && config.keyboardZoom === true) {
         setHfov(config.hfov + (speed.hfov * 0.8 - 0.2) * diff);
         isKeyDown = true;
       } // If up arrow or "w" is down
-
 
       if (keysDown[2] || keysDown[6]) {
         // Pan up
@@ -2675,20 +3444,17 @@ var pannellum = (function (window, document, undefined$1) {
         isKeyDown = true;
       } // If down arrow or "s" is down
 
-
       if (keysDown[3] || keysDown[7]) {
         // Pan down
         config.pitch += (speed.pitch * 0.8 - 0.2) * diff;
         isKeyDown = true;
       } // If left arrow or "a" is down
 
-
       if (keysDown[4] || keysDown[8]) {
         // Pan left
         config.yaw += (speed.yaw * 0.8 - 0.2) * diff;
         isKeyDown = true;
       } // If right arrow or "d" is down
-
 
       if (keysDown[5] || keysDown[9]) {
         // Pan right
@@ -2702,11 +3468,14 @@ var pannellum = (function (window, document, undefined$1) {
         // Pan
         if (newTime - prevTime > 0.001) {
           var timeDiff = (newTime - prevTime) / 1000;
-          var yawDiff = (speed.yaw / timeDiff * diff - config.autoRotate * 0.2) * timeDiff;
-          yawDiff = (-config.autoRotate > 0 ? 1 : -1) * Math.min(Math.abs(config.autoRotate * timeDiff), Math.abs(yawDiff));
+          var yawDiff =
+            ((speed.yaw / timeDiff) * diff - config.autoRotate * 0.2) *
+            timeDiff;
+          yawDiff =
+            (-config.autoRotate > 0 ? 1 : -1) *
+            Math.min(Math.abs(config.autoRotate * timeDiff), Math.abs(yawDiff));
           config.yaw += yawDiff;
         } // Deal with stopping auto rotation after a set delay
-
 
         if (config.autoRotateStopDelay) {
           config.autoRotateStopDelay -= newTime - prevTime;
@@ -2718,7 +3487,6 @@ var pannellum = (function (window, document, undefined$1) {
           }
         }
       } // Animated moves
-
 
       if (animatedMove.pitch) {
         animateMove("pitch");
@@ -2735,20 +3503,29 @@ var pannellum = (function (window, document, undefined$1) {
         prevZoom = config.hfov;
       } // "Inertia"
 
-
       if (diff > 0 && !config.autoRotate) {
         // "Friction"
         var slowDownFactor = 1 - config.friction; // Yaw
 
-        if (!keysDown[4] && !keysDown[5] && !keysDown[8] && !keysDown[9] && !animatedMove.yaw) {
+        if (
+          !keysDown[4] &&
+          !keysDown[5] &&
+          !keysDown[8] &&
+          !keysDown[9] &&
+          !animatedMove.yaw
+        ) {
           config.yaw += speed.yaw * diff * slowDownFactor;
         } // Pitch
 
-
-        if (!keysDown[2] && !keysDown[3] && !keysDown[6] && !keysDown[7] && !animatedMove.pitch) {
+        if (
+          !keysDown[2] &&
+          !keysDown[3] &&
+          !keysDown[6] &&
+          !keysDown[7] &&
+          !animatedMove.pitch
+        ) {
           config.pitch += speed.pitch * diff * slowDownFactor;
         } // Zoom
-
 
         if (!keysDown[0] && !keysDown[1] && !animatedMove.hfov) {
           setHfov(config.hfov + speed.hfov * diff * slowDownFactor);
@@ -2758,16 +3535,16 @@ var pannellum = (function (window, document, undefined$1) {
       prevTime = newTime;
 
       if (diff > 0) {
-        speed.yaw = speed.yaw * 0.8 + (config.yaw - prevYaw) / diff * 0.2;
-        speed.pitch = speed.pitch * 0.8 + (config.pitch - prevPitch) / diff * 0.2;
-        speed.hfov = speed.hfov * 0.8 + (config.hfov - prevZoom) / diff * 0.2; // Limit speed
+        speed.yaw = speed.yaw * 0.8 + ((config.yaw - prevYaw) / diff) * 0.2;
+        speed.pitch =
+          speed.pitch * 0.8 + ((config.pitch - prevPitch) / diff) * 0.2;
+        speed.hfov = speed.hfov * 0.8 + ((config.hfov - prevZoom) / diff) * 0.2; // Limit speed
 
         var maxSpeed = config.autoRotate ? Math.abs(config.autoRotate) : 5;
         speed.yaw = Math.min(maxSpeed, Math.max(speed.yaw, -maxSpeed));
         speed.pitch = Math.min(maxSpeed, Math.max(speed.pitch, -maxSpeed));
         speed.hfov = Math.min(maxSpeed, Math.max(speed.hfov, -maxSpeed));
       } // Stop movement if opposite controls are pressed
-
 
       if (keysDown[0] && keysDown[1]) {
         speed.hfov = 0;
@@ -2787,13 +3564,22 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function animateMove(axis) {
       var t = animatedMove[axis];
-      var normTime = Math.min(1, Math.max((Date.now() - t.startTime) / 1000 / (t.duration / 1000), 0));
-      var result = t.startPosition + config.animationTimingFunction(normTime) * (t.endPosition - t.startPosition);
+      var normTime = Math.min(
+        1,
+        Math.max((Date.now() - t.startTime) / 1000 / (t.duration / 1000), 0)
+      );
+      var result =
+        t.startPosition +
+        config.animationTimingFunction(normTime) *
+          (t.endPosition - t.startPosition);
 
-      if (t.endPosition > t.startPosition && result >= t.endPosition || t.endPosition < t.startPosition && result <= t.endPosition || t.endPosition === t.startPosition) {
+      if (
+        (t.endPosition > t.startPosition && result >= t.endPosition) ||
+        (t.endPosition < t.startPosition && result <= t.endPosition) ||
+        t.endPosition === t.startPosition
+      ) {
         result = t.endPosition;
         speed[axis] = 0;
         delete animatedMove[axis];
@@ -2807,7 +3593,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function timingFunction(t) {
       // easeInOutQuad from https://gist.github.com/gre/1650294
       return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
@@ -2816,7 +3601,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Event handler for document resizes. Updates viewer size and rerenders view.
      * @private
      */
-
 
     function onDocumentResize() {
       // Resize panorama renderer (moved to onFullScreenChange)
@@ -2829,7 +3613,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Initializes animation.
      * @private
      */
-
 
     function animateInit() {
       if (animating) {
@@ -2844,7 +3627,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function animate() {
       if (destroyed) {
         return;
@@ -2855,27 +3637,54 @@ var pannellum = (function (window, document, undefined$1) {
 
       if (isUserInteracting || orientation === true) {
         requestAnimationFrame(animate);
-      } else if (keysDown[0] || keysDown[1] || keysDown[2] || keysDown[3] || keysDown[4] || keysDown[5] || keysDown[6] || keysDown[7] || keysDown[8] || keysDown[9] || config.autoRotate || animatedMove.pitch || animatedMove.yaw || animatedMove.hfov || Math.abs(speed.yaw) > 0.01 || Math.abs(speed.pitch) > 0.01 || Math.abs(speed.hfov) > 0.01) {
+      } else if (
+        keysDown[0] ||
+        keysDown[1] ||
+        keysDown[2] ||
+        keysDown[3] ||
+        keysDown[4] ||
+        keysDown[5] ||
+        keysDown[6] ||
+        keysDown[7] ||
+        keysDown[8] ||
+        keysDown[9] ||
+        config.autoRotate ||
+        animatedMove.pitch ||
+        animatedMove.yaw ||
+        animatedMove.hfov ||
+        Math.abs(speed.yaw) > 0.01 ||
+        Math.abs(speed.pitch) > 0.01 ||
+        Math.abs(speed.hfov) > 0.01
+      ) {
         keyRepeat();
 
-        if (config.autoRotateInactivityDelay >= 0 && autoRotateSpeed && Date.now() - latestInteraction > config.autoRotateInactivityDelay && !config.autoRotate) {
+        if (
+          config.autoRotateInactivityDelay >= 0 &&
+          autoRotateSpeed &&
+          Date.now() - latestInteraction > config.autoRotateInactivityDelay &&
+          !config.autoRotate
+        ) {
           config.autoRotate = autoRotateSpeed;
 
           _this.lookAt(origPitch, undefined$1, origHfov, 3000);
         }
 
         requestAnimationFrame(animate);
-      } else if (renderer && (renderer.isLoading() || config.dynamic === true && update)) {
+      } else if (
+        renderer &&
+        (renderer.isLoading() || (config.dynamic === true && update))
+      ) {
         requestAnimationFrame(animate);
       } else {
         fireEvent("animatefinished", {
           pitch: _this.getPitch(),
           yaw: _this.getYaw(),
-          hfov: _this.getHfov()
+          hfov: _this.getHfov(),
         });
         animating = false;
         prevTime = undefined$1;
-        var autoRotateStartTime = config.autoRotateInactivityDelay - (Date.now() - latestInteraction);
+        var autoRotateStartTime =
+          config.autoRotateInactivityDelay - (Date.now() - latestInteraction);
 
         if (autoRotateStartTime > 0) {
           autoRotateStart = setTimeout(function () {
@@ -2899,7 +3708,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function render() {
       var tmpyaw;
 
@@ -2915,27 +3723,42 @@ var pannellum = (function (window, document, undefined$1) {
           }
         } // Keep a tmp value of yaw for autoRotate comparison later
 
-
         tmpyaw = config.yaw; // Optionally avoid showing background (empty space) on left or right by adapting min/max yaw
 
         var hoffcut = 0;
 
         if (config.avoidShowingBackground) {
           var hfov2 = config.hfov / 2,
-              vfov2 = Math.atan2(Math.tan(hfov2 / 180 * Math.PI), canvas.width / canvas.height) * 180 / Math.PI,
-              transposed = config.vaov > config.haov;
+            vfov2 =
+              (Math.atan2(
+                Math.tan((hfov2 / 180) * Math.PI),
+                canvas.width / canvas.height
+              ) *
+                180) /
+              Math.PI,
+            transposed = config.vaov > config.haov;
 
           if (transposed) {
-            vfov2 * (1 - Math.min(Math.cos((config.pitch - hfov2) / 180 * Math.PI), Math.cos((config.pitch + hfov2) / 180 * Math.PI)));
+            vfov2 *
+              (1 -
+                Math.min(
+                  Math.cos(((config.pitch - hfov2) / 180) * Math.PI),
+                  Math.cos(((config.pitch + hfov2) / 180) * Math.PI)
+                ));
           } else {
-            hoffcut = hfov2 * (1 - Math.min(Math.cos((config.pitch - vfov2) / 180 * Math.PI), Math.cos((config.pitch + vfov2) / 180 * Math.PI)));
+            hoffcut =
+              hfov2 *
+              (1 -
+                Math.min(
+                  Math.cos(((config.pitch - vfov2) / 180) * Math.PI),
+                  Math.cos(((config.pitch + vfov2) / 180) * Math.PI)
+                ));
           }
         } // Ensure the yaw is within min and max allowed
 
-
         var yawRange = config.maxYaw - config.minYaw,
-            minYaw = -180,
-            maxYaw = 180;
+          minYaw = -180,
+          maxYaw = 180;
 
         if (yawRange < 360) {
           minYaw = config.minYaw + config.hfov / 2 + hoffcut;
@@ -2960,16 +3783,25 @@ var pannellum = (function (window, document, undefined$1) {
         } // Check if we autoRotate in a limited by min and max yaw
         // If so reverse direction
 
-
-        if (config.autoRotate !== false && tmpyaw != config.yaw && prevTime !== undefined$1) {
+        if (
+          config.autoRotate !== false &&
+          tmpyaw != config.yaw &&
+          prevTime !== undefined$1
+        ) {
           // this condition prevents changing the direction initially
           config.autoRotate *= -1;
         } // Ensure the calculated pitch is within min and max allowed
 
-
-        var vfov = 2 * Math.atan(Math.tan(config.hfov / 180 * Math.PI * 0.5) / (canvas.width / canvas.height)) / Math.PI * 180;
+        var vfov =
+          ((2 *
+            Math.atan(
+              Math.tan((config.hfov / 180) * Math.PI * 0.5) /
+                (canvas.width / canvas.height)
+            )) /
+            Math.PI) *
+          180;
         var minPitch = config.minPitch + vfov / 2,
-            maxPitch = config.maxPitch - vfov / 2;
+          maxPitch = config.maxPitch - vfov / 2;
         var pitchRange = config.maxPitch - config.minPitch;
 
         if (pitchRange < vfov) {
@@ -2980,14 +3812,21 @@ var pannellum = (function (window, document, undefined$1) {
         if (isNaN(minPitch)) minPitch = -90;
         if (isNaN(maxPitch)) maxPitch = 90;
         config.pitch = Math.max(minPitch, Math.min(maxPitch, config.pitch));
-        renderer.render(config.pitch * Math.PI / 180, config.yaw * Math.PI / 180, config.hfov * Math.PI / 180, {
-          roll: config.roll * Math.PI / 180
-        });
+        renderer.render(
+          (config.pitch * Math.PI) / 180,
+          (config.yaw * Math.PI) / 180,
+          (config.hfov * Math.PI) / 180,
+          {
+            roll: (config.roll * Math.PI) / 180,
+          }
+        );
         renderHotSpots(); // Update compass
 
         if (config.compass) {
-          compass.style.transform = "rotate(" + (-config.yaw - config.northOffset) + "deg)";
-          compass.style.webkitTransform = "rotate(" + (-config.yaw - config.northOffset) + "deg)";
+          compass.style.transform =
+            "rotate(" + (-config.yaw - config.northOffset) + "deg)";
+          compass.style.webkitTransform =
+            "rotate(" + (-config.yaw - config.northOffset) + "deg)";
         }
       }
     }
@@ -3000,7 +3839,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {Number} y - Y value
      * @param {Number} z - Z value
      */
-
 
     function Quaternion(w, x, y, z) {
       this.w = w;
@@ -3015,9 +3853,13 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Quaternion} Result of multiplication
      */
 
-
     Quaternion.prototype.multiply = function (q) {
-      return new Quaternion(this.w * q.w - this.x * q.x - this.y * q.y - this.z * q.z, this.x * q.w + this.w * q.x + this.y * q.z - this.z * q.y, this.y * q.w + this.w * q.y + this.z * q.x - this.x * q.z, this.z * q.w + this.w * q.z + this.x * q.y - this.y * q.x);
+      return new Quaternion(
+        this.w * q.w - this.x * q.x - this.y * q.y - this.z * q.z,
+        this.x * q.w + this.w * q.x + this.y * q.z - this.z * q.y,
+        this.y * q.w + this.w * q.y + this.z * q.x - this.x * q.z,
+        this.z * q.w + this.w * q.z + this.x * q.y - this.y * q.x
+      );
     };
     /**
      * Converts quaternion to Euler angles.
@@ -3025,11 +3867,16 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Number[]} [phi angle, theta angle, psi angle]
      */
 
-
     Quaternion.prototype.toEulerAngles = function () {
-      var phi = Math.atan2(2 * (this.w * this.x + this.y * this.z), 1 - 2 * (this.x * this.x + this.y * this.y)),
-          theta = Math.asin(2 * (this.w * this.y - this.z * this.x)),
-          psi = Math.atan2(2 * (this.w * this.z + this.x * this.y), 1 - 2 * (this.y * this.y + this.z * this.z));
+      var phi = Math.atan2(
+          2 * (this.w * this.x + this.y * this.z),
+          1 - 2 * (this.x * this.x + this.y * this.y)
+        ),
+        theta = Math.asin(2 * (this.w * this.y - this.z * this.x)),
+        psi = Math.atan2(
+          2 * (this.w * this.z + this.x * this.y),
+          1 - 2 * (this.y * this.y + this.z * this.z)
+        );
       return [phi, theta, psi];
     };
     /**
@@ -3041,12 +3888,20 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Quaternion} Orientation quaternion
      */
 
-
     function taitBryanToQuaternion(alpha, beta, gamma) {
-      var r = [beta ? beta * Math.PI / 180 / 2 : 0, gamma ? gamma * Math.PI / 180 / 2 : 0, alpha ? alpha * Math.PI / 180 / 2 : 0];
+      var r = [
+        beta ? (beta * Math.PI) / 180 / 2 : 0,
+        gamma ? (gamma * Math.PI) / 180 / 2 : 0,
+        alpha ? (alpha * Math.PI) / 180 / 2 : 0,
+      ];
       var c = [Math.cos(r[0]), Math.cos(r[1]), Math.cos(r[2])],
-          s = [Math.sin(r[0]), Math.sin(r[1]), Math.sin(r[2])];
-      return new Quaternion(c[0] * c[1] * c[2] - s[0] * s[1] * s[2], s[0] * c[1] * c[2] - c[0] * s[1] * s[2], c[0] * s[1] * c[2] + s[0] * c[1] * s[2], c[0] * c[1] * s[2] + s[0] * s[1] * c[2]);
+        s = [Math.sin(r[0]), Math.sin(r[1]), Math.sin(r[2])];
+      return new Quaternion(
+        c[0] * c[1] * c[2] - s[0] * s[1] * s[2],
+        s[0] * c[1] * c[2] - c[0] * s[1] * s[2],
+        c[0] * s[1] * c[2] + s[0] * c[1] * s[2],
+        c[0] * c[1] * s[2] + s[0] * s[1] * c[2]
+      );
     }
     /**
      * Computes current device orientation quaternion from device orientation API
@@ -3058,22 +3913,26 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Quaternion} Orientation quaternion
      */
 
-
     function computeQuaternion(alpha, beta, gamma) {
       // Convert Tait-Bryan angles to quaternion
       var quaternion = taitBryanToQuaternion(alpha, beta, gamma); // Apply world transform
 
-      quaternion = quaternion.multiply(new Quaternion(Math.sqrt(0.5), -Math.sqrt(0.5), 0, 0)); // Apply screen transform
+      quaternion = quaternion.multiply(
+        new Quaternion(Math.sqrt(0.5), -Math.sqrt(0.5), 0, 0)
+      ); // Apply screen transform
 
-      var angle = window.orientation ? -window.orientation * Math.PI / 180 / 2 : 0;
-      return quaternion.multiply(new Quaternion(Math.cos(angle), 0, -Math.sin(angle), 0));
+      var angle = window.orientation
+        ? (-window.orientation * Math.PI) / 180 / 2
+        : 0;
+      return quaternion.multiply(
+        new Quaternion(Math.cos(angle), 0, -Math.sin(angle), 0)
+      );
     }
     /**
      * Event handler for device orientation API. Controls pointing.
      * @private
      * @param {DeviceOrientationEvent} event - Device orientation event.
      */
-
 
     function orientationListener(e) {
       if (e.hasOwnProperty("requestPermission")) e.requestPermission();
@@ -3087,13 +3946,13 @@ var pannellum = (function (window, document, undefined$1) {
         orientation += 1;
       } else if (orientation === 10) {
         // Record starting yaw to prevent jumping
-        orientationYawOffset = q[2] / Math.PI * 180 + config.yaw;
+        orientationYawOffset = (q[2] / Math.PI) * 180 + config.yaw;
         orientation = true;
         requestAnimationFrame(animate);
       } else {
-        config.pitch = q[0] / Math.PI * 180;
-        config.roll = -q[1] / Math.PI * 180;
-        config.yaw = -q[2] / Math.PI * 180 + orientationYawOffset;
+        config.pitch = (q[0] / Math.PI) * 180;
+        config.roll = (-q[1] / Math.PI) * 180;
+        config.yaw = (-q[2] / Math.PI) * 180 + orientationYawOffset;
       }
     }
     /**
@@ -3101,14 +3960,25 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function renderInit() {
       try {
         var params = {};
-        if (config.horizonPitch !== undefined$1) params.horizonPitch = config.horizonPitch * Math.PI / 180;
-        if (config.horizonRoll !== undefined$1) params.horizonRoll = config.horizonRoll * Math.PI / 180;
-        if (config.backgroundColor !== undefined$1) params.backgroundColor = config.backgroundColor;
-        renderer.init(panoImage, config.type, config.dynamic, config.haov * Math.PI / 180, config.vaov * Math.PI / 180, config.vOffset * Math.PI / 180, renderInitCallback, params);
+        if (config.horizonPitch !== undefined$1)
+          params.horizonPitch = (config.horizonPitch * Math.PI) / 180;
+        if (config.horizonRoll !== undefined$1)
+          params.horizonRoll = (config.horizonRoll * Math.PI) / 180;
+        if (config.backgroundColor !== undefined$1)
+          params.backgroundColor = config.backgroundColor;
+        renderer.init(
+          panoImage,
+          config.type,
+          config.dynamic,
+          (config.haov * Math.PI) / 180,
+          (config.vaov * Math.PI) / 180,
+          (config.vOffset * Math.PI) / 180,
+          renderInitCallback,
+          params
+        );
 
         if (config.dynamic !== true) {
           // Allow image to be garbage collected
@@ -3120,7 +3990,11 @@ var pannellum = (function (window, document, undefined$1) {
         if (event.type === "webgl error" || event.type === "no webgl") {
           anError();
         } else if (event.type === "webgl size error") {
-          anError(config.uiText.textureSizeError.replace("%s", event.width).replace("%s", event.maxWidth));
+          anError(
+            config.uiText.textureSizeError
+              .replace("%s", event.width)
+              .replace("%s", event.maxWidth)
+          );
         } else {
           anError(config.uiText.unknownError);
           throw event;
@@ -3133,7 +4007,6 @@ var pannellum = (function (window, document, undefined$1) {
      * display.
      * @private
      */
-
 
     function renderInitCallback() {
       // Fade if specified
@@ -3148,13 +4021,11 @@ var pannellum = (function (window, document, undefined$1) {
         }, config.sceneFadeDuration);
       } // Show compass if applicable
 
-
       if (config.compass) {
         compass.style.display = "inline";
       } else {
         compass.style.display = "none";
       } // Show hotspots
-
 
       createHotSpots(); // Hide loading display
 
@@ -3175,22 +4046,25 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {Object} hs - The configuration for the hotspot
      */
 
-
     function createHotSpot(hs) {
       // Make sure hot spot pitch and yaw are numbers
       hs.pitch = Number(hs.pitch) || 0;
       hs.yaw = Number(hs.yaw) || 0;
       var div = document.createElement("div");
       div.className = "pnlm-hotspot-base";
-      if (hs.cssClass) div.className += " " + hs.cssClass;else div.className += " pnlm-hotspot pnlm-sprite pnlm-" + escapeHTML(hs.type);
+      if (hs.cssClass) div.className += " " + hs.cssClass;
+      else
+        div.className +=
+          " pnlm-hotspot pnlm-sprite pnlm-" + escapeHTML(hs.type);
       var span = document.createElement("span");
       if (hs.text) span.innerHTML = escapeHTML(hs.text);
       var a;
 
       if (hs.video) {
         var video = document.createElement("video"),
-            vidp = hs.video;
-        if (config.basePath && !absoluteURL(vidp)) vidp = config.basePath + vidp;
+          vidp = hs.video;
+        if (config.basePath && !absoluteURL(vidp))
+          vidp = config.basePath + vidp;
         video.src = sanitizeURL(vidp);
         video.controls = true;
         video.style.width = hs.width + "px";
@@ -3198,7 +4072,8 @@ var pannellum = (function (window, document, undefined$1) {
         span.appendChild(video);
       } else if (hs.image) {
         var imgp = hs.image;
-        if (config.basePath && !absoluteURL(imgp)) imgp = config.basePath + imgp;
+        if (config.basePath && !absoluteURL(imgp))
+          imgp = config.basePath + imgp;
         a = document.createElement("a");
         a.href = sanitizeURL(hs.URL ? hs.URL : imgp);
         a.target = "_blank";
@@ -3231,7 +4106,12 @@ var pannellum = (function (window, document, undefined$1) {
           div.onclick = div.ontouchend = function () {
             if (!div.clicked) {
               div.clicked = true;
-              loadScene(hs.sceneId, hs.targetPitch, hs.targetYaw, hs.targetHfov);
+              loadScene(
+                hs.sceneId,
+                hs.targetPitch,
+                hs.targetYaw,
+                hs.targetHfov
+              );
             }
 
             return false;
@@ -3249,15 +4129,21 @@ var pannellum = (function (window, document, undefined$1) {
       } else if (hs.text || hs.video || hs.image) {
         div.classList.add("pnlm-tooltip");
         div.appendChild(span);
+        span.style.wordBreak = "break-word";
         span.style.width = span.scrollWidth - 20 + "px";
-        span.style.marginLeft = -(span.scrollWidth - div.offsetWidth + 26) / 2 + "px";
+        span.style.marginLeft =
+          -(span.scrollWidth - div.offsetWidth) / 2 + "px";
         span.style.marginTop = -span.scrollHeight - 12 + "px";
       }
 
       if (hs.clickHandlerFunc) {
-        div.addEventListener("click", function (e) {
-          hs.clickHandlerFunc(e, hs.clickHandlerArgs);
-        }, "false");
+        div.addEventListener(
+          "click",
+          function (e) {
+            hs.clickHandlerFunc(e, hs.clickHandlerArgs);
+          },
+          "false"
+        );
         div.className += " pnlm-pointer";
         span.className += " pnlm-pointer";
       }
@@ -3268,7 +4154,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Creates hot spot elements for the current scene.
      * @private
      */
-
 
     function createHotSpots() {
       if (hotspotsCreated) return;
@@ -3291,7 +4176,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function destroyHotSpots() {
       var hs = config.hotSpots;
       hotspotsCreated = false;
@@ -3302,7 +4186,10 @@ var pannellum = (function (window, document, undefined$1) {
           var current = hs[i].div;
 
           if (current) {
-            while (current.parentNode && current.parentNode != renderContainer) {
+            while (
+              current.parentNode &&
+              current.parentNode != renderContainer
+            ) {
               current = current.parentNode;
             }
 
@@ -3318,35 +4205,55 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function renderHotSpot(hs) {
-      var hsPitchSin = Math.sin(hs.pitch * Math.PI / 180),
-          hsPitchCos = Math.cos(hs.pitch * Math.PI / 180),
-          configPitchSin = Math.sin(config.pitch * Math.PI / 180),
-          configPitchCos = Math.cos(config.pitch * Math.PI / 180),
-          yawCos = Math.cos((-hs.yaw + config.yaw) * Math.PI / 180);
-      var z = hsPitchSin * configPitchSin + hsPitchCos * yawCos * configPitchCos;
+      var hsPitchSin = Math.sin((hs.pitch * Math.PI) / 180),
+        hsPitchCos = Math.cos((hs.pitch * Math.PI) / 180),
+        configPitchSin = Math.sin((config.pitch * Math.PI) / 180),
+        configPitchCos = Math.cos((config.pitch * Math.PI) / 180),
+        yawCos = Math.cos(((-hs.yaw + config.yaw) * Math.PI) / 180);
+      var z =
+        hsPitchSin * configPitchSin + hsPitchCos * yawCos * configPitchCos;
 
-      if (hs.yaw <= 90 && hs.yaw > -90 && z <= 0 || (hs.yaw > 90 || hs.yaw <= -90) && z <= 0) {
+      if (
+        (hs.yaw <= 90 && hs.yaw > -90 && z <= 0) ||
+        ((hs.yaw > 90 || hs.yaw <= -90) && z <= 0)
+      ) {
         hs.div.style.visibility = "hidden";
       } else {
-        var yawSin = Math.sin((-hs.yaw + config.yaw) * Math.PI / 180),
-            hfovTan = Math.tan(config.hfov * Math.PI / 360);
+        var yawSin = Math.sin(((-hs.yaw + config.yaw) * Math.PI) / 180),
+          hfovTan = Math.tan((config.hfov * Math.PI) / 360);
         hs.div.style.visibility = "visible"; // Subpixel rendering doesn't work in Firefox
         // https://bugzilla.mozilla.org/show_bug.cgi?id=739176
 
         var canvas = renderer.getCanvas(),
-            canvasWidth = canvas.clientWidth,
-            canvasHeight = canvas.clientHeight;
-        var coord = [-canvasWidth / hfovTan * yawSin * hsPitchCos / z / 2, -canvasWidth / hfovTan * (hsPitchSin * configPitchCos - hsPitchCos * yawCos * configPitchSin) / z / 2]; // Apply roll
+          canvasWidth = canvas.clientWidth,
+          canvasHeight = canvas.clientHeight;
+        var coord = [
+          ((-canvasWidth / hfovTan) * yawSin * hsPitchCos) / z / 2,
+          ((-canvasWidth / hfovTan) *
+            (hsPitchSin * configPitchCos -
+              hsPitchCos * yawCos * configPitchSin)) /
+            z /
+            2,
+        ]; // Apply roll
 
-        var rollSin = Math.sin(config.roll * Math.PI / 180),
-            rollCos = Math.cos(config.roll * Math.PI / 180);
-        coord = [coord[0] * rollCos - coord[1] * rollSin, coord[0] * rollSin + coord[1] * rollCos]; // Apply transform
+        var rollSin = Math.sin((config.roll * Math.PI) / 180),
+          rollCos = Math.cos((config.roll * Math.PI) / 180);
+        coord = [
+          coord[0] * rollCos - coord[1] * rollSin,
+          coord[0] * rollSin + coord[1] * rollCos,
+        ]; // Apply transform
 
         coord[0] += (canvasWidth - hs.div.offsetWidth) / 2;
         coord[1] += (canvasHeight - hs.div.offsetHeight) / 2;
-        var transform = "translate(" + coord[0] + "px, " + coord[1] + "px) translateZ(9999px) rotate(" + config.roll + "deg)";
+        var transform =
+          "translate(" +
+          coord[0] +
+          "px, " +
+          coord[1] +
+          "px) translateZ(9999px) rotate(" +
+          config.roll +
+          "deg)";
 
         if (hs.scale) {
           transform += " scale(" + origHfov / config.hfov / z + ")";
@@ -3362,7 +4269,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function renderHotSpots() {
       config.hotSpots.forEach(renderHotSpot);
     }
@@ -3372,11 +4278,17 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {string} sceneId - Identifier of scene configuration to merge in.
      */
 
-
     function mergeConfig(sceneId) {
       config = {};
       var k, s;
-      var photoSphereExcludes = ["haov", "vaov", "vOffset", "northOffset", "horizonPitch", "horizonRoll"];
+      var photoSphereExcludes = [
+        "haov",
+        "vaov",
+        "vOffset",
+        "northOffset",
+        "horizonPitch",
+        "horizonRoll",
+      ];
       specifiedPhotoSphereExcludes = []; // Merge default config
 
       for (k in defaultConfig) {
@@ -3385,13 +4297,14 @@ var pannellum = (function (window, document, undefined$1) {
         }
       } // Merge default scene config
 
-
       for (k in initialConfig["default"]) {
         if (initialConfig["default"].hasOwnProperty(k)) {
           if (k === "uiText") {
             for (s in initialConfig["default"].uiText) {
               if (initialConfig["default"].uiText.hasOwnProperty(s)) {
-                config.uiText[s] = escapeHTML(initialConfig["default"].uiText[s]);
+                config.uiText[s] = escapeHTML(
+                  initialConfig["default"].uiText[s]
+                );
               }
             }
           } else {
@@ -3404,8 +4317,12 @@ var pannellum = (function (window, document, undefined$1) {
         }
       } // Merge current scene config
 
-
-      if (sceneId !== null && sceneId !== "" && initialConfig.scenes && initialConfig.scenes[sceneId]) {
+      if (
+        sceneId !== null &&
+        sceneId !== "" &&
+        initialConfig.scenes &&
+        initialConfig.scenes[sceneId]
+      ) {
         var scene = initialConfig.scenes[sceneId];
 
         for (k in scene) {
@@ -3428,7 +4345,6 @@ var pannellum = (function (window, document, undefined$1) {
 
         config.scene = sceneId;
       } // Merge initial config
-
 
       for (k in initialConfig) {
         if (initialConfig.hasOwnProperty(k)) {
@@ -3454,7 +4370,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function processOptions(isPreview) {
       isPreview = isPreview ? isPreview : false; // Process preview first so it always loads before the browser hits its
       // maximum number of connections to a server as can happen with cubic
@@ -3469,22 +4384,27 @@ var pannellum = (function (window, document, undefined$1) {
         renderContainer.appendChild(preview);
       } // Handle different preview values
 
-
       var title = config.title,
-          author = config.author,
-          description = config.description;
+        author = config.author,
+        description = config.description;
 
       if (isPreview) {
         if ("previewTitle" in config) config.title = config.previewTitle;
-        if ("previewDescription" in config) config.description = config.previewDescription;
+        if ("previewDescription" in config)
+          config.description = config.previewDescription;
         if ("previewAuthor" in config) config.author = config.previewAuthor;
       } // Reset title / author display
 
-
       if (!config.hasOwnProperty("title")) infoDisplay.title.innerHTML = "";
-      if (!config.hasOwnProperty("description")) infoDisplay.description.innerHTML = "";
+      if (!config.hasOwnProperty("description"))
+        infoDisplay.description.innerHTML = "";
       if (!config.hasOwnProperty("author")) infoDisplay.author.innerHTML = "";
-      if (!config.hasOwnProperty("title") && !config.hasOwnProperty("description") && !config.hasOwnProperty("author")) infoDisplay.container.style.display = "none"; // Fill in load button label and loading box text
+      if (
+        !config.hasOwnProperty("title") &&
+        !config.hasOwnProperty("description") &&
+        !config.hasOwnProperty("author")
+      )
+        infoDisplay.container.style.display = "none"; // Fill in load button label and loading box text
 
       controls.load.innerHTML = "<p>" + config.uiText.loadButtonLabel + "</p>";
       infoDisplay.load.boxp.innerHTML = config.uiText.loadingLabel; // Process other options
@@ -3513,7 +4433,10 @@ var pannellum = (function (window, document, undefined$1) {
                 authorText = authorLink.outerHTML;
               }
 
-              infoDisplay.author.innerHTML = config.uiText.bylineLabel.replace("%s", authorText);
+              infoDisplay.author.innerHTML = config.uiText.bylineLabel.replace(
+                "%s",
+                authorText
+              );
               infoDisplay.container.style.display = "inline";
               break;
 
@@ -3521,7 +4444,8 @@ var pannellum = (function (window, document, undefined$1) {
               var link = document.createElement("a");
               link.href = sanitizeURL(config[key]);
               link.target = "_blank";
-              link.textContent = "Click here to view this panorama in an alternative viewer.";
+              link.textContent =
+                "Click here to view this panorama in an alternative viewer.";
               var message = document.createElement("p");
               message.textContent = "Your browser does not support WebGL.";
               message.appendChild(document.createElement("br"));
@@ -3559,7 +4483,14 @@ var pannellum = (function (window, document, undefined$1) {
               break;
 
             case "showFullscreenCtrl":
-              if (config[key] && config.showControls != false && ("fullscreen" in document || "mozFullScreen" in document || "webkitIsFullScreen" in document || "msFullscreenElement" in document)) {
+              if (
+                config[key] &&
+                config.showControls != false &&
+                ("fullscreen" in document ||
+                  "mozFullScreen" in document ||
+                  "webkitIsFullScreen" in document ||
+                  "msFullscreenElement" in document)
+              ) {
                 // Show fullscreen control
                 controls.fullscreen.style.display = "block";
               } else {
@@ -3570,7 +4501,8 @@ var pannellum = (function (window, document, undefined$1) {
               break;
 
             case "hotSpotDebug":
-              if (config[key]) hotSpotDebugIndicator.style.display = "block";else hotSpotDebugIndicator.style.display = "none";
+              if (config[key]) hotSpotDebugIndicator.style.display = "block";
+              else hotSpotDebugIndicator.style.display = "none";
               break;
 
             case "showControls":
@@ -3587,23 +4519,24 @@ var pannellum = (function (window, document, undefined$1) {
                 startOrientation();
                 break;
               }
-
           }
         }
       }
 
       if (isPreview) {
         // Restore original values if changed for preview
-        if (title) config.title = title;else delete config.title;
-        if (description) config.description = description;else delete config.description;
-        if (author) config.author = author;else delete config.author;
+        if (title) config.title = title;
+        else delete config.title;
+        if (description) config.description = description;
+        else delete config.description;
+        if (author) config.author = author;
+        else delete config.author;
       }
     }
     /**
      * Toggles fullscreen mode.
      * @private
      */
-
 
     function toggleFullscreen() {
       if (loaded && !error) {
@@ -3618,7 +4551,8 @@ var pannellum = (function (window, document, undefined$1) {
             } else {
               container.webkitRequestFullScreen();
             }
-          } catch (event) {// Fullscreen doesn't work
+          } catch (event) {
+            // Fullscreen doesn't work
           }
         } else {
           if (document.exitFullscreen) {
@@ -3638,13 +4572,22 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function onFullScreenChange(resize) {
-      if (document.fullscreenElement || document.fullscreen || document.mozFullScreen || document.webkitIsFullScreen || document.msFullscreenElement) {
-        controls.fullscreen.classList.add("pnlm-fullscreen-toggle-button-active");
+      if (
+        document.fullscreenElement ||
+        document.fullscreen ||
+        document.mozFullScreen ||
+        document.webkitIsFullScreen ||
+        document.msFullscreenElement
+      ) {
+        controls.fullscreen.classList.add(
+          "pnlm-fullscreen-toggle-button-active"
+        );
         fullscreenActive = true;
       } else {
-        controls.fullscreen.classList.remove("pnlm-fullscreen-toggle-button-active");
+        controls.fullscreen.classList.remove(
+          "pnlm-fullscreen-toggle-button-active"
+        );
         fullscreenActive = false;
       }
 
@@ -3659,7 +4602,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function zoomIn() {
       if (loaded) {
         setHfov(config.hfov - 5);
@@ -3670,7 +4612,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Decreases panorama zoom. For use with zoom button.
      * @private
      */
-
 
     function zoomOut() {
       if (loaded) {
@@ -3685,13 +4626,16 @@ var pannellum = (function (window, document, undefined$1) {
      * @return {number} - Clamped horizontal field of view (in degrees)
      */
 
-
     function constrainHfov(hfov) {
       // Keep field of view within bounds
       var minHfov = config.minHfov;
 
       if (config.type === "multires" && renderer && !config.multiResMinHfov) {
-        minHfov = Math.min(minHfov, renderer.getCanvas().width / (config.multiRes.cubeResolution / 90 * 0.9));
+        minHfov = Math.min(
+          minHfov,
+          renderer.getCanvas().width /
+            ((config.multiRes.cubeResolution / 90) * 0.9)
+        );
       }
 
       if (minHfov > config.maxHfov) {
@@ -3710,10 +4654,18 @@ var pannellum = (function (window, document, undefined$1) {
         newHfov = hfov;
       } // Optionally avoid showing background (empty space) on top or bottom by adapting newHfov
 
-
       if (config.avoidShowingBackground && renderer) {
         var canvas = renderer.getCanvas();
-        newHfov = Math.min(newHfov, Math.atan(Math.tan((config.maxPitch - config.minPitch) / 360 * Math.PI) / canvas.height * canvas.width) * 360 / Math.PI);
+        newHfov = Math.min(
+          newHfov,
+          (Math.atan(
+            (Math.tan(((config.maxPitch - config.minPitch) / 360) * Math.PI) /
+              canvas.height) *
+              canvas.width
+          ) *
+            360) /
+            Math.PI
+        );
       }
 
       return newHfov;
@@ -3724,7 +4676,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {number} hfov - Desired horizontal field of view in degrees.
      */
 
-
     function setHfov(hfov) {
       config.hfov = constrainHfov(hfov);
       fireEvent("zoomchange", config.hfov);
@@ -3733,7 +4684,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Stops auto rotation and animated moves.
      * @private
      */
-
 
     function stopAnimation() {
       animatedMove = {};
@@ -3744,7 +4694,6 @@ var pannellum = (function (window, document, undefined$1) {
      * Loads panorama.
      * @private
      */
-
 
     function load() {
       // Since WebGL error handling is very general, first we clear any error box
@@ -3766,7 +4715,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {boolean} [fadeDone] - If `true`, fade setup is skipped.
      */
 
-
     function loadScene(sceneId, targetPitch, targetYaw, targetHfov, fadeDone) {
       if (!loaded) fadeDone = true; // Don't try to fade when there isn't a scene loaded
 
@@ -3776,14 +4724,20 @@ var pannellum = (function (window, document, undefined$1) {
       var fadeImg, workingPitch, workingYaw, workingHfov;
 
       if (config.sceneFadeDuration && !fadeDone) {
-        var data = renderer.render(config.pitch * Math.PI / 180, config.yaw * Math.PI / 180, config.hfov * Math.PI / 180, {
-          returnImage: true
-        });
+        var data = renderer.render(
+          (config.pitch * Math.PI) / 180,
+          (config.yaw * Math.PI) / 180,
+          (config.hfov * Math.PI) / 180,
+          {
+            returnImage: true,
+          }
+        );
 
         if (data !== undefined$1) {
           fadeImg = new Image();
           fadeImg.className = "pnlm-fade-img";
-          fadeImg.style.transition = "opacity " + config.sceneFadeDuration / 1000 + "s";
+          fadeImg.style.transition =
+            "opacity " + config.sceneFadeDuration / 1000 + "s";
           fadeImg.style.width = "100%";
           fadeImg.style.height = "100%";
 
@@ -3798,7 +4752,6 @@ var pannellum = (function (window, document, undefined$1) {
         }
       } // Set new pointing
 
-
       if (targetPitch === "same") {
         workingPitch = config.pitch;
       } else {
@@ -3808,7 +4761,10 @@ var pannellum = (function (window, document, undefined$1) {
       if (targetYaw === "same") {
         workingYaw = config.yaw;
       } else if (targetYaw === "sameAzimuth") {
-        workingYaw = config.yaw + (config.northOffset || 0) - (initialConfig.scenes[sceneId].northOffset || 0);
+        workingYaw =
+          config.yaw +
+          (config.northOffset || 0) -
+          (initialConfig.scenes[sceneId].northOffset || 0);
       } else {
         workingYaw = targetYaw;
       }
@@ -3818,7 +4774,6 @@ var pannellum = (function (window, document, undefined$1) {
       } else {
         workingHfov = targetHfov;
       } // Destroy hot spots from previous scene
-
 
       destroyHotSpots(); // Create the new config for the scene
 
@@ -3848,7 +4803,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function stopOrientation() {
       window.removeEventListener("deviceorientation", orientationListener);
       controls.orientation.classList.remove("pnlm-orientation-button-active");
@@ -3859,20 +4813,23 @@ var pannellum = (function (window, document, undefined$1) {
      * @private
      */
 
-
     function startOrientation() {
       orientation = 1; // Fix for IOS 13 where the user needs to perform an action i.e click. Then we need to ask permission
 
-      if (DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function") {
-        DeviceOrientationEvent.requestPermission().then(function (response) {
-          if (response === "granted") {
-            window.addEventListener("deviceorientation", orientationListener);
-          }
-        })["catch"](console.error);
+      if (
+        DeviceOrientationEvent &&
+        typeof DeviceOrientationEvent.requestPermission === "function"
+      ) {
+        DeviceOrientationEvent.requestPermission()
+          .then(function (response) {
+            if (response === "granted") {
+              window.addEventListener("deviceorientation", orientationListener);
+            }
+          })
+          ["catch"](console.error);
       } else {
         window.addEventListener("deviceorientation", orientationListener);
       } // window.addEventListener('deviceorientation', orientationListener);
-
 
       controls.orientation.classList.add("pnlm-orientation-button-active");
     }
@@ -3883,10 +4840,23 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {string} Escaped string
      */
 
-
     function escapeHTML(s) {
       if (!initialConfig.escapeHTML) return String(s).split("\n").join("<br>");
-      return String(s).split(/&/g).join("&amp;").split('"').join("&quot;").split("'").join("&#39;").split("<").join("&lt;").split(">").join("&gt;").split("/").join("&#x2f;").split("\n").join("<br>"); // Allow line breaks
+      return String(s)
+        .split(/&/g)
+        .join("&amp;")
+        .split('"')
+        .join("&quot;")
+        .split("'")
+        .join("&#39;")
+        .split("<")
+        .join("&lt;")
+        .split(">")
+        .join("&gt;")
+        .split("/")
+        .join("&#x2f;")
+        .split("\n")
+        .join("<br>"); // Allow line breaks
     }
     /**
      * Removes possibility of XSS attacks with URLs.
@@ -3895,7 +4865,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {string} url - URL to sanitize
      * @returns {string} Sanitized URL
      */
-
 
     function sanitizeURL(url) {
       if (url.trim().toLowerCase().indexOf("javascript:") === 0) {
@@ -3913,7 +4882,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {string} Sanitized URL
      */
 
-
     function sanitizeURLForCss(url) {
       return sanitizeURL(url).replace(/"/g, "%22").replace(/'/g, "%27");
     }
@@ -3924,7 +4892,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {boolean} `true` if a panorama is loaded, else `false`
      */
 
-
     this.isLoaded = function () {
       return Boolean(loaded);
     };
@@ -3934,7 +4901,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {number} Pitch in degrees
      */
-
 
     this.getPitch = function () {
       return config.pitch;
@@ -3949,7 +4915,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {object} [callbackArgs] - Arguments to pass to callback function
      * @returns {Viewer} `this`
      */
-
 
     this.setPitch = function (pitch, animated, callback, callbackArgs) {
       latestInteraction = Date.now();
@@ -3966,11 +4931,12 @@ var pannellum = (function (window, document, undefined$1) {
           startTime: Date.now(),
           startPosition: config.pitch,
           endPosition: pitch,
-          duration: animated
+          duration: animated,
         };
-        if (typeof callback === "function") setTimeout(function () {
-          callback(callbackArgs);
-        }, animated);
+        if (typeof callback === "function")
+          setTimeout(function () {
+            callback(callbackArgs);
+          }, animated);
       } else {
         config.pitch = pitch;
       }
@@ -3985,7 +4951,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {number[]} [minimum pitch, maximum pitch]
      */
 
-
     this.getPitchBounds = function () {
       return [config.minPitch, config.maxPitch];
     };
@@ -3996,7 +4961,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {number[]} bounds - [minimum pitch, maximum pitch]
      * @returns {Viewer} `this`
      */
-
 
     this.setPitchBounds = function (bounds) {
       config.minPitch = Math.max(-90, Math.min(bounds[0], 90));
@@ -4009,7 +4973,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {number} Yaw in degrees
      */
-
 
     this.getYaw = function () {
       return config.yaw;
@@ -4025,7 +4988,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.setYaw = function (yaw, animated, callback, callbackArgs) {
       latestInteraction = Date.now();
 
@@ -4035,20 +4997,22 @@ var pannellum = (function (window, document, undefined$1) {
       }
 
       animated = animated === undefined$1 ? 1000 : Number(animated);
-      yaw = (yaw + 180) % 360 - 180; // Keep in bounds
+      yaw = ((yaw + 180) % 360) - 180; // Keep in bounds
 
       if (animated) {
         // Animate in shortest direction
-        if (config.yaw - yaw > 180) yaw += 360;else if (yaw - config.yaw > 180) yaw -= 360;
+        if (config.yaw - yaw > 180) yaw += 360;
+        else if (yaw - config.yaw > 180) yaw -= 360;
         animatedMove.yaw = {
           startTime: Date.now(),
           startPosition: config.yaw,
           endPosition: yaw,
-          duration: animated
+          duration: animated,
         };
-        if (typeof callback === "function") setTimeout(function () {
-          callback(callbackArgs);
-        }, animated);
+        if (typeof callback === "function")
+          setTimeout(function () {
+            callback(callbackArgs);
+          }, animated);
       } else {
         config.yaw = yaw;
       }
@@ -4063,7 +5027,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {number[]} [yaw pitch, maximum yaw]
      */
 
-
     this.getYawBounds = function () {
       return [config.minYaw, config.maxYaw];
     };
@@ -4074,7 +5037,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {number[]} bounds - [minimum yaw, maximum yaw]
      * @returns {Viewer} `this`
      */
-
 
     this.setYawBounds = function (bounds) {
       config.minYaw = Math.max(-180, Math.min(bounds[0], 180));
@@ -4087,7 +5049,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {number} Horizontal field of view in degrees
      */
-
 
     this.getHfov = function () {
       return config.hfov;
@@ -4102,7 +5063,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {object} [callbackArgs] - Arguments to pass to callback function
      * @returns {Viewer} `this`
      */
-
 
     this.setHfov = function (hfov, animated, callback, callbackArgs) {
       latestInteraction = Date.now();
@@ -4119,11 +5079,12 @@ var pannellum = (function (window, document, undefined$1) {
           startTime: Date.now(),
           startPosition: config.hfov,
           endPosition: constrainHfov(hfov),
-          duration: animated
+          duration: animated,
         };
-        if (typeof callback === "function") setTimeout(function () {
-          callback(callbackArgs);
-        }, animated);
+        if (typeof callback === "function")
+          setTimeout(function () {
+            callback(callbackArgs);
+          }, animated);
       } else {
         setHfov(hfov);
       }
@@ -4139,7 +5100,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {number[]} [minimum hfov, maximum hfov]
      */
 
-
     this.getHfovBounds = function () {
       return [config.minHfov, config.maxHfov];
     };
@@ -4150,7 +5110,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {number[]} bounds - [minimum hfov, maximum hfov]
      * @returns {Viewer} `this`
      */
-
 
     this.setHfovBounds = function (bounds) {
       config.minHfov = Math.max(0, bounds[0]);
@@ -4170,8 +5129,14 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
-    this.lookAt = function (pitch, yaw, hfov, animated, callback, callbackArgs) {
+    this.lookAt = function (
+      pitch,
+      yaw,
+      hfov,
+      animated,
+      callback,
+      callbackArgs
+    ) {
       animated = animated === undefined$1 ? 1000 : Number(animated);
 
       if (pitch !== undefined$1 && Math.abs(pitch - config.pitch) > eps) {
@@ -4199,7 +5164,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {number} North offset in degrees
      */
 
-
     this.getNorthOffset = function () {
       return config.northOffset;
     };
@@ -4210,7 +5174,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {number} heading - North offset in degrees
      * @returns {Viewer} `this`
      */
-
 
     this.setNorthOffset = function (heading) {
       config.northOffset = Math.min(360, Math.max(0, heading));
@@ -4224,7 +5187,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {number} Horizon roll in degrees
      */
 
-
     this.getHorizonRoll = function () {
       return config.horizonRoll;
     };
@@ -4236,10 +5198,12 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.setHorizonRoll = function (roll) {
       config.horizonRoll = Math.min(90, Math.max(-90, roll));
-      renderer.setPose(config.horizonPitch * Math.PI / 180, config.horizonRoll * Math.PI / 180);
+      renderer.setPose(
+        (config.horizonPitch * Math.PI) / 180,
+        (config.horizonRoll * Math.PI) / 180
+      );
       animateInit();
       return this;
     };
@@ -4249,7 +5213,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {number} Horizon pitch in degrees
      */
-
 
     this.getHorizonPitch = function () {
       return config.horizonPitch;
@@ -4262,10 +5225,12 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.setHorizonPitch = function (pitch) {
       config.horizonPitch = Math.min(90, Math.max(-90, pitch));
-      renderer.setPose(config.horizonPitch * Math.PI / 180, config.horizonRoll * Math.PI / 180);
+      renderer.setPose(
+        (config.horizonPitch * Math.PI) / 180,
+        (config.horizonRoll * Math.PI) / 180
+      );
       animateInit();
       return this;
     };
@@ -4279,7 +5244,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {number} [pitch] - The pitch to rotate at. If not specified, inital pitch is used.
      * @returns {Viewer} `this`
      */
-
 
     this.startAutoRotate = function (speed, pitch) {
       speed = speed || autoRotateSpeed || 1;
@@ -4298,11 +5262,17 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.stopAutoRotate = function () {
       autoRotateSpeed = config.autoRotate ? config.autoRotate : autoRotateSpeed;
       config.autoRotate = false;
       config.autoRotateInactivityDelay = -1;
+      return this;
+    };
+
+    this.showCompass = function (value) {
+      config.compass = value;
+      renderInitCallback();
+      console.log(config);
       return this;
     };
     /**
@@ -4311,13 +5281,12 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      */
 
-
     this.stopMovement = function () {
       stopAnimation();
       speed = {
         yaw: 0,
         pitch: 0,
-        hfov: 0
+        hfov: 0,
       };
     };
     /**
@@ -4326,7 +5295,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {Renderer}
      */
-
 
     this.getRenderer = function () {
       return renderer;
@@ -4339,10 +5307,10 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.setUpdate = function (bool) {
       update = bool === true;
-      if (renderer === undefined$1) onImageLoad();else animateInit();
+      if (renderer === undefined$1) onImageLoad();
+      else animateInit();
       return this;
     };
 
@@ -4356,7 +5324,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {MouseEvent} event - Document mouse down event.
      * @returns {number[]} [pitch, yaw]
      */
-
 
     this.mouseEventToCoords = function (event) {
       return mouseEventToCoords(event);
@@ -4372,7 +5339,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.loadScene = function (sceneId, pitch, yaw, hfov) {
       if (loaded !== false) loadScene(sceneId, pitch, yaw, hfov);
       return this;
@@ -4384,7 +5350,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {string} ID of current scene
      */
 
-
     this.getScene = function () {
       return config.scene;
     };
@@ -4394,7 +5359,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns [Object] ID of all scenes
      */
-
 
     this.getAllScenes = function () {
       var allScenes = [];
@@ -4412,7 +5376,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.addScene = function (sceneId, config) {
       initialConfig.scenes[sceneId] = config;
       return this;
@@ -4425,9 +5388,12 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {boolean} False if the scene is the current scene or if the scene doesn't exists, else true
      */
 
-
     this.removeScene = function (sceneId) {
-      if (config.scene === sceneId || !initialConfig.scenes.hasOwnProperty(sceneId)) return false;
+      if (
+        config.scene === sceneId ||
+        !initialConfig.scenes.hasOwnProperty(sceneId)
+      )
+        return false;
       delete initialConfig.scenes[sceneId];
       return true;
     };
@@ -4437,7 +5403,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {Viewer} `this`
      */
-
 
     this.toggleFullscreen = function () {
       toggleFullscreen();
@@ -4450,7 +5415,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Object} Configuration of current scene
      */
 
-
     this.getConfig = function () {
       return config;
     };
@@ -4460,7 +5424,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {HTMLElement} Container `div` element
      */
-
 
     this.getContainer = function () {
       return container;
@@ -4475,7 +5438,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @throws Throws an error if the scene ID is provided but invalid
      */
 
-
     this.addHotSpot = function (hs, sceneId) {
       if (sceneId === undefined$1 && config.scene === undefined$1) {
         // Not a tour
@@ -4488,7 +5450,8 @@ var pannellum = (function (window, document, undefined$1) {
           if (!initialConfig.scenes[id].hasOwnProperty("hotSpots")) {
             initialConfig.scenes[id].hotSpots = []; // Create hot spots array if needed
 
-            if (id === config.scene) config.hotSpots = initialConfig.scenes[id].hotSpots; // Link to current config
+            if (id === config.scene)
+              config.hotSpots = initialConfig.scenes[id].hotSpots; // Link to current config
           }
 
           initialConfig.scenes[id].hotSpots.push(hs); // Add hot spot to config
@@ -4514,13 +5477,15 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {boolean} True if deletion is successful, else false
      */
 
-
     this.removeHotSpot = function (hotSpotId, sceneId) {
       if (sceneId === undefined$1 || config.scene === sceneId) {
         if (!config.hotSpots) return false;
 
         for (var i = 0; i < config.hotSpots.length; i++) {
-          if (config.hotSpots[i].hasOwnProperty("id") && config.hotSpots[i].id === hotSpotId) {
+          if (
+            config.hotSpots[i].hasOwnProperty("id") &&
+            config.hotSpots[i].id === hotSpotId
+          ) {
             // Delete hot spot DOM elements
             var current = config.hotSpots[i].div;
 
@@ -4537,10 +5502,18 @@ var pannellum = (function (window, document, undefined$1) {
         }
       } else {
         if (initialConfig.scenes.hasOwnProperty(sceneId)) {
-          if (!initialConfig.scenes[sceneId].hasOwnProperty("hotSpots")) return false;
+          if (!initialConfig.scenes[sceneId].hasOwnProperty("hotSpots"))
+            return false;
 
-          for (var j = 0; j < initialConfig.scenes[sceneId].hotSpots.length; j++) {
-            if (initialConfig.scenes[sceneId].hotSpots[j].hasOwnProperty("id") && initialConfig.scenes[sceneId].hotSpots[j].id === hotSpotId) {
+          for (
+            var j = 0;
+            j < initialConfig.scenes[sceneId].hotSpots.length;
+            j++
+          ) {
+            if (
+              initialConfig.scenes[sceneId].hotSpots[j].hasOwnProperty("id") &&
+              initialConfig.scenes[sceneId].hotSpots[j].id === hotSpotId
+            ) {
               // Remove hot spot from configuration
               initialConfig.scenes[sceneId].hotSpots.splice(j, 1);
               return true;
@@ -4557,7 +5530,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      */
 
-
     this.resize = function () {
       if (renderer) onDocumentResize();
     };
@@ -4567,7 +5539,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {boolean} True if a panorama is loaded, else false
      */
-
 
     this.isLoaded = function () {
       return loaded;
@@ -4579,7 +5550,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {boolean} True if supported, else false
      */
 
-
     this.isOrientationSupported = function () {
       return orientationSupport || false;
     };
@@ -4588,7 +5558,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @memberof Viewer
      * @instance
      */
-
 
     this.stopOrientation = function () {
       stopOrientation();
@@ -4599,7 +5568,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      */
 
-
     this.startOrientation = function () {
       if (orientationSupport) startOrientation();
     };
@@ -4609,7 +5577,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @instance
      * @returns {boolean} True if active, else false
      */
-
 
     this.isOrientationActive = function () {
       return Boolean(orientation);
@@ -4623,7 +5590,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @returns {Viewer} `this`
      */
 
-
     this.on = function (type, listener) {
       externalEventListeners[type] = externalEventListeners[type] || [];
       externalEventListeners[type].push(listener);
@@ -4636,7 +5602,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {Function} [listener] - Listener function to remove. If not specified, all listeners of specified type are removed.
      * @returns {Viewer} `this`
      */
-
 
     this.off = function (type, listener) {
       if (!type) {
@@ -4670,12 +5635,13 @@ var pannellum = (function (window, document, undefined$1) {
      * @param {string} [type] - Type of event to fire listeners for.
      */
 
-
     function fireEvent(type) {
       if (type in externalEventListeners) {
         // Reverse iteration is useful, if event listener is removed inside its definition
         for (var i = externalEventListeners[type].length; i > 0; i--) {
-          externalEventListeners[type][externalEventListeners[type].length - i].apply(null, [].slice.call(arguments, 1));
+          externalEventListeners[type][
+            externalEventListeners[type].length - i
+          ].apply(null, [].slice.call(arguments, 1));
         }
       }
     }
@@ -4685,7 +5651,6 @@ var pannellum = (function (window, document, undefined$1) {
      * @memberof Viewer
      */
 
-
     this.destroy = function () {
       destroyed = true;
       clearTimeout(autoRotateStart);
@@ -4694,12 +5659,32 @@ var pannellum = (function (window, document, undefined$1) {
       if (listenersAdded) {
         document.removeEventListener("mousemove", onDocumentMouseMove, false);
         document.removeEventListener("mouseup", onDocumentMouseUp, false);
-        container.removeEventListener("mozfullscreenchange", onFullScreenChange, false);
-        container.removeEventListener("webkitfullscreenchange", onFullScreenChange, false);
-        container.removeEventListener("msfullscreenchange", onFullScreenChange, false);
-        container.removeEventListener("fullscreenchange", onFullScreenChange, false);
+        container.removeEventListener(
+          "mozfullscreenchange",
+          onFullScreenChange,
+          false
+        );
+        container.removeEventListener(
+          "webkitfullscreenchange",
+          onFullScreenChange,
+          false
+        );
+        container.removeEventListener(
+          "msfullscreenchange",
+          onFullScreenChange,
+          false
+        );
+        container.removeEventListener(
+          "fullscreenchange",
+          onFullScreenChange,
+          false
+        );
         window.removeEventListener("resize", onDocumentResize, false);
-        window.removeEventListener("orientationchange", onDocumentResize, false);
+        window.removeEventListener(
+          "orientationchange",
+          onDocumentResize,
+          false
+        );
         container.removeEventListener("keydown", onDocumentKeyPress, false);
         container.removeEventListener("keyup", onDocumentKeyUp, false);
         container.removeEventListener("blur", clearKeys, false);
@@ -4714,12 +5699,21 @@ var pannellum = (function (window, document, undefined$1) {
   return {
     viewer: function viewer(container, config) {
       return new Viewer(container, config);
-    }
+    },
   };
-})(typeof window === "undefined" ? null : window, typeof document === "undefined" ? null : document);
+})(
+  typeof window === "undefined" ? null : window,
+  typeof document === "undefined" ? null : document
+);
 
 var myPromise = function myPromise(condition) {
-  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+  for (
+    var _len = arguments.length,
+      args = new Array(_len > 1 ? _len - 1 : 0),
+      _key = 1;
+    _key < _len;
+    _key++
+  ) {
     args[_key - 1] = arguments[_key];
   }
 
@@ -4745,21 +5739,24 @@ var configs = {
     noPanoramaError: "No panorama image was specified.",
     fileAccessError: "The file %s could not be accessed.",
     malformedURLError: "There is something wrong with the panorama URL.",
-    iOS8WebGLError: "Due to iOS 8's broken WebGL implementation, only progressive encoded JPEGs work for your device (this panorama uses standard encoding).",
-    genericWebGLError: "Your browser does not have the necessary WebGL support to display this panorama.",
-    textureSizeError: "This panorama is too big for your device! It's %spx wide, but your device only supports images up to %spx wide. Try another device. (If you're the author, try scaling down the image.)",
-    unknownError: "Unknown error. Check developer console."
+    iOS8WebGLError:
+      "Due to iOS 8's broken WebGL implementation, only progressive encoded JPEGs work for your device (this panorama uses standard encoding).",
+    genericWebGLError:
+      "Your browser does not have the necessary WebGL support to display this panorama.",
+    textureSizeError:
+      "This panorama is too big for your device! It's %spx wide, but your device only supports images up to %spx wide. Try another device. (If you're the author, try scaling down the image.)",
+    unknownError: "Unknown error. Check developer console.",
   },
   styles: {
     width: "100%",
     height: "90%",
-    background: "#000000"
+    background: "#000000",
   },
   equirectangularOptions: {
     haov: 360,
     vaov: 180,
     vOffset: 0,
-    ignoreGPanoXMP: false
+    ignoreGPanoXMP: false,
   },
   panoramaConfigs: {
     title: "",
@@ -4795,21 +5792,23 @@ var configs = {
     compass: false,
     northOffset: 0,
     hotSpots: [],
-    hotSpotDebug: false
-  }
+    hotSpotDebug: false,
+  },
 };
 
 function styleInject(css, ref) {
-  if ( ref === void 0 ) ref = {};
+  if (ref === void 0) ref = {};
   var insertAt = ref.insertAt;
 
-  if (!css || typeof document === 'undefined') { return; }
+  if (!css || typeof document === "undefined") {
+    return;
+  }
 
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
+  var head = document.head || document.getElementsByTagName("head")[0];
+  var style = document.createElement("style");
+  style.type = "text/css";
 
-  if (insertAt === 'top') {
+  if (insertAt === "top") {
     if (head.firstChild) {
       head.insertBefore(style, head.firstChild);
     } else {
@@ -4826,12 +5825,12 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = `/* Pannellum 2.4.1, https://github.com/mpetroff/pannellum */\r\n\r\n.pnlm-container {\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  position: relative;\r\n  cursor: default;\r\n  width: 100%;\r\n  height: 100%;\r\n  font-family: Helvetica, \"Nimbus Sans L\", \"Liberation Sans\", Arial, sans-serif;\r\n  background: #f4f4f4 url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2267%22%20height%3D%22100%22%20viewBox%3D%220%200%2067%20100%22%3E%0A%3Cpath%20stroke%3D%22%23ccc%22%20fill%3D%22none%22%20d%3D%22M33.5%2C50%2C0%2C63%2C33.5%2C75%2C67%2C63%2C33.5%2C50m-33.5-50%2C67%2C25m-0.5%2C0%2C0%2C75m-66.5-75%2C67-25m-33.5%2C75%2C0%2C25m0-100%2C0%2C50%22%2F%3E%0A%3C%2Fsvg%3E%0A') repeat;\r\n  -webkit-user-select: none;\r\n  -khtml-user-select: none;\r\n  -moz-user-select: none;\r\n  -o-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n  outline: 0;\r\n  line-height: 1.4;\r\n  contain: content;\r\n}\r\n\r\n.pnlm-container * {\r\n  box-sizing: content-box;\r\n}\r\n\r\n.pnlm-ui {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-custom {\r\n  cursor: crosshair;\r\n}\r\n\r\n.pnlm-grab {\r\n  cursor: grab;\r\n  cursor: ${"url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2226%22%20width%3D%2226%22%3E%0A%3Cpath%20stroke%3D%22%23000%22%20stroke-width%3D%221px%22%20fill%3D%22%23fff%22%20d%3D%22m15.3%2020.5s6.38-6.73%204.64-8.24-3.47%201.01-3.47%201.01%203.61-5.72%201.41-6.49c-2.2-0.769-3.33%204.36-3.33%204.36s0.873-5.76-1.06-5.76-1.58%205.39-1.58%205.39-0.574-4.59-2.18-4.12c-1.61%200.468-0.572%205.51-0.572%205.51s-1.58-4.89-2.93-3.79c-1.35%201.11%200.258%205.25%200.572%206.62%200.836%202.43%202.03%202.94%202.17%205.55%22%2F%3E%0A%3C%2Fsvg%3E%0A') 12 8, default"}\r\n}\r\n\r\n.pnlm-grabbing {\r\n  cursor: grabbing;\r\n  cursor: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2226%22%20width%3D%2226%22%3E%0A%3Cpath%20stroke%3D%22%23000%22%20stroke-width%3D%221px%22%20fill%3D%22%23fff%22%20d%3D%22m15.3%2020.5s5.07-5.29%203.77-6.74c-1.31-1.45-2.53%200.14-2.53%200.14s2.74-3.29%200.535-4.06c-2.2-0.769-2.52%201.3-2.52%201.3s0.81-2.13-1.12-2.13-1.52%201.77-1.52%201.77-0.261-1.59-1.87-1.12c-1.61%200.468-0.874%202.17-0.874%202.17s-0.651-1.55-2-0.445c-1.35%201.11-0.68%202.25-0.365%203.62%200.836%202.43%202.03%202.94%202.17%205.55%22%2F%3E%0A%3C%2Fsvg%3E%0A') 12 8, default\r\n}\r\n\r\n.pnlm-sprite {\r\n  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2226%22%20height%3D%22208%22%3E%0A%3Ccircle%20fill-opacity%3D%22.78%22%20cy%3D%22117%22%20cx%3D%2213%22%20r%3D%2211%22%20fill%3D%22%23fff%22%2F%3E%0A%3Ccircle%20fill-opacity%3D%22.78%22%20cy%3D%22143%22%20cx%3D%2213%22%20r%3D%2211%22%20fill%3D%22%23fff%22%2F%3E%0A%3Ccircle%20cy%3D%22169%22%20cx%3D%2213%22%20r%3D%227%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0A%3Ccircle%20cy%3D%22195%22%20cx%3D%2213%22%20r%3D%227%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0A%3Ccircle%20cx%3D%2213%22%20cy%3D%22195%22%20r%3D%222.5%22%2F%3E%0A%3Cpath%20d%3D%22m5%2083v6h2v-4h4v-2zm10%200v2h4v4h2v-6zm-5%205v6h6v-6zm-5%205v6h6v-2h-4v-4zm14%200v4h-4v2h6v-6z%22%2F%3E%0A%3Cpath%20d%3D%22m13%20110a7%207%200%200%200%20-7%207%207%207%200%200%200%207%207%207%207%200%200%200%207%20-7%207%207%200%200%200%20-7%20-7zm-1%203h2v2h-2zm0%203h2v5h-2z%22%2F%3E%0A%3Cpath%20d%3D%22m5%2057v6h2v-4h4v-2zm10%200v2h4v4h2v-6zm-10%2010v6h6v-2h-4v-4zm14%200v4h-4v2h6v-6z%22%2F%3E%0A%3Cpath%20d%3D%22m17%2038v2h-8v-2z%22%2F%3E%0A%3Cpath%20d%3D%22m12%209v3h-3v2h3v3h2v-3h3v-2h-3v-3z%22%2F%3E%0A%3Cpath%20d%3D%22m13%20136-6.125%206.125h4.375v7.875h3.5v-7.875h4.375z%22%2F%3E%0A%3Cpath%20d%3D%22m10.428%20173.33v-5.77l5-2.89v5.77zm1-1.73%203-1.73-3.001-1.74z%22%2F%3E%0A%3C%2Fsvg%3E%0A')\r\n}\r\n\r\n.pnlm-container:-moz-full-screen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-container:-webkit-full-screen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-container:-ms-fullscreen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-container:fullscreen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-render-container {\r\n  cursor: inherit;\r\n\r\n  /* Fix display bug in Safari 7 */\r\n  position: absolute;\r\n  height: 100%;\r\n  width: 100%;\r\n}\r\n\r\n.pnlm-controls {\r\n  margin-top: 4px;\r\n  background-color: #fff;\r\n  border: 1px solid #999;\r\n  border-color: rgba(0, 0, 0, 0.4);\r\n  border-radius: 3px;\r\n  cursor: pointer;\r\n  z-index: 2;\r\n  /* Fix Safari fullscreen bug */\r\n  -webkit-transform: translateZ(9999px);\r\n  transform: translateZ(9999px);\r\n}\r\n\r\n.pnlm-control:hover {\r\n  background-color: #f8f8f8;\r\n}\r\n\r\n.pnlm-controls-container {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 4px;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-zoom-controls {\r\n  width: 26px;\r\n  height: 52px;\r\n}\r\n\r\n.pnlm-zoom-in {\r\n  width: 100%;\r\n  height: 50%;\r\n  position: absolute;\r\n  top: 0;\r\n  border-radius: 3px 3px 0 0;\r\n}\r\n\r\n.pnlm-zoom-out {\r\n  width: 100%;\r\n  height: 50%;\r\n  position: absolute;\r\n  bottom: 0;\r\n  background-position: 0 -26px;\r\n  border-top: 1px solid #ddd;\r\n  border-top-color: rgba(0, 0, 0, 0.10);\r\n  border-radius: 0 0 3px 3px;\r\n}\r\n\r\n.pnlm-fullscreen-toggle-button,\r\n.pnlm-orientation-button,\r\n.pnlm-hot-spot-debug-indicator {\r\n  width: 26px;\r\n  height: 26px;\r\n}\r\n\r\n.pnlm-hot-spot-debug-indicator {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 26px;\r\n  height: 26px;\r\n  margin: -13px 0 0 -13px;\r\n  background-color: rgba(255, 255, 255, 0.5);\r\n  border-radius: 13px;\r\n  display: none;\r\n}\r\n\r\n.pnlm-orientation-button-inactive {\r\n  background-position: 0 -156px;\r\n}\r\n\r\n.pnlm-orientation-button-active {\r\n  background-position: 0 -182px;\r\n}\r\n\r\n.pnlm-fullscreen-toggle-button-inactive {\r\n  background-position: 0 -52px;\r\n}\r\n\r\n.pnlm-fullscreen-toggle-button-active {\r\n  background-position: 0 -78px;\r\n}\r\n\r\n.pnlm-panorama-info {\r\n  position: absolute;\r\n  bottom: 4px;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  border-radius: 0 3px 3px 0;\r\n  padding-right: 10px;\r\n  color: #fff;\r\n  text-align: left;\r\n  display: none;\r\n  z-index: 2;\r\n  /* Fix Safari fullscreen bug */\r\n  -webkit-transform: translateZ(9999px);\r\n  transform: translateZ(9999px);\r\n}\r\n\r\n.pnlm-title-box {\r\n  position: relative;\r\n  font-size: 20px;\r\n  display: table;\r\n  padding-left: 5px;\r\n  margin-bottom: 3px;\r\n}\r\n\r\n.pnlm-description-box {\r\n  position: relative;\r\n  font-size: 18px;\r\n  display: table;\r\n  padding-left: 5px;\r\n  margin-bottom: 3px;\r\n}\r\n\r\n.pnlm-author-box {\r\n  position: relative;\r\n  font-size: 12px;\r\n  display: table;\r\n  padding-left: 5px;\r\n}\r\n\r\n.pnlm-load-box {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 200px;\r\n  height: 150px;\r\n  margin: -75px 0 0 -100px;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  border-radius: 3px;\r\n  text-align: center;\r\n  font-size: 20px;\r\n  display: none;\r\n  color: #fff;\r\n}\r\n\r\n.pnlm-load-box p {\r\n  margin: 20px 0;\r\n}\r\n\r\n.pnlm-lbox {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 20px;\r\n  height: 20px;\r\n  margin: -10px 0 0 -10px;\r\n  display: none;\r\n}\r\n\r\n.pnlm-loading {\r\n  animation-duration: 1.5s;\r\n  -webkit-animation-duration: 1.5s;\r\n  animation-name: pnlm-mv;\r\n  -webkit-animation-name: pnlm-mv;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-timing-function: linear;\r\n  height: 10px;\r\n  width: 10px;\r\n  background-color: #fff;\r\n  position: relative;\r\n}\r\n\r\n@keyframes pnlm-mv {\r\n  from {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n\r\n  25% {\r\n    left: 10px;\r\n    top: 0;\r\n  }\r\n\r\n  50% {\r\n    left: 10px;\r\n    top: 10px;\r\n  }\r\n\r\n  75% {\r\n    left: 0;\r\n    top: 10px;\r\n  }\r\n\r\n  to {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n}\r\n\r\n@-webkit-keyframes pnlm-mv {\r\n  from {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n\r\n  25% {\r\n    left: 10px;\r\n    top: 0;\r\n  }\r\n\r\n  50% {\r\n    left: 10px;\r\n    top: 10px;\r\n  }\r\n\r\n  75% {\r\n    left: 0;\r\n    top: 10px;\r\n  }\r\n\r\n  to {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n}\r\n\r\n.pnlm-load-button {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 200px;\r\n  height: 100px;\r\n  margin: -50px 0 0 -100px;\r\n  background-color: rgba(0, 0, 0, .7);\r\n  border-radius: 3px;\r\n  text-align: center;\r\n  font-size: 20px;\r\n  display: table;\r\n  color: #fff;\r\n  cursor: pointer;\r\n}\r\n\r\n.pnlm-load-button:hover {\r\n  background-color: rgba(0, 0, 0, .8);\r\n}\r\n\r\n.pnlm-load-button p {\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n}\r\n\r\n.pnlm-info-box {\r\n  font-size: 15px;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 200px;\r\n  height: 150px;\r\n  margin: -75px 0 0 -100px;\r\n  background-color: #000;\r\n  border-radius: 3px;\r\n  display: table;\r\n  text-align: center;\r\n  color: #fff;\r\n  table-layout: fixed;\r\n}\r\n\r\n.pnlm-info-box a,\r\n.pnlm-author-box a {\r\n  color: #fff;\r\n  word-wrap: break-word;\r\n  overflow-wrap: break-word;\r\n}\r\n\r\n.pnlm-info-box p {\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n  padding: 0 5px 0 5px;\r\n}\r\n\r\n.pnlm-error-msg {\r\n  display: none;\r\n}\r\n\r\n.pnlm-about-msg {\r\n  font-size: 11px;\r\n  line-height: 11px;\r\n  color: #fff;\r\n  padding: 5px 8px 5px 8px;\r\n  background: rgba(0, 0, 0, 0.7);\r\n  border-radius: 3px;\r\n  position: absolute;\r\n  top: 50px;\r\n  left: 50px;\r\n  display: none;\r\n  opacity: 0;\r\n  -moz-transition: opacity .3s ease-in-out;\r\n  -webkit-transition: opacity .3s ease-in-out;\r\n  -o-transition: opacity .3s ease-in-out;\r\n  -ms-transition: opacity .3s ease-in-out;\r\n  transition: opacity .3s ease-in-out;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-about-msg a:link,\r\n.pnlm-about-msg a:visited {\r\n  color: #fff;\r\n}\r\n\r\n.pnlm-about-msg a:hover,\r\n.pnlm-about-msg a:active {\r\n  color: #eee;\r\n}\r\n\r\n.pnlm-hotspot-base {\r\n  position: absolute;\r\n  visibility: hidden;\r\n  cursor: default;\r\n  vertical-align: middle;\r\n  top: 0;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-hotspot {\r\n  height: 26px;\r\n  width: 26px;\r\n  border-radius: 13px;\r\n}\r\n\r\n.pnlm-hotspot:hover {\r\n  background-color: rgba(255, 255, 255, 0.2);\r\n}\r\n\r\n.pnlm-hotspot.pnlm-info {\r\n  background-position: 0 -104px;\r\n}\r\n\r\n.pnlm-hotspot.pnlm-scene {\r\n  background-position: 0 -130px;\r\n}\r\n\r\ndiv.pnlm-tooltip span {\r\n  visibility: hidden;\r\n  position: absolute;\r\n  border-radius: 3px;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  color: #fff;\r\n  text-align: center;\r\n  max-width: 200px;\r\n  padding: 5px 10px;\r\n  margin-left: -220px;\r\n  cursor: default;\r\n}\r\n\r\ndiv.pnlm-tooltip:hover span {\r\n  visibility: visible;\r\n}\r\n\r\ndiv.pnlm-tooltip:hover span:after {\r\n  content: '';\r\n  position: absolute;\r\n  width: 0;\r\n  height: 0;\r\n  border-width: 10px;\r\n  border-style: solid;\r\n  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;\r\n  bottom: -20px;\r\n  left: -10px;\r\n  margin: 0 50%;\r\n}\r\n\r\n.pnlm-compass {\r\n  position: absolute;\r\n  width: 50px;\r\n  height: 50px;\r\n  right: 4px;\r\n  bottom: 4px;\r\n  border-radius: 25px;\r\n  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2250%22%20width%3D%2250%22%3E%0A%3Cpath%20d%3D%22m24.5078%206-3.2578%2018h7.5l-3.25781-18h-0.984376zm-3.2578%2020%203.2578%2018h0.9844l3.2578-18h-7.5zm1.19531%200.9941h5.10938l-2.5547%2014.1075-2.5547-14.1075z%22%2F%3E%0A%3C%2Fsvg%3E%0A');\r\n  cursor: default;\r\n  display: none;\r\n}\r\n\r\n.pnlm-world {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n}\r\n\r\n.pnlm-face {\r\n  position: absolute;\r\n  -webkit-transform-origin: 0 0 0;\r\n  transform-origin: 0 0 0;\r\n}\r\n\r\n.pnlm-dragfix,\r\n.pnlm-preview-img {\r\n  position: absolute;\r\n  height: 100%;\r\n  width: 100%;\r\n}\r\n\r\n.pnlm-preview-img {\r\n  background-size: cover;\r\n  background-position: center;\r\n}\r\n\r\n.pnlm-lbar {\r\n  width: 150px;\r\n  margin: 0 auto;\r\n  border: #fff 1px solid;\r\n  height: 6px;\r\n}\r\n\r\n.pnlm-lbar-fill {\r\n  background: #fff;\r\n  height: 100%;\r\n  width: 0;\r\n}\r\n\r\n.pnlm-lmsg {\r\n  font-size: 12px;\r\n}\r\n\r\n.pnlm-fade-img {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.pnlm-pointer {\r\n  cursor: pointer;\r\n}\r\n`;
+var css_248z = `/* Pannellum 2.4.1, https://github.com/mpetroff/pannellum */\r\n\r\n.pnlm-container {\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n  position: relative;\r\n  cursor: default;\r\n  width: 100%;\r\n  height: 100%;\r\n  font-family: Helvetica, \"Nimbus Sans L\", \"Liberation Sans\", Arial, sans-serif;\r\n  background: #f4f4f4 url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2267%22%20height%3D%22100%22%20viewBox%3D%220%200%2067%20100%22%3E%0A%3Cpath%20stroke%3D%22%23ccc%22%20fill%3D%22none%22%20d%3D%22M33.5%2C50%2C0%2C63%2C33.5%2C75%2C67%2C63%2C33.5%2C50m-33.5-50%2C67%2C25m-0.5%2C0%2C0%2C75m-66.5-75%2C67-25m-33.5%2C75%2C0%2C25m0-100%2C0%2C50%22%2F%3E%0A%3C%2Fsvg%3E%0A') repeat;\r\n  -webkit-user-select: none;\r\n  -khtml-user-select: none;\r\n  -moz-user-select: none;\r\n  -o-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n  outline: 0;\r\n  line-height: 1.4;\r\n  contain: content;\r\n}\r\n\r\n.pnlm-container * {\r\n  box-sizing: content-box;\r\n  font-family: source sans pro, ui-sans-serif;\r\n}\r\n\r\n.pnlm-ui {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-custom {\r\n  cursor: crosshair;\r\n}\r\n\r\n.pnlm-grab {\r\n  cursor: grab;\r\n  cursor: ${"url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2226%22%20width%3D%2226%22%3E%0A%3Cpath%20stroke%3D%22%23000%22%20stroke-width%3D%221px%22%20fill%3D%22%23fff%22%20d%3D%22m15.3%2020.5s6.38-6.73%204.64-8.24-3.47%201.01-3.47%201.01%203.61-5.72%201.41-6.49c-2.2-0.769-3.33%204.36-3.33%204.36s0.873-5.76-1.06-5.76-1.58%205.39-1.58%205.39-0.574-4.59-2.18-4.12c-1.61%200.468-0.572%205.51-0.572%205.51s-1.58-4.89-2.93-3.79c-1.35%201.11%200.258%205.25%200.572%206.62%200.836%202.43%202.03%202.94%202.17%205.55%22%2F%3E%0A%3C%2Fsvg%3E%0A') 12 8, default"}\r\n}\r\n\r\n.pnlm-grabbing {\r\n  cursor: grabbing;\r\n  cursor: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2226%22%20width%3D%2226%22%3E%0A%3Cpath%20stroke%3D%22%23000%22%20stroke-width%3D%221px%22%20fill%3D%22%23fff%22%20d%3D%22m15.3%2020.5s5.07-5.29%203.77-6.74c-1.31-1.45-2.53%200.14-2.53%200.14s2.74-3.29%200.535-4.06c-2.2-0.769-2.52%201.3-2.52%201.3s0.81-2.13-1.12-2.13-1.52%201.77-1.52%201.77-0.261-1.59-1.87-1.12c-1.61%200.468-0.874%202.17-0.874%202.17s-0.651-1.55-2-0.445c-1.35%201.11-0.68%202.25-0.365%203.62%200.836%202.43%202.03%202.94%202.17%205.55%22%2F%3E%0A%3C%2Fsvg%3E%0A') 12 8, default\r\n}\r\n\r\n.pnlm-sprite {\r\n  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2226%22%20height%3D%22208%22%3E%0A%3Ccircle%20fill-opacity%3D%22.78%22%20cy%3D%22117%22%20cx%3D%2213%22%20r%3D%2211%22%20fill%3D%22%23fff%22%2F%3E%0A%3Ccircle%20fill-opacity%3D%22.78%22%20cy%3D%22143%22%20cx%3D%2213%22%20r%3D%2211%22%20fill%3D%22%23fff%22%2F%3E%0A%3Ccircle%20cy%3D%22169%22%20cx%3D%2213%22%20r%3D%227%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0A%3Ccircle%20cy%3D%22195%22%20cx%3D%2213%22%20r%3D%227%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0A%3Ccircle%20cx%3D%2213%22%20cy%3D%22195%22%20r%3D%222.5%22%2F%3E%0A%3Cpath%20d%3D%22m5%2083v6h2v-4h4v-2zm10%200v2h4v4h2v-6zm-5%205v6h6v-6zm-5%205v6h6v-2h-4v-4zm14%200v4h-4v2h6v-6z%22%2F%3E%0A%3Cpath%20d%3D%22m13%20110a7%207%200%200%200%20-7%207%207%207%200%200%200%207%207%207%207%200%200%200%207%20-7%207%207%200%200%200%20-7%20-7zm-1%203h2v2h-2zm0%203h2v5h-2z%22%2F%3E%0A%3Cpath%20d%3D%22m5%2057v6h2v-4h4v-2zm10%200v2h4v4h2v-6zm-10%2010v6h6v-2h-4v-4zm14%200v4h-4v2h6v-6z%22%2F%3E%0A%3Cpath%20d%3D%22m17%2038v2h-8v-2z%22%2F%3E%0A%3Cpath%20d%3D%22m12%209v3h-3v2h3v3h2v-3h3v-2h-3v-3z%22%2F%3E%0A%3Cpath%20d%3D%22m13%20136-6.125%206.125h4.375v7.875h3.5v-7.875h4.375z%22%2F%3E%0A%3Cpath%20d%3D%22m10.428%20173.33v-5.77l5-2.89v5.77zm1-1.73%203-1.73-3.001-1.74z%22%2F%3E%0A%3C%2Fsvg%3E%0A')\r\n}\r\n\r\n.pnlm-container:-moz-full-screen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-container:-webkit-full-screen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-container:-ms-fullscreen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-container:fullscreen {\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  position: static !important;\r\n}\r\n\r\n.pnlm-render-container {\r\n  cursor: inherit;\r\n\r\n  /* Fix display bug in Safari 7 */\r\n  position: absolute;\r\n  height: 100%;\r\n  width: 100%;\r\n}\r\n\r\n.pnlm-controls {\r\n  margin-top: 4px;\r\n  background-color: #fff;\r\n  border: 1px solid #999;\r\n  border-color: rgba(0, 0, 0, 0.4);\r\n  border-radius: 3px;\r\n  cursor: pointer;\r\n  z-index: 2;\r\n  /* Fix Safari fullscreen bug */\r\n  -webkit-transform: translateZ(9999px);\r\n  transform: translateZ(9999px);\r\n}\r\n\r\n.pnlm-control:hover {\r\n  background-color: #f8f8f8;\r\n}\r\n\r\n.pnlm-controls-container {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 4px;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-zoom-controls {\r\n  width: 26px;\r\n  height: 52px;\r\n}\r\n\r\n.pnlm-zoom-in {\r\n  width: 100%;\r\n  height: 50%;\r\n  position: absolute;\r\n  top: 0;\r\n  border-radius: 3px 3px 0 0;\r\n}\r\n\r\n.pnlm-zoom-out {\r\n  width: 100%;\r\n  height: 50%;\r\n  position: absolute;\r\n  bottom: 0;\r\n  background-position: 0 -26px;\r\n  border-top: 1px solid #ddd;\r\n  border-top-color: rgba(0, 0, 0, 0.10);\r\n  border-radius: 0 0 3px 3px;\r\n}\r\n\r\n.pnlm-fullscreen-toggle-button,\r\n.pnlm-orientation-button,\r\n.pnlm-hot-spot-debug-indicator {\r\n  width: 26px;\r\n  height: 26px;\r\n}\r\n\r\n.pnlm-hot-spot-debug-indicator {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 26px;\r\n  height: 26px;\r\n  margin: -13px 0 0 -13px;\r\n  background-color: rgba(255, 255, 255, 0.5);\r\n  border-radius: 13px;\r\n  display: none;\r\n}\r\n\r\n.pnlm-orientation-button-inactive {\r\n  background-position: 0 -156px;\r\n}\r\n\r\n.pnlm-orientation-button-active {\r\n  background-position: 0 -182px;\r\n}\r\n\r\n.pnlm-fullscreen-toggle-button-inactive {\r\n  background-position: 0 -52px;\r\n}\r\n\r\n.pnlm-fullscreen-toggle-button-active {\r\n  background-position: 0 -78px;\r\n}\r\n\r\n.pnlm-panorama-info {\r\n  position: absolute;\r\n  bottom: 4px;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  border-radius: 0 3px 3px 0;\r\n  padding-right: 10px;\r\n  color: #fff;\r\n  text-align: left;\r\n  display: none;\r\n  z-index: 2;\r\n  /* Fix Safari fullscreen bug */\r\n  -webkit-transform: translateZ(9999px);\r\n  transform: translateZ(9999px);\r\n}\r\n\r\n.pnlm-title-box {\r\n  position: relative;\r\n  font-size: 20px;\r\n  display: table;\r\n  padding-left: 5px;\r\n  margin-bottom: 3px;\r\n}\r\n\r\n.pnlm-description-box {\r\n  position: relative;\r\n  font-size: 18px;\r\n  display: table;\r\n  padding-left: 5px;\r\n  margin-bottom: 3px;\r\n}\r\n\r\n.pnlm-author-box {\r\n  position: relative;\r\n  font-size: 12px;\r\n  display: table;\r\n  padding-left: 5px;\r\n}\r\n\r\n.pnlm-load-box {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 200px;\r\n  height: 150px;\r\n  margin: -75px 0 0 -100px;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  border-radius: 3px;\r\n  text-align: center;\r\n  font-size: 20px;\r\n  display: none;\r\n  color: #fff;\r\n}\r\n\r\n.pnlm-load-box p {\r\n  margin: 20px 0;\r\n}\r\n\r\n.pnlm-lbox {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 20px;\r\n  height: 20px;\r\n  margin: -10px 0 0 -10px;\r\n  display: none;\r\n}\r\n\r\n.pnlm-loading {\r\n  animation-duration: 1.5s;\r\n  -webkit-animation-duration: 1.5s;\r\n  animation-name: pnlm-mv;\r\n  -webkit-animation-name: pnlm-mv;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-timing-function: linear;\r\n  height: 10px;\r\n  width: 10px;\r\n  background-color: #fff;\r\n  position: relative;\r\n}\r\n\r\n@keyframes pnlm-mv {\r\n  from {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n\r\n  25% {\r\n    left: 10px;\r\n    top: 0;\r\n  }\r\n\r\n  50% {\r\n    left: 10px;\r\n    top: 10px;\r\n  }\r\n\r\n  75% {\r\n    left: 0;\r\n    top: 10px;\r\n  }\r\n\r\n  to {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n}\r\n\r\n@-webkit-keyframes pnlm-mv {\r\n  from {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n\r\n  25% {\r\n    left: 10px;\r\n    top: 0;\r\n  }\r\n\r\n  50% {\r\n    left: 10px;\r\n    top: 10px;\r\n  }\r\n\r\n  75% {\r\n    left: 0;\r\n    top: 10px;\r\n  }\r\n\r\n  to {\r\n    left: 0;\r\n    top: 0;\r\n  }\r\n}\r\n\r\n.pnlm-load-button {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 200px;\r\n  height: 100px;\r\n  margin: -50px 0 0 -100px;\r\n  background-color: rgba(0, 0, 0, .7);\r\n  border-radius: 3px;\r\n  text-align: center;\r\n  font-size: 20px;\r\n  display: table;\r\n  color: #fff;\r\n  cursor: pointer;\r\n}\r\n\r\n.pnlm-load-button:hover {\r\n  background-color: rgba(0, 0, 0, .8);\r\n}\r\n\r\n.pnlm-load-button p {\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n}\r\n\r\n.pnlm-info-box {\r\n  font-size: 15px;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 200px;\r\n  height: 150px;\r\n  margin: -75px 0 0 -100px;\r\n  background-color: #000;\r\n  border-radius: 3px;\r\n  display: table;\r\n  text-align: center;\r\n  color: #fff;\r\n  table-layout: fixed;\r\n}\r\n\r\n.pnlm-info-box a,\r\n.pnlm-author-box a {\r\n  color: #fff;\r\n  word-wrap: break-word;\r\n  overflow-wrap: break-word;\r\n}\r\n\r\n.pnlm-info-box p {\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n  padding: 0 5px 0 5px;\r\n}\r\n\r\n.pnlm-error-msg {\r\n  display: none;\r\n}\r\n\r\n.pnlm-about-msg {\r\n  font-size: 11px;\r\n  line-height: 11px;\r\n  color: #fff;\r\n  padding: 5px 8px 5px 8px;\r\n  background: rgba(0, 0, 0, 0.7);\r\n  border-radius: 3px;\r\n  position: absolute;\r\n  top: 50px;\r\n  left: 50px;\r\n  display: none;\r\n  opacity: 0;\r\n  -moz-transition: opacity .3s ease-in-out;\r\n  -webkit-transition: opacity .3s ease-in-out;\r\n  -o-transition: opacity .3s ease-in-out;\r\n  -ms-transition: opacity .3s ease-in-out;\r\n  transition: opacity .3s ease-in-out;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-about-msg a:link,\r\n.pnlm-about-msg a:visited {\r\n  color: #fff;\r\n}\r\n\r\n.pnlm-about-msg a:hover,\r\n.pnlm-about-msg a:active {\r\n  color: #eee;\r\n}\r\n\r\n.pnlm-hotspot-base {\r\n  position: absolute;\r\n  visibility: hidden;\r\n  cursor: default;\r\n  vertical-align: middle;\r\n  top: 0;\r\n  z-index: 1;\r\n}\r\n\r\n.pnlm-hotspot {\r\n  height: 26px;\r\n  width: 26px;\r\n  border-radius: 13px;\r\n}\r\n\r\n.pnlm-hotspot:hover {\r\n  background-color: rgba(255, 255, 255, 0.2);\r\n}\r\n\r\n.pnlm-hotspot.pnlm-info {\r\n  background-position: 0 -104px;\r\n}\r\n\r\n.pnlm-hotspot.pnlm-scene {\r\n  background-position: 0 -130px;\r\n}\r\n\r\ndiv.pnlm-tooltip span {\r\n  visibility: hidden;\r\n  position: absolute;\r\n  border-radius: 3px;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  color: #fff;\r\n  text-align: center;\r\n  max-width: 200px;\r\n  padding: 5px 10px;\r\n  margin-left: -220px;\r\n  cursor: default;\r\n}\r\n\r\ndiv.pnlm-tooltip:hover span {\r\n  visibility: visible;\r\n}\r\n\r\ndiv.pnlm-tooltip:hover span:after {\r\n  content: '';\r\n  position: absolute;\r\n  width: 0;\r\n  height: 0;\r\n  border-width: 10px;\r\n  border-style: solid;\r\n  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;\r\n  bottom: -20px;\r\n  left: -10px;\r\n  margin: 0 50%;\r\n}\r\n\r\n.pnlm-compass {\r\n  position: absolute;\r\n  width: 50px;\r\n  height: 50px;\r\n  right: 4px;\r\n  bottom: 4px;\r\n  border-radius: 25px;\r\n  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2250%22%20width%3D%2250%22%3E%0A%3Cpath%20d%3D%22m24.5078%206-3.2578%2018h7.5l-3.25781-18h-0.984376zm-3.2578%2020%203.2578%2018h0.9844l3.2578-18h-7.5zm1.19531%200.9941h5.10938l-2.5547%2014.1075-2.5547-14.1075z%22%2F%3E%0A%3C%2Fsvg%3E%0A');\r\n  cursor: default;\r\n  display: none;\r\n}\r\n\r\n.pnlm-world {\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n}\r\n\r\n.pnlm-face {\r\n  position: absolute;\r\n  -webkit-transform-origin: 0 0 0;\r\n  transform-origin: 0 0 0;\r\n}\r\n\r\n.pnlm-dragfix,\r\n.pnlm-preview-img {\r\n  position: absolute;\r\n  height: 100%;\r\n  width: 100%;\r\n}\r\n\r\n.pnlm-preview-img {\r\n  background-size: cover;\r\n  background-position: center;\r\n}\r\n\r\n.pnlm-lbar {\r\n  width: 150px;\r\n  margin: 0 auto;\r\n  border: #fff 1px solid;\r\n  height: 6px;\r\n}\r\n\r\n.pnlm-lbar-fill {\r\n  background: #fff;\r\n  height: 100%;\r\n  width: 0;\r\n}\r\n\r\n.pnlm-lmsg {\r\n  font-size: 12px;\r\n}\r\n\r\n.pnlm-fade-img {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.pnlm-pointer {\r\n  cursor: pointer;\r\n}\r\n`;
 styleInject(css_248z);
 
 var myPannellum = null;
 
-var ReactPannellum = /*#__PURE__*/function (_React$Component) {
+var ReactPannellum = /*#__PURE__*/ (function (_React$Component) {
   _inherits(ReactPannellum, _React$Component);
 
   var _super = _createSuper(ReactPannellum);
@@ -4841,7 +5840,11 @@ var ReactPannellum = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, ReactPannellum);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    for (
+      var _len = arguments.length, args = new Array(_len), _key = 0;
+      _key < _len;
+      _key++
+    ) {
       args[_key] = arguments[_key];
     }
 
@@ -4850,485 +5853,643 @@ var ReactPannellum = /*#__PURE__*/function (_React$Component) {
       imageSource: "",
       equirectangularOptions: {},
       cubeMap: [],
-      multiRes: {}
+      multiRes: {},
     };
 
     _this.init = function () {
       var _this$state = _this.state,
-          imageSource = _this$state.imageSource,
-          equirectangularOptions = _this$state.equirectangularOptions,
-          cubeMap = _this$state.cubeMap,
-          multiRes = _this$state.multiRes;
+        imageSource = _this$state.imageSource,
+        equirectangularOptions = _this$state.equirectangularOptions,
+        cubeMap = _this$state.cubeMap,
+        multiRes = _this$state.multiRes;
       var _this$props = _this.props,
-          sceneId = _this$props.sceneId,
-          config = _this$props.config,
-          type = _this$props.type;
+        sceneId = _this$props.sceneId,
+        config = _this$props.config,
+        type = _this$props.type;
       myPannellum = pannellum.viewer(_this.props.id, {
-        "default": {
-          firstScene: sceneId
+        default: {
+          firstScene: sceneId,
         },
-        scenes: _defineProperty({}, sceneId, _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, configs.panoramaConfigs), configs.equirectangularOptions), configs.uiText), config), {}, {
-          type: type,
-          imageSource: imageSource
-        }, equirectangularOptions), {}, {
-          cubeMap: cubeMap,
-          multiRes: multiRes
-        }))
+        scenes: _defineProperty(
+          {},
+          sceneId,
+          _objectSpread2(
+            _objectSpread2(
+              _objectSpread2(
+                _objectSpread2(
+                  _objectSpread2(
+                    _objectSpread2({}, configs.panoramaConfigs),
+                    configs.equirectangularOptions
+                  ),
+                  configs.uiText
+                ),
+                config
+              ),
+              {},
+              {
+                type: type,
+                imageSource: imageSource,
+              },
+              equirectangularOptions
+            ),
+            {},
+            {
+              cubeMap: cubeMap,
+              multiRes: multiRes,
+            }
+          )
+        ),
       });
 
-      myPannellum && myPannellum.on('mousedown', function(event) {
-        return _this.props.onMouseDown(event);
-      })
+      myPannellum &&
+        myPannellum.on("mousedown", function (event) {
+          return _this.props.onMouseDown(event);
+        });
 
-      myPannellum && myPannellum.on('mouseup', function(event) {
-        return _this.props.onMouseUp(event);
-      })
+      myPannellum &&
+        myPannellum.on("mouseup", function (event) {
+          return _this.props.onMouseUp(event);
+        });
 
-      myPannellum && myPannellum.on('mousemove', function(event) {
-        return _this.props.onMouseMove(event);
-      })
+      myPannellum &&
+        myPannellum.on("mousemove", function (event) {
+          return _this.props.onMouseMove(event);
+        });
 
-      _this.props.onPanoramaLoaded && myPannellum.on("load", function () {
-        return _this.props.onPanoramaLoaded();
-      });
+      _this.props.onPanoramaLoaded &&
+        myPannellum.on("load", function () {
+          return _this.props.onPanoramaLoaded();
+        });
     };
 
     return _this;
   }
 
-  _createClass(ReactPannellum, [{
-    key: "initPanalleum",
-    value: function initPanalleum() {
-      var _this2 = this;
+  _createClass(
+    ReactPannellum,
+    [
+      {
+        key: "initPanalleum",
+        value: function initPanalleum() {
+          var _this2 = this;
 
-      var _this$props2 = this.props,
-          imageSource = _this$props2.imageSource,
-          type = _this$props2.type,
-          cubeMap = _this$props2.cubeMap,
-          multiRes = _this$props2.multiRes,
-          equirectangularOptions = _this$props2.equirectangularOptions;
+          var _this$props2 = this.props,
+            imageSource = _this$props2.imageSource,
+            type = _this$props2.type,
+            cubeMap = _this$props2.cubeMap,
+            multiRes = _this$props2.multiRes,
+            equirectangularOptions = _this$props2.equirectangularOptions;
 
-      switch (type) {
-        case "equirectangular":
-          this.setState({
-            imageSource: imageSource,
-            equirectangularOptions: equirectangularOptions,
-            cubeMap: []
-          }, function () {
-            return _this2.init();
+          switch (type) {
+            case "equirectangular":
+              this.setState(
+                {
+                  imageSource: imageSource,
+                  equirectangularOptions: equirectangularOptions,
+                  cubeMap: [],
+                },
+                function () {
+                  return _this2.init();
+                }
+              );
+              break;
+
+            case "cubemap":
+              this.setState(
+                {
+                  cubeMap: cubeMap,
+                  imageSource: "",
+                },
+                function () {
+                  return _this2.init();
+                }
+              );
+              break;
+
+            case "multires":
+              this.setState(
+                {
+                  cubeMap: [],
+                  imageSource: "",
+                  multiRes: multiRes,
+                },
+                function () {
+                  return _this2.init();
+                }
+              );
+              break;
+          }
+        },
+      },
+      {
+        key: "componentDidMount",
+        value: function componentDidMount() {
+          this.initPanalleum();
+        },
+      },
+      {
+        key: "componentWillUnmount",
+        value: function componentWillUnmount() {
+          myPannellum &&
+            this.props.onPanoramaLoaded &&
+            myPannellum.off("load", this.props.onPanoramaLoaded);
+        },
+      },
+      {
+        key: "render",
+        value: function render() {
+          var _this$props3 = this.props,
+            style = _this$props3.style,
+            className = _this$props3.className,
+            id = _this$props3.id,
+            children = _this$props3.children;
+          return /*#__PURE__*/ React__default["default"].createElement("div", {
+            id: id,
+            style: style,
+            className: className,
+            children: children,
           });
-          break;
+        },
+      },
+    ],
+    [
+      {
+        key: "isLoaded",
+        value: function isLoaded() {
+          return myPannellum && myPannellum.isLoaded();
+        },
+      },
+      {
+        key: "getPitch",
+        value: function getPitch() {
+          return myPannellum && myPannellum.getPitch();
+        },
+      },
+      {
+        key: "setPitch",
+        value: function setPitch(pitch) {
+          var animated =
+            arguments.length > 1 && arguments[1] !== undefined
+              ? arguments[1]
+              : 1000;
+          var callback = arguments.length > 2 ? arguments[2] : undefined;
+          var callbackArgs = arguments.length > 3 ? arguments[3] : undefined;
 
-        case "cubemap":
-          this.setState({
-            cubeMap: cubeMap,
-            imageSource: ""
-          }, function () {
-            return _this2.init();
-          });
-          break;
+          if (myPannellum) {
+            myPannellum.setPitch(pitch, animated, callback, callbackArgs);
+          }
+        },
+      },
+      {
+        key: "getPitchBounds",
+        value: function getPitchBounds() {
+          return myPannellum && myPannellum.getPitchBounds();
+        },
+      },
+      {
+        key: "setPitchBounds",
+        value: function setPitchBounds(bounds) {
+          if (myPannellum) {
+            myPannellum.setPitchBounds(bounds);
+          }
+        },
+      },
+      {
+        key: "getYaw",
+        value: function getYaw() {
+          return myPannellum && myPannellum.getYaw();
+        },
+      },
+      {
+        key: "setYaw",
+        value: function setYaw(yaw) {
+          var animated =
+            arguments.length > 1 && arguments[1] !== undefined
+              ? arguments[1]
+              : 1000;
+          var callback = arguments.length > 2 ? arguments[2] : undefined;
+          var callbackArgs = arguments.length > 3 ? arguments[3] : undefined;
 
-        case "multires":
-          this.setState({
-            cubeMap: [],
-            imageSource: "",
-            multiRes: multiRes
-          }, function () {
-            return _this2.init();
-          });
-          break;
-      }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.initPanalleum();
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      myPannellum && this.props.onPanoramaLoaded && myPannellum.off("load", this.props.onPanoramaLoaded);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props3 = this.props,
-          style = _this$props3.style,
-          className = _this$props3.className,
-          id = _this$props3.id,
-          children = _this$props3.children;
-      return /*#__PURE__*/React__default['default'].createElement("div", {
-        id: id,
-        style: style,
-        className: className,
-        children: children
-      });
-    }
-  }], [{
-    key: "isLoaded",
-    value: function isLoaded() {
-      return myPannellum && myPannellum.isLoaded();
-    }
-  }, {
-    key: "getPitch",
-    value: function getPitch() {
-      return myPannellum && myPannellum.getPitch();
-    }
-  }, {
-    key: "setPitch",
-    value: function setPitch(pitch) {
-      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-      var callback = arguments.length > 2 ? arguments[2] : undefined;
-      var callbackArgs = arguments.length > 3 ? arguments[3] : undefined;
+          if (myPannellum) {
+            myPannellum.setYaw(yaw, animated, callback, callbackArgs);
+          }
+        },
+      },
+      {
+        key: "getYawBounds",
+        value: function getYawBounds() {
+          return myPannellum && myPannellum.getYawBounds();
+        },
+      },
+      {
+        key: "setYawBounds",
+        value: function setYawBounds(bounds) {
+          myPromise(myPannellum, {
+            bounds: bounds,
+          })
+            .then(function (_ref) {
+              var bounds = _ref.bounds;
+              myPannellum.setYawBounds(bounds);
+            })
+            ["catch"](function (err) {
+              console.log(err);
+            });
+        },
+      },
+      {
+        key: "getHfov",
+        value: function getHfov() {
+          return myPannellum && myPannellum.getHfov();
+        },
+      },
+      {
+        key: "setHfov",
+        value: function setHfov(hfov) {
+          var animated =
+            arguments.length > 1 && arguments[1] !== undefined
+              ? arguments[1]
+              : 1000;
+          var callback = arguments.length > 2 ? arguments[2] : undefined;
+          var callbackArgs = arguments.length > 3 ? arguments[3] : undefined;
 
-      if (myPannellum) {
-        myPannellum.setPitch(pitch, animated, callback, callbackArgs);
-      }
-    }
-  }, {
-    key: "getPitchBounds",
-    value: function getPitchBounds() {
-      return myPannellum && myPannellum.getPitchBounds();
-    }
-  }, {
-    key: "setPitchBounds",
-    value: function setPitchBounds(bounds) {
-      if (myPannellum) {
-        myPannellum.setPitchBounds(bounds);
-      }
-    }
-  }, {
-    key: "getYaw",
-    value: function getYaw() {
-      return myPannellum && myPannellum.getYaw();
-    }
-  }, {
-    key: "setYaw",
-    value: function setYaw(yaw) {
-      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-      var callback = arguments.length > 2 ? arguments[2] : undefined;
-      var callbackArgs = arguments.length > 3 ? arguments[3] : undefined;
+          if (myPannellum) {
+            myPannellum.setHfov(hfov, animated, callback, callbackArgs);
+          }
+        },
+      },
+      {
+        key: "getHfovBounds",
+        value: function getHfovBounds() {
+          return myPannellum && myPannellum.getHfovBounds();
+        },
+      },
+      {
+        key: "setHfovBounds",
+        value: function setHfovBounds(bounds) {
+          myPromise(myPannellum, {
+            bounds: bounds,
+          })
+            .then(function (_ref2) {
+              var bounds = _ref2.bounds;
+              myPannellum.setHfovBounds(bounds);
+            })
+            ["catch"](function (err) {
+              console.log(err);
+            });
+        },
+      },
+      {
+        key: "lookAt",
+        value: function lookAt(pitch, yaw, hfov) {
+          var animated =
+            arguments.length > 3 && arguments[3] !== undefined
+              ? arguments[3]
+              : 1000;
+          var callback = arguments.length > 4 ? arguments[4] : undefined;
+          var callbackArgs = arguments.length > 5 ? arguments[5] : undefined;
 
-      if (myPannellum) {
-        myPannellum.setYaw(yaw, animated, callback, callbackArgs);
-      }
-    }
-  }, {
-    key: "getYawBounds",
-    value: function getYawBounds() {
-      return myPannellum && myPannellum.getYawBounds();
-    }
-  }, {
-    key: "setYawBounds",
-    value: function setYawBounds(bounds) {
-      myPromise(myPannellum, {
-        bounds: bounds
-      }).then(function (_ref) {
-        var bounds = _ref.bounds;
-        myPannellum.setYawBounds(bounds);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
-    key: "getHfov",
-    value: function getHfov() {
-      return myPannellum && myPannellum.getHfov();
-    }
-  }, {
-    key: "setHfov",
-    value: function setHfov(hfov) {
-      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-      var callback = arguments.length > 2 ? arguments[2] : undefined;
-      var callbackArgs = arguments.length > 3 ? arguments[3] : undefined;
-
-      if (myPannellum) {
-        myPannellum.setHfov(hfov, animated, callback, callbackArgs);
-      }
-    }
-  }, {
-    key: "getHfovBounds",
-    value: function getHfovBounds() {
-      return myPannellum && myPannellum.getHfovBounds();
-    }
-  }, {
-    key: "setHfovBounds",
-    value: function setHfovBounds(bounds) {
-      myPromise(myPannellum, {
-        bounds: bounds
-      }).then(function (_ref2) {
-        var bounds = _ref2.bounds;
-        myPannellum.setHfovBounds(bounds);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
-    key: "lookAt",
-    value: function lookAt(pitch, yaw, hfov) {
-      var animated = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1000;
-      var callback = arguments.length > 4 ? arguments[4] : undefined;
-      var callbackArgs = arguments.length > 5 ? arguments[5] : undefined;
-
-      if (myPannellum) {
-        myPannellum.lookAt(pitch, yaw, hfov, animated, callback, callbackArgs);
-      }
-    }
-  }, {
-    key: "getNorthOffset",
-    value: function getNorthOffset() {
-      return myPannellum && myPannellum.getNorthOffset();
-    }
-  }, {
-    key: "setNorthOffset",
-    value: function setNorthOffset(heading) {
-      myPromise(myPannellum, {
-        heading: heading
-      }).then(function (_ref3) {
-        var heading = _ref3.heading;
-        myPannellum.setNorthOffset(heading);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
-    key: "getHorizonRoll",
-    value: function getHorizonRoll() {
-      return myPannellum && myPannellum.getHorizonRoll();
-    }
-  }, {
-    key: "setHorizonRoll",
-    value: function setHorizonRoll(roll) {
-      myPromise(myPannellum, {
-        roll: roll
-      }).then(function (_ref4) {
-        var roll = _ref4.roll;
-        myPannellum.setHorizonRoll(roll);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
-    key: "getHorizonPitch",
-    value: function getHorizonPitch() {
-      return myPannellum && myPannellum.getHorizonPitch();
-    }
-  }, {
-    key: "setHorizonPitch",
-    value: function setHorizonPitch(pitch) {
-      myPromise(myPannellum, {
-        pitch: pitch
-      }).then(function (_ref5) {
-        var pitch = _ref5.pitch;
-        myPannellum.setHorizonPitch(pitch);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
-    key: "startAutoRotate",
-    value: function startAutoRotate(speed, pitch) {
-      myPromise(myPannellum, {
-        pitch: pitch
-      }).then(function (_ref6) {
-        var pitch = _ref6.pitch;
-        myPannellum.startAutoRotate(speed, pitch);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
-    key: "stopAutoRotate",
-    value: function stopAutoRotate() {
-      if (myPannellum) {
-        myPannellum.stopAutoRotate();
-      }
-    }
-  }, {
-    key:"changeMouseCursor",
-    value: function changeMouseCursor(event){
-      return myPannellum && myPannellum.changeMouseCursor(event);
-    }
-  }, {
-    key: "mouseEventToCoords",
-    value: function mouseEventToCoords(event) {
-      return myPannellum && myPannellum.mouseEventToCoords(event);
-    }
-  }, {
-    key: "addScene",
-    value: function addScene(sceneId, config, callback) {
-      if (sceneId && sceneId !== "" && config && config !== {}) {
-        myPromise(myPannellum, {
-          sceneId: sceneId,
-          config: config,
-          callback: callback
-        }).then(function (_ref7) {
-          var sceneId = _ref7.sceneId,
-              config = _ref7.config,
-              callback = _ref7.callback;
-          myPannellum.addScene(sceneId, config);
-          callback && callback();
-        })["catch"](function (err) {
-          console.log(err);
-        });
-      } else {
-        console.log("sceneId cannot be empty and config.imageSource cannot be empty!!");
-      }
-    }
-  }, {
-    key: "getCurrentScene",
-    value: function getCurrentScene() {
-      return myPannellum && myPannellum.getScene();
-    }
-  }, {
-    key: "getAllScenes",
-    value: function getAllScenes() {
-      return myPannellum && myPannellum.getAllScenes();
-    }
-  }, {
-    key: "removeScene",
-    value: function removeScene(sceneId, callback) {
-      if (sceneId && sceneId !== "") {
-        myPromise(myPannellum, {
-          sceneId: sceneId
-        }).then(function (_ref8) {
-          var sceneId = _ref8.sceneId;
-          myPannellum.removeScene(sceneId);
-          callback && callback();
-        })["catch"](function (err) {
-          console.log(err);
-        });
-      } else {
-        console.log("sceneId cannot be empty");
-      }
-    }
-  }, {
-    key: "loadScene",
-    value: function loadScene(sceneId, targetPitch, targetYaw, targetHfov, fadeDone) {
-      if (myPannellum && sceneId && sceneId !== "") {
-        myPannellum.loadScene(sceneId, targetPitch, targetYaw, targetHfov, fadeDone);
-      }
-    }
-  }, {
-    key: "toggleFullscreen",
-    value: function toggleFullscreen() {
-      return myPannellum && myPannellum.toggleFullscreen();
-    }
-  }, {
-    key: "getConfig",
-    value: function getConfig() {
-      return myPannellum && myPannellum.getConfig();
-    }
-  }, {
-    key: "getContainer",
-    value: function getContainer() {
-      return myPannellum && myPannellum.getContainer();
-    }
-  }, {
-    key: "addHotSpot",
-    value: function addHotSpot(hotspot, sceneId) {
-      if (hotspot !== {}) {
-        myPromise(myPannellum, {
-          hotspot: hotspot,
-          sceneId: sceneId
-        }).then(function (_ref9) {
-          var hotspot = _ref9.hotspot,
-              sceneId = _ref9.sceneId;
-          myPannellum.addHotSpot(hotspot, sceneId);
-        })["catch"](function (err) {
-          console.log(err);
-        });
-      } else {
-        console.log("hotspot cannot be empty, please check hotspot elements needed in document: config props `hotSpots`.");
-      }
-    }
-  }, {
-    key: "removeHotSpot",
-    value: function removeHotSpot(hotSpotId, sceneId) {
-      if (hotSpotId !== "") {
-        myPromise(myPannellum, {
-          hotSpotId: hotSpotId,
-          sceneId: sceneId
-        }).then(function (_ref10) {
-          var hotSpotId = _ref10.hotSpotId,
-              sceneId = _ref10.sceneId;
-          myPannellum.removeHotSpot(hotSpotId, sceneId);
-        })["catch"](function (err) {
-          console.log(err);
-        });
-      } else {
-        console.log("hotspotId cannot be empty!!");
-      }
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      return myPannellum && myPannellum.destroy();
-    }
-  }, {
-    key: "stopMovement",
-    value: function stopMovement() {
-      return myPannellum && myPannellum.stopMovement();
-    }
-  }, {
-    key: "resize",
-    value: function resize() {
-      return myPannellum && myPannellum.resize();
-    }
-  }, {
-    key: "isOrientationSupported",
-    value: function isOrientationSupported() {
-      return myPannellum && myPannellum.isOrientationSupported();
-    }
-  }, {
-    key: "stopOrientation",
-    value: function stopOrientation() {
-      return myPannellum && myPannellum.stopOrientation();
-    }
-  }, {
-    key: "startOrientation",
-    value: function startOrientation() {
-      return myPannellum && myPannellum.startOrientation();
-    }
-  }, {
-    key: "isOrientationActive",
-    value: function isOrientationActive() {
-      return myPannellum && myPannellum.isOrientationActive();
-    }
-  }, {
-    key: "getViewer",
-    value: function getViewer() {
-      return myPannellum;
-    }
-  }]);
+          if (myPannellum) {
+            myPannellum.lookAt(
+              pitch,
+              yaw,
+              hfov,
+              animated,
+              callback,
+              callbackArgs
+            );
+          }
+        },
+      },
+      {
+        key: "getNorthOffset",
+        value: function getNorthOffset() {
+          return myPannellum && myPannellum.getNorthOffset();
+        },
+      },
+      {
+        key: "setNorthOffset",
+        value: function setNorthOffset(heading) {
+          myPromise(myPannellum, {
+            heading: heading,
+          })
+            .then(function (_ref3) {
+              var heading = _ref3.heading;
+              myPannellum.setNorthOffset(heading);
+            })
+            ["catch"](function (err) {
+              console.log(err);
+            });
+        },
+      },
+      {
+        key: "getHorizonRoll",
+        value: function getHorizonRoll() {
+          return myPannellum && myPannellum.getHorizonRoll();
+        },
+      },
+      {
+        key: "setHorizonRoll",
+        value: function setHorizonRoll(roll) {
+          myPromise(myPannellum, {
+            roll: roll,
+          })
+            .then(function (_ref4) {
+              var roll = _ref4.roll;
+              myPannellum.setHorizonRoll(roll);
+            })
+            ["catch"](function (err) {
+              console.log(err);
+            });
+        },
+      },
+      {
+        key: "getHorizonPitch",
+        value: function getHorizonPitch() {
+          return myPannellum && myPannellum.getHorizonPitch();
+        },
+      },
+      {
+        key: "setHorizonPitch",
+        value: function setHorizonPitch(pitch) {
+          myPromise(myPannellum, {
+            pitch: pitch,
+          })
+            .then(function (_ref5) {
+              var pitch = _ref5.pitch;
+              myPannellum.setHorizonPitch(pitch);
+            })
+            ["catch"](function (err) {
+              console.log(err);
+            });
+        },
+      },
+      {
+        key: "startAutoRotate",
+        value: function startAutoRotate(speed, pitch) {
+          myPromise(myPannellum, {
+            pitch: pitch,
+          })
+            .then(function (_ref6) {
+              var pitch = _ref6.pitch;
+              myPannellum.startAutoRotate(speed, pitch);
+            })
+            ["catch"](function (err) {
+              console.log(err);
+            });
+        },
+      },
+      {
+        key: "stopAutoRotate",
+        value: function stopAutoRotate() {
+          if (myPannellum) {
+            myPannellum.stopAutoRotate();
+          }
+        },
+      },
+      {
+        key: "showCompass",
+        value: function showCompass(value) {
+          myPromise(myPannellum, {})
+            .then(function () {
+              myPannellum.showCompass(value);
+            })
+            ["catch"](function (err) {
+              console.log(err);
+            });
+        },
+      },
+      {
+        key: "changeMouseCursor",
+        value: function changeMouseCursor(event) {
+          return myPannellum && myPannellum.changeMouseCursor(event);
+        },
+      },
+      {
+        key: "mouseEventToCoords",
+        value: function mouseEventToCoords(event) {
+          return myPannellum && myPannellum.mouseEventToCoords(event);
+        },
+      },
+      {
+        key: "addScene",
+        value: function addScene(sceneId, config, callback) {
+          if (sceneId && sceneId !== "" && config && config !== {}) {
+            myPromise(myPannellum, {
+              sceneId: sceneId,
+              config: config,
+              callback: callback,
+            })
+              .then(function (_ref7) {
+                var sceneId = _ref7.sceneId,
+                  config = _ref7.config,
+                  callback = _ref7.callback;
+                myPannellum.addScene(sceneId, config);
+                callback && callback();
+              })
+              ["catch"](function (err) {
+                console.log(err);
+              });
+          } else {
+            console.log(
+              "sceneId cannot be empty and config.imageSource cannot be empty!!"
+            );
+          }
+        },
+      },
+      {
+        key: "getCurrentScene",
+        value: function getCurrentScene() {
+          return myPannellum && myPannellum.getScene();
+        },
+      },
+      {
+        key: "getAllScenes",
+        value: function getAllScenes() {
+          return myPannellum && myPannellum.getAllScenes();
+        },
+      },
+      {
+        key: "removeScene",
+        value: function removeScene(sceneId, callback) {
+          if (sceneId && sceneId !== "") {
+            myPromise(myPannellum, {
+              sceneId: sceneId,
+            })
+              .then(function (_ref8) {
+                var sceneId = _ref8.sceneId;
+                myPannellum.removeScene(sceneId);
+                callback && callback();
+              })
+              ["catch"](function (err) {
+                console.log(err);
+              });
+          } else {
+            console.log("sceneId cannot be empty");
+          }
+        },
+      },
+      {
+        key: "loadScene",
+        value: function loadScene(
+          sceneId,
+          targetPitch,
+          targetYaw,
+          targetHfov,
+          fadeDone
+        ) {
+          if (myPannellum && sceneId && sceneId !== "") {
+            myPannellum.loadScene(
+              sceneId,
+              targetPitch,
+              targetYaw,
+              targetHfov,
+              fadeDone
+            );
+          }
+        },
+      },
+      {
+        key: "toggleFullscreen",
+        value: function toggleFullscreen() {
+          return myPannellum && myPannellum.toggleFullscreen();
+        },
+      },
+      {
+        key: "getConfig",
+        value: function getConfig() {
+          return myPannellum && myPannellum.getConfig();
+        },
+      },
+      {
+        key: "getContainer",
+        value: function getContainer() {
+          return myPannellum && myPannellum.getContainer();
+        },
+      },
+      {
+        key: "addHotSpot",
+        value: function addHotSpot(hotspot, sceneId) {
+          if (hotspot !== {}) {
+            myPromise(myPannellum, {
+              hotspot: hotspot,
+              sceneId: sceneId,
+            })
+              .then(function (_ref9) {
+                var hotspot = _ref9.hotspot,
+                  sceneId = _ref9.sceneId;
+                myPannellum.addHotSpot(hotspot, sceneId);
+              })
+              ["catch"](function (err) {
+                console.log(err);
+              });
+          } else {
+            console.log(
+              "hotspot cannot be empty, please check hotspot elements needed in document: config props `hotSpots`."
+            );
+          }
+        },
+      },
+      {
+        key: "removeHotSpot",
+        value: function removeHotSpot(hotSpotId, sceneId) {
+          if (hotSpotId !== "") {
+            myPromise(myPannellum, {
+              hotSpotId: hotSpotId,
+              sceneId: sceneId,
+            })
+              .then(function (_ref10) {
+                var hotSpotId = _ref10.hotSpotId,
+                  sceneId = _ref10.sceneId;
+                myPannellum.removeHotSpot(hotSpotId, sceneId);
+              })
+              ["catch"](function (err) {
+                console.log(err);
+              });
+          } else {
+            console.log("hotspotId cannot be empty!!");
+          }
+        },
+      },
+      {
+        key: "destroy",
+        value: function destroy() {
+          return myPannellum && myPannellum.destroy();
+        },
+      },
+      {
+        key: "stopMovement",
+        value: function stopMovement() {
+          return myPannellum && myPannellum.stopMovement();
+        },
+      },
+      {
+        key: "resize",
+        value: function resize() {
+          return myPannellum && myPannellum.resize();
+        },
+      },
+      {
+        key: "isOrientationSupported",
+        value: function isOrientationSupported() {
+          return myPannellum && myPannellum.isOrientationSupported();
+        },
+      },
+      {
+        key: "stopOrientation",
+        value: function stopOrientation() {
+          return myPannellum && myPannellum.stopOrientation();
+        },
+      },
+      {
+        key: "startOrientation",
+        value: function startOrientation() {
+          return myPannellum && myPannellum.startOrientation();
+        },
+      },
+      {
+        key: "isOrientationActive",
+        value: function isOrientationActive() {
+          return myPannellum && myPannellum.isOrientationActive();
+        },
+      },
+      {
+        key: "getViewer",
+        value: function getViewer() {
+          return myPannellum;
+        },
+      },
+    ]
+  );
 
   return ReactPannellum;
-}(React__default['default'].Component); 
+})(React__default["default"].Component);
 
 ReactPannellum.propTypes = {
-  id: PropTypes__default['default'].string.isRequired,
-  sceneId: PropTypes__default['default'].string.isRequired,
-  children: PropTypes__default['default'].any,
-  type: PropTypes__default['default'].string,
-  imageSource: PropTypes__default['default'].string,
-  equirectangularOptions: PropTypes__default['default'].shape({}),
-  cubeMap: PropTypes__default['default'].arrayOf(PropTypes__default['default'].string),
-  multiRes: PropTypes__default['default'].shape({
-    basePath: PropTypes__default['default'].string,
-    path: PropTypes__default['default'].string,
-    fallbackPath: PropTypes__default['default'].string,
-    extension: PropTypes__default['default'].string,
-    tileResolution: PropTypes__default['default'].number,
-    maxLevel: PropTypes__default['default'].number,
-    cubeResolution: PropTypes__default['default'].number
+  id: PropTypes__default["default"].string.isRequired,
+  sceneId: PropTypes__default["default"].string.isRequired,
+  children: PropTypes__default["default"].any,
+  type: PropTypes__default["default"].string,
+  imageSource: PropTypes__default["default"].string,
+  equirectangularOptions: PropTypes__default["default"].shape({}),
+  cubeMap: PropTypes__default["default"].arrayOf(
+    PropTypes__default["default"].string
+  ),
+  multiRes: PropTypes__default["default"].shape({
+    basePath: PropTypes__default["default"].string,
+    path: PropTypes__default["default"].string,
+    fallbackPath: PropTypes__default["default"].string,
+    extension: PropTypes__default["default"].string,
+    tileResolution: PropTypes__default["default"].number,
+    maxLevel: PropTypes__default["default"].number,
+    cubeResolution: PropTypes__default["default"].number,
   }),
-  config: PropTypes__default['default'].shape({}),
-  className: PropTypes__default['default'].string,
-  style: PropTypes__default['default'].shape({}),
-  onPanoramaLoaded: PropTypes__default['default'].func,
-  onMouseDown: PropTypes__default['default'].func,
-  onMouseUp: PropTypes__default['default'].func,
-  onMouseMove: PropTypes__default['default'].func,
+  config: PropTypes__default["default"].shape({}),
+  className: PropTypes__default["default"].string,
+  style: PropTypes__default["default"].shape({}),
+  onPanoramaLoaded: PropTypes__default["default"].func,
+  onMouseDown: PropTypes__default["default"].func,
+  onMouseUp: PropTypes__default["default"].func,
+  onMouseMove: PropTypes__default["default"].func,
 };
 ReactPannellum.defaultProps = {
   type: "equirectangular",
@@ -5373,6 +6534,7 @@ var startAutoRotate = ReactPannellum.startAutoRotate;
 var stopAutoRotate = ReactPannellum.stopAutoRotate;
 var mouseEventToCoords = ReactPannellum.mouseEventToCoords;
 var changeMouseCursor = ReactPannellum.changeMouseCursor;
+var showCompass = ReactPannellum.showCompass;
 var toggleFullscreen = ReactPannellum.toggleFullscreen;
 var getConfig = ReactPannellum.getConfig;
 var getContainer = ReactPannellum.getContainer;
@@ -5425,6 +6587,7 @@ exports.setPitchBounds = setPitchBounds;
 exports.setYaw = setYaw;
 exports.setYawBounds = setYawBounds;
 exports.startAutoRotate = startAutoRotate;
+exports.showCompass = showCompass;
 exports.startOrientation = startOrientation;
 exports.stopAutoRotate = stopAutoRotate;
 exports.stopMovement = stopMovement;

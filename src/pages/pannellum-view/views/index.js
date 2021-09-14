@@ -22,12 +22,16 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ReactPannellum, {
-  getConfig,
   mouseEventToCoords,
   changeMouseCursor,
   addHotSpot,
   addScene,
   getAllScenes,
+  startAutoRotate,
+  stopAutoRotate,
+  showCompass,
+  removeHotSpot,
+  removeScene,
 } from "../libs/react-pannellum";
 
 const drawerWidth = 240;
@@ -113,10 +117,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const types = [
-  { title: "info" },
-  { title: "scene" },
-];
+const types = [{ title: "info" }, { title: "scene" }];
 
 export default function Mainpage() {
   const classes = useStyles();
@@ -124,7 +125,7 @@ export default function Mainpage() {
   const [state, setState] = useState({
     isOpenDrawer: true,
     openDialog: "",
-    isSelect: -2,
+    isSelect: -1,
     hotSpot: {
       id: "",
       sceneId: "",
@@ -146,13 +147,25 @@ export default function Mainpage() {
     isSceneType: false,
     isInfoType: false,
     isAddScene: false,
+    isDeleteInfo: false,
+    isDeleteScene: false,
+    config: {
+      // autoLoad: true,
+      // // title: "George Peabody Library",
+    },
+    fullScenesInformation: [],
   });
 
   useEffect(() => {
     changeMouseCursor(state);
-    console.log(state.hotSpot);
+    setState((s) => ({ ...s, fullScenesInformation: getAllScenes() }));
     console.log(getAllScenes());
-  }, [state.isAddInfo, state.isAddScene]);
+  }, [
+    state.isAddInfo,
+    state.isDeleteInfo,
+    state.isAddScene,
+    state.isDeleteScene,
+  ]);
 
   const handleDrawerOpen = () => {
     setState((s) => ({ ...s, isOpenDrawer: true }));
@@ -163,16 +176,22 @@ export default function Mainpage() {
   };
 
   const handleDialogOpen = () => {
-    if (state.isAddInfo === true) 
-      setState((s) => ({ ...s, openDialog: "isAddInfo" }));
+    state.isAddInfo && setState((s) => ({ ...s, openDialog: "isAddInfo" }));
   };
 
   const handleDialogClose = (index) => {
     switch (index) {
       case 0:
-        setState((s) => ({ ...s, openDialog: "", isSceneType: false, isInfoType: false }));
+        // this case use to close "Add Info" dialog when click "CANCEL".
+        setState((s) => ({
+          ...s,
+          openDialog: "",
+          isSceneType: false,
+          isInfoType: false,
+        }));
         break;
       case 1:
+        // this case use to close "Add Info" dialog when click "ADD".
         addHotSpot({
           pitch: state.hotSpot["pitch"],
           yaw: state.hotSpot["yaw"],
@@ -184,6 +203,7 @@ export default function Mainpage() {
         });
         setState((s) => ({
           ...s,
+          hotSpot: {},
           openDialog: "",
           isAddInfo: false,
           isSceneType: false,
@@ -192,13 +212,29 @@ export default function Mainpage() {
         }));
         break;
       case 2:
+        // this case use to close "Add Scene" dialog when click "ADD".
         addScene(state.scene.sceneId, state.scene["config"]);
         state.scenes.push(state.scene);
         setState((s) => ({ ...s, isAddScene: false, isSelect: -1 }));
         break;
       case 3:
-        setState((s) => ({ ...s, isAddScene: false, isSelect: -1 }));
+        // this case use to close all dialog ( except "Add Info" ) when click "CANCEL".
+        setState((s) => ({
+          ...s,
+          isAddScene: false,
+          isDeleteInfo: false,
+          isDeleteScene: false,
+          isSelect: -1,
+        }));
         break;
+      case 4:
+        // this case use to close "Delete Info" when click "DELETE".
+        removeHotSpot(state.hotSpot["id"], state.hotSpot["sceneId"]);
+        setState((s) => ({ ...s, isDeleteInfo: false, isSelect: -1 }));
+      case 5:
+        // this case use to close "Delete Scene" when click "DELETE".
+        removeScene(state.hotSpot["sceneId"]);
+        setState((s) => ({ ...s, isDeleteScene: false, isSelect: -1 }));
       default:
         break;
     }
@@ -209,6 +245,7 @@ export default function Mainpage() {
       ...s,
       isAddInfo: data,
       isAddScene: false,
+      isDeleteInfo: false,
       isSelect: index,
     }));
   };
@@ -217,9 +254,36 @@ export default function Mainpage() {
     setState((s) => ({
       ...s,
       isAddInfo: false,
+      isDeleteInfo: false,
       isAddScene: data,
       isSelect: index,
     }));
+  };
+
+  const isDeleteInfo = (data, index) => {
+    setState((s) => ({
+      ...s,
+      isAddInfo: false,
+      isDeleteInfo: data,
+      isAddScene: false,
+      isSelect: index,
+    }));
+  };
+
+  const isDeleteScene = (data, index) => {
+    setState((s) => ({
+      ...s,
+      isDeleteScene: data,
+      isSelect: index,
+    }));
+  };
+
+  const autoRotate = (value) => {
+    value ? startAutoRotate() : stopAutoRotate();
+  };
+
+  const enableCompass = (value) => {
+    showCompass(value);
   };
 
   const getMouseEventToCoords = (e) => {
@@ -233,12 +297,6 @@ export default function Mainpage() {
         },
       }));
     }
-  };
-
-  const config = {
-    author: "Nguyên",
-    autoLoad: true,
-    hotSpots: [],
   };
 
   return (
@@ -299,6 +357,10 @@ export default function Mainpage() {
             isAddInfo={isAddInfo}
             isAddScene={isAddScene}
             isSelect={state.isSelect}
+            isAutoRotate={autoRotate}
+            isDeleteInfo={isDeleteInfo}
+            isDeleteScene={isDeleteScene}
+            isCompass={enableCompass}
           />
         </List>
         <Divider />
@@ -315,11 +377,11 @@ export default function Mainpage() {
             id="1"
             sceneId="firstScene"
             imageSource="https://pannellum.org/images/alma.jpg"
-            config={config}
+            config={state.config}
           />
         </Container>
         <Dialog
-          open={state.openDialog === "isAddInfo" && true}
+          open={state.openDialog === "isAddInfo"}
           onClose={() => handleDialogClose(0)}
           aria-labelledby="form-dialog-title"
         >
@@ -352,30 +414,52 @@ export default function Mainpage() {
                 getOptionLabel={(option) => option.title}
                 onChange={(event, value) => {
                   setState((s) => ({
-                  ...s,
-                  hotSpot: { ...s.hotSpot, type: value && value.title.toString()},
-                  isSceneType: value && value.title.toString() === "scene" ? true : false,
-                  isInfoType: value && value.title.toString() === "info" ? true : false,
-                }))}}
+                    ...s,
+                    hotSpot: {
+                      ...s.hotSpot,
+                      type: value && value.title.toString(),
+                    },
+                    isSceneType:
+                      value && value.title.toString() === "scene"
+                        ? true
+                        : false,
+                    isInfoType:
+                      value && value.title.toString() === "info" ? true : false,
+                  }));
+                }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Type" variant="outlined" margin="dense"/>
+                  <TextField
+                    {...params}
+                    label="Type"
+                    variant="outlined"
+                    margin="dense"
+                  />
                 )}
               />
-              {
-                state.isSceneType === true && 
+              {state.isSceneType === true && (
                 <Autocomplete
                   id="scenes"
                   options={state.scenes}
                   getOptionLabel={(option) => option.sceneId}
-                  onChange={(event, value) => setState((s) => ({
-                    ...s,
-                    hotSpot: { ...s.hotSpot, sceneId: value.sceneId.toString()}
-                  }))}
+                  onChange={(event, value) =>
+                    setState((s) => ({
+                      ...s,
+                      hotSpot: {
+                        ...s.hotSpot,
+                        sceneId: value.sceneId.toString(),
+                      },
+                    }))
+                  }
                   renderInput={(params) => (
-                    <TextField {...params} label="Scene Name" variant="outlined" margin="dense"/>
+                    <TextField
+                      {...params}
+                      label="Scene Name"
+                      variant="outlined"
+                      margin="dense"
+                    />
                   )}
                 />
-              }
+              )}
               <TextField
                 variant="outlined"
                 margin="dense"
@@ -389,10 +473,11 @@ export default function Mainpage() {
                     hotSpot: { ...s.hotSpot, text: e.target.value },
                   }))
                 }
+                multiline
+                rows={3}
                 fullWidth
               />
-              {
-                state.isInfoType &&
+              {state.isInfoType && (
                 <TextField
                   variant="outlined"
                   margin="dense"
@@ -408,7 +493,7 @@ export default function Mainpage() {
                   }
                   fullWidth
                 />
-              }
+              )}
             </DialogContent>
             <DialogActions>
               <Button onClick={() => handleDialogClose(0)} color="primary">
@@ -429,8 +514,8 @@ export default function Mainpage() {
             <DialogTitle id="form-dialog-title">Add Scene</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                To add scene, enter a scene name, then
-                enter the source of scene ( link ).
+                To add scene, enter a scene name, then enter the source of scene
+                ( link ).
               </DialogContentText>
               <TextField
                 autoFocus
@@ -446,7 +531,7 @@ export default function Mainpage() {
                     scene: {
                       ...s.scene,
                       sceneId: e.target.value,
-                    }
+                    },
                   }))
                 }
                 fullWidth
@@ -467,7 +552,7 @@ export default function Mainpage() {
                         ...s.scene["config"],
                         imageSource: e.target.value,
                       },
-                    }
+                    },
                   }))
                 }
                 fullWidth
@@ -479,6 +564,120 @@ export default function Mainpage() {
               </Button>
               <Button onClick={() => handleDialogClose(2)} color="primary">
                 Add
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
+        <Dialog
+          open={state.isDeleteInfo}
+          onClose={() => handleDialogClose(3)}
+          aria-labelledby="form-dialog-title"
+        >
+          <form id="my-delete-scene">
+            <DialogTitle id="form-dialog-title">Delete Info</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                To delete info, first choice scene name, then choice hotspot.
+              </DialogContentText>
+              <Autocomplete
+                id="scenes"
+                options={state.fullScenesInformation}
+                getOptionLabel={(option) => Object.keys(option)[0]}
+                onChange={(event, value) => {
+                  setState((s) => ({
+                    ...s,
+                    scene: value ? Object.values(value)[0] : {},
+                    hotSpot: {
+                      ...s.hotSpot,
+                      sceneId: Object.keys(value)[0],
+                    },
+                  }));
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Scene Name"
+                    variant="outlined"
+                    margin="dense"
+                  />
+                )}
+              />
+              <Autocomplete
+                disabled={state.scene["hotSpots"] ? false : true}
+                id="hotspot"
+                options={state.scene["hotSpots"]}
+                getOptionLabel={(option) => option.id}
+                onChange={(event, value) =>
+                  setState((s) => ({
+                    ...s,
+                    hotSpot: {
+                      ...s.hotSpot,
+                      id: value ? value.id.toString() : "",
+                    },
+                  }))
+                }
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Hotspot Name"
+                    variant="outlined"
+                    margin="dense"
+                  />
+                )}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => handleDialogClose(3)} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={() => handleDialogClose(4)} color="primary">
+                Delete
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
+        <Dialog
+          open={state.isDeleteScene}
+          onClose={() => handleDialogClose(3)}
+          aria-labelledby="form-dialog-title"
+        >
+          <form id="my-delete-scene">
+            <DialogTitle id="form-dialog-title">Delete Scene</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                To delete Scene, choice Scene Name. ( Note that you cannot
+                delete the current scene )
+              </DialogContentText>
+              <Autocomplete
+                id="scenes"
+                options={state.fullScenesInformation}
+                getOptionLabel={(option) => Object.keys(option)[0]}
+                onChange={(event, value) => {
+                  setState((s) => ({
+                    ...s,
+                    scene: value ? Object.values(value)[0] : {},
+                    hotSpot: {
+                      ...s.hotSpot,
+                      sceneId: Object.keys(value)[0],
+                    },
+                  }));
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Scene Name"
+                    variant="outlined"
+                    margin="dense"
+                  />
+                )}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => handleDialogClose(3)} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={() => handleDialogClose(5)} color="primary">
+                Delete
               </Button>
             </DialogActions>
           </form>
