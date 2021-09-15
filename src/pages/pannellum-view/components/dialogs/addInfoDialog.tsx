@@ -8,6 +8,8 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import { addHotSpot } from "../../libs/react-pannellum";
+import { useFormControls } from "../validiations/addInfoValidation";
+import { makeStyles } from "@material-ui/core/styles";
 
 interface types {
   title: string;
@@ -28,6 +30,15 @@ interface Props {
   isSceneType: boolean;
   isInfoType: boolean;
 }
+
+const helperTextStyles = makeStyles((theme) => ({
+  error: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      position: "absolute",
+      marginTop: "40px",
+    },
+  },
+}));
 
 export default function AddInfoDialog(props) {
   const [state, setState] = useState<Props>({
@@ -59,6 +70,13 @@ export default function AddInfoDialog(props) {
       isInfoType: false, // use to define "info" type of hotspot when "Add"
     }));
   }, [props.open]);
+
+  const { handleInputValue, handleFormSubmit, formIsValid, errors } =
+    useFormControls({
+      open: props.open,
+      isInfo: state.isInfoType,
+      isScene: state.isSceneType,
+    });
 
   const onAddInfo = () => {
     addHotSpot({
@@ -103,6 +121,7 @@ export default function AddInfoDialog(props) {
           <Autocomplete
             id="type"
             options={types}
+            onSelect={handleInputValue}
             getOptionLabel={(option) => option.title}
             onChange={(event: any, value: any) => {
               setState((s) => ({
@@ -120,53 +139,83 @@ export default function AddInfoDialog(props) {
             renderInput={(params) => (
               <TextField
                 {...params}
+                style={{ marginTop: "15px", marginBottom: "10px" }}
+                margin="dense"
+                FormHelperTextProps={{ classes: helperTextStyles() }}
                 label="Type"
                 variant="outlined"
-                margin="dense"
+                name="type"
+                error={errors["type"]}
+                onBlur={handleInputValue}
+                onChange={handleInputValue}
+                {...(errors["type"] && {
+                  error: true,
+                  helperText: errors["type"],
+                })}
               />
             )}
           />
           <TextField
-            autoFocus
+            style={{ marginTop: "15px", marginBottom: "10px" }}
             variant="outlined"
             margin="dense"
             id="title"
+            name="title"
+            error={errors["title"]}
             label="Title( ID )"
             type="text"
             autoComplete="off"
-            onChange={(e) =>
+            onBlur={handleInputValue}
+            FormHelperTextProps={{ classes: helperTextStyles() }}
+            onChange={(e) => {
+              handleInputValue(e);
               setState((s) => ({
                 ...s,
                 hotSpot: { ...s.hotSpot, id: e.target.value },
-              }))
-            }
+              }));
+            }}
+            {...(errors["title"] && {
+              error: true,
+              helperText: errors["title"],
+            })}
             fullWidth
           />
           {state.isSceneType && (
             <Autocomplete
               id="scenes"
               options={props.fullScenesInformation}
+              onSelect={handleInputValue}
               getOptionLabel={(option: object) => Object.keys(option)[0]}
               onChange={(event: any, value: any) =>
                 setState((s) => ({
                   ...s,
                   hotSpot: {
                     ...s.hotSpot,
-                    sceneId: Object.keys(value)[0],
+                    sceneId: value && Object.keys(value)[0],
                   },
                 }))
               }
               renderInput={(params) => (
                 <TextField
                   {...params}
+                  name="sname"
+                  style={{ marginTop: "15px", marginBottom: "10px" }}
                   label="Scene Name"
                   variant="outlined"
                   margin="dense"
+                  error={errors["sname"]}
+                  onBlur={handleInputValue}
+                  onChange={handleInputValue}
+                  {...(errors["sname"] && {
+                    error: true,
+                    helperText: errors["sname"],
+                  })}
                 />
               )}
             />
           )}
           <TextField
+            style={{ marginTop: "15px", marginBottom: "10px" }}
             variant="outlined"
             margin="dense"
             id="description"
@@ -185,6 +234,7 @@ export default function AddInfoDialog(props) {
           />
           {state.isInfoType && (
             <TextField
+              style={{ marginTop: "15px", marginBottom: "10px" }}
               variant="outlined"
               margin="dense"
               id="url"
@@ -205,7 +255,11 @@ export default function AddInfoDialog(props) {
           <Button onClick={() => props.close(0)} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => onAddInfo()} color="primary">
+          <Button
+            disabled={!formIsValid()}
+            onClick={() => onAddInfo()}
+            color="primary"
+          >
             Add
           </Button>
         </DialogActions>

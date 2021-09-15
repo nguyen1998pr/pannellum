@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PostContactForm = async (
   values: any,
@@ -12,34 +12,41 @@ const PostContactForm = async (
 };
 
 const initialFormValues = {
-  fullName: "",
-  email: "",
-  message: "",
+  title: "",
+  type: "",
+  sname: "",
   formSubmitted: false,
   success: false,
 };
 
-export const useFormControls = () => {
+export const useFormControls = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({} as any);
+
+  useEffect(() => {
+    setValues(initialFormValues);
+    setErrors({});
+  }, [props.open]);
+
+  useEffect(() => {
+    if (props.isInfo === true) {
+      setValues((s) => ({ ...s, sname: " " }));
+    } else {
+      setValues((s) => ({ ...s, sname: "" }));
+    }
+  }, [props.isScene, props.isInfo]);
 
   const validate: any = (fieldValues = values) => {
     let temp: any = { ...errors };
 
-    if ("fullName" in fieldValues)
-      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
+    if ("title" in fieldValues)
+      temp.title = fieldValues.title ? "" : "This field is required.";
 
-    if ("email" in fieldValues) {
-      temp.email = fieldValues.email ? "" : "This field is required.";
-      if (fieldValues.email)
-        temp.email = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)
-          ? ""
-          : "Email is not valid.";
-    }
+    if ("type" in fieldValues)
+      temp.type = fieldValues.type ? "" : "This field is required.";
 
-    if ("message" in fieldValues)
-      temp.message =
-        fieldValues.message.length !== 0 ? "" : "This field is required.";
+    if ("sname" in fieldValues)
+      temp.sname = fieldValues.sname ? "" : "This field is required.";
 
     setErrors({
       ...temp,
@@ -73,9 +80,9 @@ export const useFormControls = () => {
 
   const formIsValid = (fieldValues = values) => {
     const isValid =
-      fieldValues.fullName &&
-      fieldValues.email &&
-      fieldValues.message &&
+      fieldValues.title &&
+      fieldValues.type &&
+      fieldValues.sname &&
       Object.values(errors).every((x) => x === "");
 
     return isValid;

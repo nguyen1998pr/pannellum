@@ -26,6 +26,9 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { defaultConfig } from "./default-config";
 import AddInfoDialog from "../components/dialogs/addInfoDialog";
 import AddSceneDialog from "../components/dialogs/addSceneDialog";
+import DeleteInfoDialog from "../components/dialogs/deleteInfoDialog";
+import DeleteSceneDialog from "../components/dialogs/deleteSceneDialog";
+import LoadSceneDialog from "../components/dialogs/loadSceneDialog";
 import ReactPannellum, {
   mouseEventToCoords,
   changeMouseCursor,
@@ -232,26 +235,8 @@ export default function Mainpage() {
             ...s.config,
             title: Object.values(value.fullScenesInformation[0])[0].title,
             author: Object.values(value.fullScenesInformation[0])[0].author,
-          }
+          },
         }));
-        break;
-      case 2: // this case use to close "Add Scene" dialog when click "ADD".
-        if (!state.fullScenesInformation?.length) {
-          setState((s) => ({
-            ...s,
-            fullScenesInformation: [
-              {
-                [s.scene["sceneId"]]: {
-                  imageSource: s.scene["config"].imageSource,
-                },
-              },
-            ],
-          }));
-        } else {
-          addScene(state.scene.sceneId, state.scene["config"], addSceneSuccess);
-          state.scenes.push(state.scene);
-        }
-        setState((s) => ({ ...s, isAddScene: false, isSelect: -1 }));
         break;
       case 3: // this case use to close all dialog ( except "Add Info" ) when click "CANCEL".
         setState((s) => ({
@@ -265,15 +250,6 @@ export default function Mainpage() {
           isSelect: -1,
         }));
         break;
-      case 4: // this case use to close "Delete Info" dialog when click "DELETE".
-        removeHotSpot(state.hotSpot["id"], state.hotSpot["sceneId"]);
-        setState((s) => ({ ...s, isDeleteInfo: false, isSelect: -1 }));
-      case 5: // this case use to close "Delete Scene" dialog when click "DELETE".
-        removeScene(state.hotSpot["sceneId"]);
-        setState((s) => ({ ...s, isDeleteScene: false, isSelect: -1 }));
-      case 6: // this case use to close "Load Scene" dialog when click "LOAD"
-        loadScene(state.hotSpot["sceneId"]);
-        setState((s) => ({ ...s, isLoadScene: false, isSelect: -1 }));
       default:
         break;
     }
@@ -467,273 +443,21 @@ export default function Mainpage() {
           close={handleDialogClose}
           fullScenesInformation={state.fullScenesInformation}
         />
-        {/* <Dialog // this is Add Scene Dialog
-          open={state.isAddScene}
-          onClose={() => handleDialogClose(0)}
-          aria-labelledby="form-dialog-title"
-        >
-          <form id="my-add-scene">
-            <DialogTitle id="form-dialog-title">Add Scene</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                To add scene, enter a scene id, scene name, then enter the
-                source of scene ( link ).
-              </DialogContentText>
-              <TextField
-                autoFocus
-                variant="outlined"
-                margin="dense"
-                id="scene-id"
-                label="Scene ID"
-                type="text"
-                autoComplete="off"
-                onChange={(e) =>
-                  setState((s) => ({
-                    ...s,
-                    scene: {
-                      ...s.scene,
-                      sceneId: e.target.value,
-                    },
-                  }))
-                }
-                fullWidth
-              />
-              <TextField
-                variant="outlined"
-                margin="dense"
-                id="image-source"
-                label="Image Source"
-                type="text"
-                autoComplete="off"
-                onChange={(e) =>
-                  setState((s) => ({
-                    ...s,
-                    scene: {
-                      ...s.scene,
-                      config: {
-                        ...defaultConfig,
-                        ...s.scene["config"],
-                        imageSource: e.target.value,
-                      },
-                    },
-                  }))
-                }
-                fullWidth
-              />
-              <TextField
-                variant="outlined"
-                margin="dense"
-                id="image-name"
-                label="Scene Name"
-                type="text"
-                autoComplete="off"
-                onChange={(e) =>
-                  setState((s) => ({
-                    ...s,
-                    scene: {
-                      ...s.scene,
-                      config: {
-                        ...defaultConfig,
-                        ...s.scene["config"],
-                        title: e.target.value,
-                      },
-                    },
-                  }))
-                }
-                fullWidth
-              />
-              <TextField
-                variant="outlined"
-                margin="dense"
-                id="author-name"
-                label="Author"
-                type="text"
-                autoComplete="off"
-                onChange={(e) =>
-                  setState((s) => ({
-                    ...s,
-                    scene: {
-                      ...s.scene,
-                      config: {
-                        ...defaultConfig,
-                        ...s.scene["config"],
-                        author: e.target.value,
-                      },
-                    },
-                  }))
-                }
-                fullWidth
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => handleDialogClose(3)} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={() => handleDialogClose(2)} color="primary">
-                Add
-              </Button>
-            </DialogActions>
-          </form>
-        </Dialog> */}
-        <Dialog // This is Load Scene Dialog
+        <LoadSceneDialog
           open={state.isLoadScene}
-          onClose={() => handleDialogClose(3)}
-          aria-labelledby="form-dialog-title"
-        >
-          <form id="my-load-scene">
-            <DialogTitle id="form-dialog-title">Load Scene</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                To Load Scene, choice Scene Name.
-              </DialogContentText>
-              <Autocomplete
-                id="scenes"
-                options={state.fullScenesInformation}
-                getOptionLabel={(option) => Object.keys(option)[0]}
-                onChange={(event, value) => {
-                  setState((s) => ({
-                    ...s,
-                    scene: value ? Object.values(value)[0] : {},
-                    hotSpot: {
-                      ...s.hotSpot,
-                      sceneId: Object.keys(value)[0],
-                    },
-                  }));
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Scene Name"
-                    variant="outlined"
-                    margin="dense"
-                  />
-                )}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => handleDialogClose(3)} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={() => handleDialogClose(5)} color="primary">
-                Load
-              </Button>
-            </DialogActions>
-          </form>
-        </Dialog>
-        <Dialog // this is Delete Info Dialog
+          close={handleDialogClose}
+          fullScenesInformation={state.fullScenesInformation}
+        />
+        <DeleteInfoDialog
           open={state.isDeleteInfo}
-          onClose={() => handleDialogClose(3)}
-          aria-labelledby="form-dialog-title"
-        >
-          <form id="my-delete-scene">
-            <DialogTitle id="form-dialog-title">Delete Info</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                To delete info, first choice scene name, then choice hotspot.
-              </DialogContentText>
-              <Autocomplete
-                id="scenes"
-                options={state.fullScenesInformation}
-                getOptionLabel={(option) => Object.keys(option)[0]}
-                onChange={(event, value) => {
-                  setState((s) => ({
-                    ...s,
-                    scene: value ? Object.values(value)[0] : {},
-                    hotSpot: {
-                      ...s.hotSpot,
-                      sceneId: Object.keys(value)[0],
-                    },
-                  }));
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Scene Name"
-                    variant="outlined"
-                    margin="dense"
-                  />
-                )}
-              />
-              <Autocomplete
-                disabled={state.scene["hotSpots"] ? false : true}
-                id="hotspot"
-                options={state.scene["hotSpots"]}
-                getOptionLabel={(option) => option.id}
-                onChange={(event, value) =>
-                  setState((s) => ({
-                    ...s,
-                    hotSpot: {
-                      ...s.hotSpot,
-                      id: value ? value.id.toString() : "",
-                    },
-                  }))
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Hotspot Name"
-                    variant="outlined"
-                    margin="dense"
-                  />
-                )}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => handleDialogClose(3)} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={() => handleDialogClose(4)} color="primary">
-                Delete
-              </Button>
-            </DialogActions>
-          </form>
-        </Dialog>
-        <Dialog // this is Delete Scene Dialog
+          close={handleDialogClose}
+          fullScenesInformation={state.fullScenesInformation}
+        />
+        <DeleteSceneDialog
           open={state.isDeleteScene}
-          onClose={() => handleDialogClose(3)}
-          aria-labelledby="form-dialog-title"
-        >
-          <form id="my-delete-scene">
-            <DialogTitle id="form-dialog-title">Delete Scene</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                To delete Scene, choice Scene Name. ( Note that you cannot
-                delete the current scene )
-              </DialogContentText>
-              <Autocomplete
-                id="scenes"
-                options={state.fullScenesInformation}
-                getOptionLabel={(option) => Object.keys(option)[0]}
-                onChange={(event, value) => {
-                  setState((s) => ({
-                    ...s,
-                    scene: value ? Object.values(value)[0] : {},
-                    hotSpot: {
-                      ...s.hotSpot,
-                      sceneId: Object.keys(value)[0],
-                    },
-                  }));
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Scene Name"
-                    variant="outlined"
-                    margin="dense"
-                  />
-                )}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => handleDialogClose(3)} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={() => handleDialogClose(5)} color="primary">
-                Delete
-              </Button>
-            </DialogActions>
-          </form>
-        </Dialog>
+          close={handleDialogClose}
+          fullScenesInformation={state.fullScenesInformation}
+        />
         <CustomizedSnackbars
           open={state.snackbarAction["isOpen"]}
           type={state.snackbarAction["type"]}

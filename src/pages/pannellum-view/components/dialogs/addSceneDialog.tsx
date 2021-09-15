@@ -9,12 +9,6 @@ import Button from "@material-ui/core/Button";
 import { addScene } from "../../libs/react-pannellum";
 import { defaultConfig } from "../../views/default-config";
 
-interface types {
-  title: string;
-}
-
-const types: types[] = [{ title: "info" }, { title: "scene" }];
-
 interface Props {
   scene: {
     // use to save / retrieve config of scene
@@ -89,20 +83,6 @@ export default function AddSceneDialog(props) {
     } else {
       addScene(state.scene.sceneId, state.scene["config"], addSceneSuccess);
     }
-    setState((s) => ({
-      ...s,
-      scene: {
-        // use to save / retrieve config of scene
-        sceneId: "",
-        config: {
-          type: "equirectangular",
-          text: "",
-          title: "",
-          author: "",
-          imageSource: "",
-        },
-      },
-    }));
     props.close(1, {
       ...state,
       fullScenesInformation: [
@@ -118,7 +98,7 @@ export default function AddSceneDialog(props) {
   return (
     <Dialog // this is Add Scene Dialog
       open={props.open}
-      onClose={() => props.close(0)}
+      onClose={() => props.close(3)}
       aria-labelledby="form-dialog-title"
     >
       <form id="my-add-scene">
