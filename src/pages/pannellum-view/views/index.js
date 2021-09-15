@@ -184,8 +184,6 @@ export default function Mainpage() {
         ...s,
         config: {
           ...s.config,
-          title: state.scene["config"].title,
-          author: state.scene["config"].author,
         },
       }));
     } else {
@@ -230,6 +228,11 @@ export default function Mainpage() {
           isLoadScene: false,
           isSelect: -1,
           fullScenesInformation: value.fullScenesInformation,
+          config: {
+            ...s.config,
+            title: Object.values(value.fullScenesInformation[0])[0].title,
+            author: Object.values(value.fullScenesInformation[0])[0].author,
+          }
         }));
         break;
       case 2: // this case use to close "Add Scene" dialog when click "ADD".
