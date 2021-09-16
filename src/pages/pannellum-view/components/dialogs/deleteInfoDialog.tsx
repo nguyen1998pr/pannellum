@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -8,6 +8,8 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { removeHotSpot } from "../../libs/react-pannellum";
 import Button from "@material-ui/core/Button";
+import { useFormControls } from "../validiations/deleteInfoValidation";
+import { helperTextStyles } from "../styles";
 
 interface Props {
   scene: {
@@ -58,6 +60,12 @@ export default function DeleteInfoDialog(props) {
     },
   });
 
+  const { handleInputValue, handleFormSubmit, formIsValid, errors } =
+    useFormControls({
+      open: props.open,
+      sceneID: state.hotSpot["sceneId"],
+    });
+
   const onDeleteInfo = () => {
     removeHotSpot(state.hotSpot["id"], state.hotSpot["sceneId"]);
     props.close(3);
@@ -78,6 +86,7 @@ export default function DeleteInfoDialog(props) {
           <Autocomplete
             id="scenes"
             options={props.fullScenesInformation}
+            onSelect={handleInputValue}
             getOptionLabel={(option: object) => Object.keys(option)[0]}
             onChange={(event: any, value: any) => {
               setState((s) => ({
@@ -85,7 +94,7 @@ export default function DeleteInfoDialog(props) {
                 scene: value ? Object.values(value as object)[0] : {},
                 hotSpot: {
                   ...s.hotSpot,
-                  sceneId: Object.keys(value as object)[0],
+                  sceneId: value ? Object.keys(value as object)[0] : "",
                 },
               }));
             }}
@@ -95,12 +104,23 @@ export default function DeleteInfoDialog(props) {
                 label="Scene Name"
                 variant="outlined"
                 margin="dense"
+                style={{ marginTop: "15px", marginBottom: "10px" }}
+                name="sceneName"
+                FormHelperTextProps={{ classes: helperTextStyles() }}
+                error={errors["sceneName"]}
+                onBlur={handleInputValue}
+                onChange={handleInputValue}
+                {...(errors["sceneName"] && {
+                  error: true,
+                  helperText: errors["sceneName"],
+                })}
               />
             )}
           />
           <Autocomplete
             disabled={state.scene["hotSpots"] ? false : true}
             id="hotspot"
+            onSelect={handleInputValue}
             options={state.scene["hotSpots"]}
             getOptionLabel={(option) => option.id}
             onChange={(event: any, value: any) =>
@@ -115,8 +135,18 @@ export default function DeleteInfoDialog(props) {
             renderInput={(params) => (
               <TextField
                 {...params}
+                style={{ marginTop: "15px", marginBottom: "10px" }}
                 label="Hotspot Name"
                 variant="outlined"
+                name="hotSpotName"
+                error={errors["hotSpotName"]}
+                onBlur={handleInputValue}
+                onChange={handleInputValue}
+                FormHelperTextProps={{ classes: helperTextStyles() }}
+                {...(errors["hotSpotName"] && {
+                  error: true,
+                  helperText: errors["hotSpotName"],
+                })}
                 margin="dense"
               />
             )}
@@ -126,7 +156,11 @@ export default function DeleteInfoDialog(props) {
           <Button onClick={() => props.close(3)} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => onDeleteInfo()} color="primary">
+          <Button
+            disabled={!formIsValid()}
+            onClick={() => onDeleteInfo()}
+            color="primary"
+          >
             Delete
           </Button>
         </DialogActions>

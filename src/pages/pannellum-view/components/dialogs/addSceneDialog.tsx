@@ -8,6 +8,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { addScene } from "../../libs/react-pannellum";
 import { defaultConfig } from "../../views/default-config";
+import { useFormControls } from "../validiations/addSceneValidation";
+import { helperTextStyles } from "../styles";
 
 interface Props {
   scene: {
@@ -56,6 +58,11 @@ export default function AddSceneDialog(props) {
       fullScenesInformation: [],
     }));
   }, [props.open]);
+
+  const { handleInputValue, handleFormSubmit, formIsValid, errors } =
+    useFormControls({
+      open: props.open,
+    });
 
   const addSceneSuccess = () => {
     setState((s) => ({
@@ -109,6 +116,8 @@ export default function AddSceneDialog(props) {
             scene ( link ).
           </DialogContentText>
           <TextField
+            style={{ marginTop: "15px", marginBottom: "10px" }}
+            FormHelperTextProps={{ classes: helperTextStyles() }}
             autoFocus
             variant="outlined"
             margin="dense"
@@ -116,25 +125,36 @@ export default function AddSceneDialog(props) {
             label="Scene ID"
             type="text"
             autoComplete="off"
-            onChange={(e) =>
+            onChange={(e) => {
+              handleInputValue(e);
               setState((s) => ({
                 ...s,
                 scene: {
                   ...s.scene,
                   sceneId: e.target.value,
                 },
-              }))
-            }
+              }));
+            }}
+            name="sceneID"
+            error={errors["sceneID"]?.length > 0}
+            onBlur={handleInputValue}
+            {...(errors["sceneID"] && {
+              error: true,
+              helperText: errors["sceneID"],
+            })}
             fullWidth
           />
           <TextField
+            style={{ marginTop: "15px", marginBottom: "10px" }}
+            FormHelperTextProps={{ classes: helperTextStyles() }}
             variant="outlined"
             margin="dense"
             id="image-source"
             label="Image Source"
             type="text"
             autoComplete="off"
-            onChange={(e) =>
+            onChange={(e) => {
+              handleInputValue(e);
               setState((s) => ({
                 ...s,
                 scene: {
@@ -145,18 +165,28 @@ export default function AddSceneDialog(props) {
                     imageSource: e.target.value,
                   },
                 },
-              }))
-            }
+              }));
+            }}
+            name="imageSource"
+            error={errors["imageSource"]?.length > 0}
+            onBlur={handleInputValue}
+            {...(errors["imageSource"] && {
+              error: true,
+              helperText: errors["imageSource"],
+            })}
             fullWidth
           />
           <TextField
+            style={{ marginTop: "15px", marginBottom: "10px" }}
+            FormHelperTextProps={{ classes: helperTextStyles() }}
             variant="outlined"
             margin="dense"
             id="image-name"
             label="Scene Name"
             type="text"
             autoComplete="off"
-            onChange={(e) =>
+            onChange={(e) => {
+              handleInputValue(e);
               setState((s) => ({
                 ...s,
                 scene: {
@@ -167,18 +197,28 @@ export default function AddSceneDialog(props) {
                     title: e.target.value,
                   },
                 },
-              }))
-            }
+              }));
+            }}
+            name="sceneName"
+            error={errors["sceneName"]?.length > 0}
+            onBlur={handleInputValue}
+            {...(errors["sceneName"] && {
+              error: true,
+              helperText: errors["sceneName"],
+            })}
             fullWidth
           />
           <TextField
+            style={{ marginTop: "15px", marginBottom: "10px" }}
+            FormHelperTextProps={{ classes: helperTextStyles() }}
             variant="outlined"
             margin="dense"
             id="author-name"
             label="Author"
             type="text"
             autoComplete="off"
-            onChange={(e) =>
+            onChange={(e) => {
+              handleInputValue(e);
               setState((s) => ({
                 ...s,
                 scene: {
@@ -189,8 +229,15 @@ export default function AddSceneDialog(props) {
                     author: e.target.value,
                   },
                 },
-              }))
-            }
+              }));
+            }}
+            name="author"
+            error={errors["author"]?.length > 0}
+            onBlur={handleInputValue}
+            {...(errors["author"] && {
+              error: true,
+              helperText: errors["author"],
+            })}
             fullWidth
           />
         </DialogContent>
@@ -198,7 +245,11 @@ export default function AddSceneDialog(props) {
           <Button onClick={() => props.close(3)} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => onAddScene()} color="primary">
+          <Button
+            disabled={!formIsValid()}
+            onClick={() => onAddScene()}
+            color="primary"
+          >
             Add
           </Button>
         </DialogActions>

@@ -9,7 +9,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import { addHotSpot } from "../../libs/react-pannellum";
 import { useFormControls } from "../validiations/addInfoValidation";
-import { makeStyles } from "@material-ui/core/styles";
+import { helperTextStyles } from "../styles";
 
 interface types {
   title: string;
@@ -30,15 +30,6 @@ interface Props {
   isSceneType: boolean;
   isInfoType: boolean;
 }
-
-const helperTextStyles = makeStyles((theme) => ({
-  error: {
-    "&.MuiFormHelperText-root.Mui-error": {
-      position: "absolute",
-      marginTop: "40px",
-    },
-  },
-}));
 
 export default function AddInfoDialog(props) {
   const [state, setState] = useState<Props>({
@@ -200,6 +191,7 @@ export default function AddInfoDialog(props) {
                   {...params}
                   name="sname"
                   style={{ marginTop: "15px", marginBottom: "10px" }}
+                  FormHelperTextProps={{ classes: helperTextStyles() }}
                   label="Scene Name"
                   variant="outlined"
                   margin="dense"

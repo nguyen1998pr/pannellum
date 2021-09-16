@@ -151,7 +151,7 @@ export const MainListItems = (props) => {
         <ListItemIcon>
           <ComposedIcon
             position="bottom-end"
-            color="default"
+            color="inherit"
             size="medium"
             icon="info-circle"
             extraIcon="user-edit"
@@ -168,7 +168,7 @@ export const MainListItems = (props) => {
         <ListItemIcon>
           <ComposedIcon
             position="bottom-end"
-            color="default"
+            color="inherit"
             size="medium"
             icon="photo-video"
             extraIcon="user-edit"
@@ -186,7 +186,7 @@ export const MainListItems = (props) => {
         <ListItemIcon>
           <ComposedIcon
             position="bottom-end"
-            color="default"
+            color="inherit"
             size="medium"
             icon="info-circle"
             extraIcon="times"
@@ -203,7 +203,7 @@ export const MainListItems = (props) => {
         <ListItemIcon>
           <ComposedIcon
             position="bottom-end"
-            color="default"
+            color="inherit"
             size="medium"
             icon="photo-video"
             extraIcon="times"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,17 +13,8 @@ import Container from "@material-ui/core/Container";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { MainListItems } from "../components/categories";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import CustomizedSnackbars from "../components/snackbar";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import { defaultConfig } from "./default-config";
 import AddInfoDialog from "../components/dialogs/addInfoDialog";
 import AddSceneDialog from "../components/dialogs/addSceneDialog";
 import DeleteInfoDialog from "../components/dialogs/deleteInfoDialog";
@@ -32,15 +23,10 @@ import LoadSceneDialog from "../components/dialogs/loadSceneDialog";
 import ReactPannellum, {
   mouseEventToCoords,
   changeMouseCursor,
-  addHotSpot,
-  addScene,
   getAllScenes,
   startAutoRotate,
   stopAutoRotate,
   showCompass,
-  removeHotSpot,
-  removeScene,
-  loadScene,
 } from "../libs/react-pannellum";
 
 const drawerWidth = 240;
@@ -191,7 +177,6 @@ export default function Mainpage() {
       }));
     } else {
       setState((s) => ({ ...s, fullScenesInformation: getAllScenes() }));
-      console.log(getAllScenes());
     }
   }, [
     state.isAddInfo,

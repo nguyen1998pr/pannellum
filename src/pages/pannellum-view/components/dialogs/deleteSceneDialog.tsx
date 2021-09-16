@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { removeScene } from "../../libs/react-pannellum";
+import { useFormControls } from "../validiations/deleteSceneValidation";
+import { helperTextStyles } from "../styles";
 import Button from "@material-ui/core/Button";
 
 interface Props {
@@ -58,7 +60,13 @@ export default function DeleteSceneDialog(props) {
     },
   });
 
+  const { handleInputValue, handleFormSubmit, formIsValid, errors } =
+    useFormControls({
+      open: props.open,
+    });
+
   const onDeleteSene = () => {
+    console.log("delete action call");
     removeScene(state.hotSpot["sceneId"]);
     props.close(3);
   };
@@ -79,6 +87,7 @@ export default function DeleteSceneDialog(props) {
           <Autocomplete
             id="scenes"
             options={props.fullScenesInformation}
+            onSelect={handleInputValue}
             getOptionLabel={(option: object) => Object.keys(option)[0]}
             onChange={(event, value: any) => {
               setState((s) => ({
@@ -86,7 +95,7 @@ export default function DeleteSceneDialog(props) {
                 scene: value ? Object.values(value as object)[0] : {},
                 hotSpot: {
                   ...s.hotSpot,
-                  sceneId: Object.keys(value as object)[0],
+                  sceneId: value ? Object.keys(value as object)[0] : "",
                 },
               }));
             }}
@@ -96,6 +105,16 @@ export default function DeleteSceneDialog(props) {
                 label="Scene Name"
                 variant="outlined"
                 margin="dense"
+                style={{ marginTop: "15px", marginBottom: "10px" }}
+                name="sceneName"
+                FormHelperTextProps={{ classes: helperTextStyles() }}
+                error={errors["sceneName"]}
+                onBlur={handleInputValue}
+                onChange={handleInputValue}
+                {...(errors["sceneName"] && {
+                  error: true,
+                  helperText: errors["sceneName"],
+                })}
               />
             )}
           />
@@ -104,7 +123,11 @@ export default function DeleteSceneDialog(props) {
           <Button onClick={() => props.close(3)} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => onDeleteSene()} color="primary">
+          <Button
+            disabled={!formIsValid()}
+            onClick={() => onDeleteSene()}
+            color="primary"
+          >
             Delete
           </Button>
         </DialogActions>
