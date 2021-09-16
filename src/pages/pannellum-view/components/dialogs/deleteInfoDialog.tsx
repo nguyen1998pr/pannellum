@@ -77,7 +77,7 @@ export default function DeleteInfoDialog(props) {
       onClose={() => props.close(3)}
       aria-labelledby="form-dialog-title"
     >
-      <form id="my-delete-scene">
+      <form id="my-delete-info">
         <DialogTitle id="form-dialog-title">Delete Info</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -86,9 +86,14 @@ export default function DeleteInfoDialog(props) {
           <Autocomplete
             id="scenes"
             options={props.fullScenesInformation}
-            onSelect={handleInputValue}
             getOptionLabel={(option: object) => Object.keys(option)[0]}
             onChange={(event: any, value: any) => {
+              handleInputValue({
+                target: {
+                  name: "sceneName",
+                  value: value ? Object.keys(value as object)[0] : "",
+                },
+              });
               setState((s) => ({
                 ...s,
                 scene: value ? Object.values(value as object)[0] : {},
@@ -107,7 +112,12 @@ export default function DeleteInfoDialog(props) {
                 style={{ marginTop: "15px", marginBottom: "10px" }}
                 name="sceneName"
                 FormHelperTextProps={{ classes: helperTextStyles() }}
-                error={errors["sceneName"]}
+                error={errors["sceneName"]?.length > 0}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
                 onBlur={handleInputValue}
                 onChange={handleInputValue}
                 {...(errors["sceneName"] && {
@@ -120,18 +130,23 @@ export default function DeleteInfoDialog(props) {
           <Autocomplete
             disabled={state.scene["hotSpots"] ? false : true}
             id="hotspot"
-            onSelect={handleInputValue}
-            options={state.scene["hotSpots"]}
+            options={state.scene["hotSpots"] ? state.scene["hotSpots"] : []}
             getOptionLabel={(option) => option.id}
-            onChange={(event: any, value: any) =>
+            onChange={(event: any, value: any) => {
+              handleInputValue({
+                target: {
+                  name: "hotSpotName",
+                  value: value ? Object.keys(value as object)[0] : "",
+                },
+              });
               setState((s) => ({
                 ...s,
                 hotSpot: {
                   ...s.hotSpot,
                   id: value ? value.id.toString() : "",
                 },
-              }))
-            }
+              }));
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -139,7 +154,12 @@ export default function DeleteInfoDialog(props) {
                 label="Hotspot Name"
                 variant="outlined"
                 name="hotSpotName"
-                error={errors["hotSpotName"]}
+                error={errors["hotSpotName"]?.length > 0}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
                 onBlur={handleInputValue}
                 onChange={handleInputValue}
                 FormHelperTextProps={{ classes: helperTextStyles() }}

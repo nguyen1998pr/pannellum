@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentScene } from "../../libs/react-pannellum";
+// import { getCurrentScene } from "../../libs/react-pannellum";
 
 const PostContactForm = async (
   values: any,
@@ -21,7 +21,7 @@ const initialFormValues = {
 export const useFormControls = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({} as any);
-  const currentScene: string = getCurrentScene()?.toString();
+  //   const currentScene: string = getCurrentScene()?.toString();
 
   useEffect(() => {
     setValues(initialFormValues);
@@ -33,12 +33,12 @@ export const useFormControls = (props) => {
 
     if ("sceneName" in fieldValues) {
       temp.sceneName = fieldValues.sceneName ? "" : "This field is required.";
-      if (fieldValues.sceneName) {
-        temp.sceneName =
-          fieldValues.sceneName.toString() !== currentScene
-            ? ""
-            : "Can not delete this scene";
-      }
+      //   if (fieldValues.sceneName) {
+      //     temp.sceneName =
+      //       fieldValues.sceneName.toString() !== currentScene
+      //         ? ""
+      //         : "Can not delete this scene";
+      //   }
     }
 
     setErrors({
@@ -47,7 +47,6 @@ export const useFormControls = (props) => {
   };
 
   const handleInputValue = (e: any) => {
-    console.log(e.target);
     const { name, value } = e.target;
     setValues({
       ...values,

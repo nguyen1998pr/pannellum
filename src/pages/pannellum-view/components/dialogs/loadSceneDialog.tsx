@@ -8,6 +8,8 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { loadScene } from "../../libs/react-pannellum";
 import Button from "@material-ui/core/Button";
+import { useFormControls } from "../validiations/loadSceneValidation";
+import { helperTextStyles } from "../styles";
 
 interface Props {
   scene: {
@@ -58,6 +60,12 @@ export default function LoadSceneDialog(props) {
     },
   });
 
+  const { handleInputValue, handleFormSubmit, formIsValid, errors } =
+    useFormControls({
+      open: props.open,
+      sceneID: state.hotSpot["sceneId"],
+    });
+
   const onLoadScene = () => {
     loadScene(state.hotSpot["sceneId"]);
     props.close(3);
@@ -79,13 +87,19 @@ export default function LoadSceneDialog(props) {
             id="scenes"
             options={props.fullScenesInformation}
             getOptionLabel={(option: object) => Object.keys(option)[0]}
-            onChange={(event, value: any) => {
+            onChange={(event: any, value: any) => {
+              handleInputValue({
+                target: {
+                  name: "sceneName",
+                  value: value ? Object.keys(value as object)[0] : "",
+                },
+              });
               setState((s) => ({
                 ...s,
                 scene: value ? Object.values(value as object)[0] : {},
                 hotSpot: {
                   ...s.hotSpot,
-                  sceneId: Object.keys(value as object)[0],
+                  sceneId: value ? Object.keys(value as object)[0] : "",
                 },
               }));
             }}
@@ -95,6 +109,21 @@ export default function LoadSceneDialog(props) {
                 label="Scene Name"
                 variant="outlined"
                 margin="dense"
+                name="sceneName"
+                FormHelperTextProps={{ classes: helperTextStyles() }}
+                style={{ marginTop: "15px", marginBottom: "11px" }}
+                error={errors["sceneName"]?.length > 0}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
+                onBlur={handleInputValue}
+                onChange={handleInputValue}
+                {...(errors["sceneName"] && {
+                  error: true,
+                  helperText: errors["sceneName"],
+                })}
               />
             )}
           />
@@ -103,7 +132,11 @@ export default function LoadSceneDialog(props) {
           <Button onClick={() => props.close(3)} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => onLoadScene()} color="primary">
+          <Button
+            disabled={!formIsValid()}
+            onClick={() => onLoadScene()}
+            color="primary"
+          >
             Load
           </Button>
         </DialogActions>

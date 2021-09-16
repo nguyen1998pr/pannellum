@@ -63,10 +63,10 @@ export default function DeleteSceneDialog(props) {
   const { handleInputValue, handleFormSubmit, formIsValid, errors } =
     useFormControls({
       open: props.open,
+      sceneID: state.hotSpot["sceneId"],
     });
 
   const onDeleteSene = () => {
-    console.log("delete action call");
     removeScene(state.hotSpot["sceneId"]);
     props.close(3);
   };
@@ -85,11 +85,16 @@ export default function DeleteSceneDialog(props) {
             the current scene )
           </DialogContentText>
           <Autocomplete
-            id="scenes"
+            id="scene"
             options={props.fullScenesInformation}
-            onSelect={handleInputValue}
             getOptionLabel={(option: object) => Object.keys(option)[0]}
             onChange={(event, value: any) => {
+              handleInputValue({
+                target: {
+                  name: "sceneName",
+                  value: value ? Object.keys(value as object)[0] : "",
+                },
+              });
               setState((s) => ({
                 ...s,
                 scene: value ? Object.values(value as object)[0] : {},
@@ -108,7 +113,12 @@ export default function DeleteSceneDialog(props) {
                 style={{ marginTop: "15px", marginBottom: "10px" }}
                 name="sceneName"
                 FormHelperTextProps={{ classes: helperTextStyles() }}
-                error={errors["sceneName"]}
+                error={errors["sceneName"]?.length > 0}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
                 onBlur={handleInputValue}
                 onChange={handleInputValue}
                 {...(errors["sceneName"] && {

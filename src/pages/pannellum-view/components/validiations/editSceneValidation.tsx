@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentScene } from "../../libs/react-pannellum";
+// import { getCurrentScene } from "../../libs/react-pannellum";
 
 const PostContactForm = async (
   values: any,
@@ -13,7 +13,10 @@ const PostContactForm = async (
 };
 
 const initialFormValues = {
+  sceneID: "",
+  imageSource: "",
   sceneName: "",
+  author: "",
   formSubmitted: false,
   success: false,
 };
@@ -21,25 +24,41 @@ const initialFormValues = {
 export const useFormControls = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({} as any);
-  const currentScene: string = getCurrentScene()?.toString();
 
   useEffect(() => {
     setValues(initialFormValues);
     setErrors({});
   }, [props.open]);
 
+  useEffect(() => {
+    setErrors({});
+  }, [props.sceneID]);
+
   const validate: any = (fieldValues = values) => {
     let temp: any = { ...errors };
 
-    if ("sceneName" in fieldValues) {
-      temp.sceneName = fieldValues.sceneName ? "" : "This field is required.";
-      if (fieldValues.sceneName) {
-        temp.sceneName =
-          fieldValues.sceneName.toString() !== currentScene
+    if ("sceneID" in fieldValues)
+      temp.sceneID = fieldValues.sceneID ? "" : "This field is required.";
+
+    if ("imageSource" in fieldValues) {
+      temp.imageSource = fieldValues.imageSource
+        ? ""
+        : "This field is required.";
+      if (fieldValues.imageSource) {
+        temp.imageSource =
+          /(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i.test(
+            fieldValues.imageSource
+          )
             ? ""
-            : "Can not delete this scene";
+            : "Image Link is not valid";
       }
     }
+
+    if ("sceneName" in fieldValues)
+      temp.sceneName = fieldValues.sceneName ? "" : "This field is required.";
+
+    if ("author" in fieldValues)
+      temp.author = fieldValues.author ? "" : "This field is required.";
 
     setErrors({
       ...temp,
@@ -47,7 +66,6 @@ export const useFormControls = (props) => {
   };
 
   const handleInputValue = (e: any) => {
-    console.log(e.target);
     const { name, value } = e.target;
     setValues({
       ...values,
@@ -74,7 +92,11 @@ export const useFormControls = (props) => {
 
   const formIsValid = (fieldValues = values) => {
     const isValid =
-      fieldValues.sceneName && Object.values(errors).every((x) => x === "");
+      fieldValues.sceneID &&
+      fieldValues.sceneName &&
+      fieldValues.imageSource &&
+      fieldValues.author &&
+      Object.values(errors).every((x) => x === "");
 
     return isValid;
   };

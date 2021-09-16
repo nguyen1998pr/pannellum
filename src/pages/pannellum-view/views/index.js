@@ -20,6 +20,8 @@ import AddSceneDialog from "../components/dialogs/addSceneDialog";
 import DeleteInfoDialog from "../components/dialogs/deleteInfoDialog";
 import DeleteSceneDialog from "../components/dialogs/deleteSceneDialog";
 import LoadSceneDialog from "../components/dialogs/loadSceneDialog";
+import EditInfoDialog from "../components/dialogs/editInfoDialog";
+import EditSceneDialog from "../components/dialogs/editSceneDialog";
 import ReactPannellum, {
   mouseEventToCoords,
   changeMouseCursor,
@@ -43,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
+    backgroundImage: `url(${"https://solutions.viettel.vn/wp-content/uploads/2021/01/logo.png"})`,
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
     ...theme.mixins.toolbar,
   },
   appBar: {
@@ -118,7 +124,7 @@ export default function Mainpage() {
   const classes = useStyles();
 
   const [state, setState] = useState({
-    isOpenDrawer: true, // use to open / close the sidebar content
+    isOpenDrawer: false, // use to open / close the sidebar content
     openDialog: "", // use to open special dialog
     isSelect: -1, // use to remove highlight of item of sidebar
     hotSpot: {
@@ -148,6 +154,8 @@ export default function Mainpage() {
     isAddInfo: false, // use to open / close "Add Info" Dialog
     isAddScene: false, // use to open / close "Add Scene" Dialog
     isLoadScene: false, // use to open / close "Load Scene" Dialog
+    isEditInfo: false,
+    isEditScene: false,
     isDeleteInfo: false, // use to open / close "Delete Info" Dialog
     isDeleteScene: false, // use to open / close "Delete Scene" Dialog
     config: {
@@ -205,7 +213,6 @@ export default function Mainpage() {
         }));
         break;
       case 1:
-        console.log(value);
         setState((s) => ({
           ...s,
           openDialog: "",
@@ -229,6 +236,8 @@ export default function Mainpage() {
           openDialog: "",
           isAddInfo: false,
           isAddScene: false,
+          isEditInfo: false,
+          isEditScene: false,
           isDeleteInfo: false,
           isDeleteScene: false,
           isLoadScene: false,
@@ -281,6 +290,22 @@ export default function Mainpage() {
     setState((s) => ({
       ...s,
       isLoadScene: data,
+      isSelect: index,
+    }));
+  };
+
+  const isEditInfo = (data, index) => {
+    setState((s) => ({
+      ...s,
+      isEditInfo: data,
+      isSelect: index,
+    }));
+  };
+
+  const isEditScene = (data, index) => {
+    setState((s) => ({
+      ...s,
+      isEditScene: data,
       isSelect: index,
     }));
   };
@@ -360,7 +385,7 @@ export default function Mainpage() {
             noWrap
             className={classes.title}
           >
-            Pannellum
+            DEMO
           </Typography>
         </Toolbar>
       </AppBar>
@@ -386,6 +411,8 @@ export default function Mainpage() {
             isAddInfo={isAddInfo}
             isAddScene={isAddScene}
             isLoadScene={isLoadScene}
+            isEditInfo={isEditInfo}
+            isEditScene={isEditScene}
             isDeleteInfo={isDeleteInfo}
             isDeleteScene={isDeleteScene}
             isAutoRotate={autoRotate}
@@ -430,6 +457,16 @@ export default function Mainpage() {
         />
         <LoadSceneDialog
           open={state.isLoadScene}
+          close={handleDialogClose}
+          fullScenesInformation={state.fullScenesInformation}
+        />
+        <EditInfoDialog
+          open={state.isEditInfo}
+          close={handleDialogClose}
+          fullScenesInformation={state.fullScenesInformation}
+        />
+        <EditSceneDialog
+          open={state.isEditScene}
           close={handleDialogClose}
           fullScenesInformation={state.fullScenesInformation}
         />

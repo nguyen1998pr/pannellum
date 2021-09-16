@@ -54,7 +54,11 @@ export const MainListItems = (props) => {
       case -1:
         props.isAddInfo(false, index);
         props.isAddScene(false, index);
+        props.isEditInfo(false, index);
+        props.isLoadScene(false, index);
+        props.isEditScene(false, index);
         props.isDeleteInfo(false, index);
+        props.isDeleteScene(false, index);
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 0:
@@ -70,9 +74,11 @@ export const MainListItems = (props) => {
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 3:
+        props.isEditInfo(true, index);
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 4:
+        props.isEditScene(true, index);
         setState((s) => ({ ...s, selectedIndex: index }));
         break;
       case 5:

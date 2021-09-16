@@ -136,7 +136,7 @@ export default function AddInfoDialog(props) {
                 label="Type"
                 variant="outlined"
                 name="type"
-                error={errors["type"]}
+                error={errors["type"]?.length > 0}
                 onBlur={handleInputValue}
                 onChange={handleInputValue}
                 {...(errors["type"] && {
@@ -152,7 +152,7 @@ export default function AddInfoDialog(props) {
             margin="dense"
             id="title"
             name="title"
-            error={errors["title"]}
+            error={errors["title"]?.length > 0}
             label="Title( ID )"
             type="text"
             autoComplete="off"
@@ -195,7 +195,7 @@ export default function AddInfoDialog(props) {
                   label="Scene Name"
                   variant="outlined"
                   margin="dense"
-                  error={errors["sname"]}
+                  error={errors["sname"]?.length > 0}
                   onBlur={handleInputValue}
                   onChange={handleInputValue}
                   {...(errors["sname"] && {

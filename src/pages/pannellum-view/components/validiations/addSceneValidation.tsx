@@ -35,10 +35,19 @@ export const useFormControls = (props) => {
     if ("sceneID" in fieldValues)
       temp.sceneID = fieldValues.sceneID ? "" : "This field is required.";
 
-    if ("imageSource" in fieldValues)
+    if ("imageSource" in fieldValues) {
       temp.imageSource = fieldValues.imageSource
         ? ""
         : "This field is required.";
+      if (fieldValues.imageSource) {
+        temp.imageSource =
+          /(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i.test(
+            fieldValues.imageSource
+          )
+            ? ""
+            : "Image Link is not valid";
+      }
+    }
 
     if ("sceneName" in fieldValues)
       temp.sceneName = fieldValues.sceneName ? "" : "This field is required.";
