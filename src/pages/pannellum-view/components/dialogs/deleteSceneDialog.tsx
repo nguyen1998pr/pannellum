@@ -68,7 +68,7 @@ export default function DeleteSceneDialog(props) {
 
   const onDeleteSene = () => {
     removeScene(state.hotSpot["sceneId"]);
-    props.close(3);
+    props.close(3, "Delete Scene Successful !");
   };
 
   return (

@@ -111,7 +111,7 @@ export default function EditInfoDialog(props) {
         )["text"],
       URL: state.hotSpot["URL"],
     });
-    props.close(3);
+    props.close(3, "Edit Hotspot Successful !");
   };
 
   return (
@@ -176,6 +176,16 @@ export default function EditInfoDialog(props) {
             options={state.scene["hotSpots"] ? state.scene["hotSpots"] : []}
             getOptionLabel={(option) => option.id}
             onChange={(event: any, value: any) => {
+              if (
+                state.hotSpot["id"] &&
+                state.scene["hotSpots"]?.find(
+                  (value) => value?.id === state.hotSpot["id"]
+                )["type"] === "info"
+              ) {
+                setState((s) => ({ ...s, isInfoType: true }));
+              } else {
+                setState((s) => ({ ...s, isSceneType: true }));
+              }
               handleInputValue({
                 target: {
                   name: "hotSpotName",
@@ -269,6 +279,18 @@ export default function EditInfoDialog(props) {
             <Autocomplete
               disabled={state.hotSpot["id"] ? false : true}
               id="scenes"
+              key={`scn${
+                state.hotSpot["id"] &&
+                state.scene["hotSpots"]?.find(
+                  (value) => value?.id === state.hotSpot["id"]
+                )["sceneId"]
+              }`}
+              defaultValue={{
+                [state.hotSpot["id"] &&
+                state.scene["hotSpots"]?.find(
+                  (value) => value?.id === state.hotSpot["id"]
+                )["sceneId"]]: "",
+              }}
               options={props.fullScenesInformation}
               onSelect={handleInputValue}
               getOptionLabel={(option: object) => Object.keys(option)[0]}

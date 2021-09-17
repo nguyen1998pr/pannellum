@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getAllScenes } from "../../libs/react-pannellum/dist";
 
 const PostContactForm = async (
   values: any,
@@ -23,6 +24,11 @@ const initialFormValues = {
 export const useFormControls = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({} as any);
+  const keyArray = getAllScenes()
+    ? getAllScenes().map((value, index) => {
+        return Object.keys(value)[0];
+      })
+    : [];
 
   useEffect(() => {
     setValues(initialFormValues);
@@ -32,8 +38,15 @@ export const useFormControls = (props) => {
   const validate: any = (fieldValues = values) => {
     let temp: any = { ...errors };
 
-    if ("sceneID" in fieldValues)
+    if ("sceneID" in fieldValues) {
       temp.sceneID = fieldValues.sceneID ? "" : "This field is required.";
+      if (fieldValues.sceneID) {
+        temp.sceneID =
+          keyArray?.findIndex((value) => value === fieldValues.sceneID) < 0
+            ? ""
+            : "This Scene ID already exists";
+      }
+    }
 
     if ("imageSource" in fieldValues) {
       temp.imageSource = fieldValues.imageSource

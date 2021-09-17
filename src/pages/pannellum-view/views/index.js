@@ -231,6 +231,7 @@ export default function Mainpage() {
         }));
         break;
       case 3: // this case use to close all dialog ( except "Add Info" ) when click "CANCEL".
+        value && actionSuccess(value);
         setState((s) => ({
           ...s,
           openDialog: "",
@@ -249,12 +250,12 @@ export default function Mainpage() {
     }
   };
 
-  const addSceneSuccess = () => {
+  const actionSuccess = (message) => {
     setState((s) => ({
       ...s,
       snackbarAction: {
         isOpen: true,
-        message: "Add Scene Successful !",
+        message: message,
         type: "success",
       },
     }));
@@ -407,6 +408,7 @@ export default function Mainpage() {
         <Divider />
         <List>
           <MainListItems
+            isOpenDrawer={state.isOpenDrawer}
             isSelect={state.isSelect}
             isAddInfo={isAddInfo}
             isAddScene={isAddScene}

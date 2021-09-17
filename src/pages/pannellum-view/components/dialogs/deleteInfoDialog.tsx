@@ -68,7 +68,7 @@ export default function DeleteInfoDialog(props) {
 
   const onDeleteInfo = () => {
     removeHotSpot(state.hotSpot["id"], state.hotSpot["sceneId"]);
-    props.close(3);
+    props.close(3, "Delete Hotspot Successful !");
   };
 
   return (

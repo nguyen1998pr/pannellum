@@ -93,7 +93,7 @@ export default function AddInfoDialog(props) {
       isSceneType: false,
       isInfoType: false,
     }));
-    props.close(3);
+    props.close(3, "Add Hotspot Successful !");
   };
 
   return (

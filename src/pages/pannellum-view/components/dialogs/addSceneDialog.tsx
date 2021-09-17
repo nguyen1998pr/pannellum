@@ -21,6 +21,7 @@ interface Props {
       title: string;
       author: string;
       imageSource: string;
+      hotSpots: Array<Object>;
     };
   };
   fullScenesInformation: Array<any>;
@@ -37,6 +38,7 @@ export default function AddSceneDialog(props) {
         title: "",
         author: "",
         imageSource: "",
+        hotSpots: [],
       },
     },
     fullScenesInformation: [],
@@ -53,6 +55,7 @@ export default function AddSceneDialog(props) {
           title: "",
           author: "",
           imageSource: "",
+          hotSpots: [],
         },
       },
       fullScenesInformation: [],
@@ -87,19 +90,21 @@ export default function AddSceneDialog(props) {
           },
         ],
       }));
-    } else {
-      addScene(state.scene.sceneId, state.scene["config"], addSceneSuccess);
-    }
-    props.close(1, {
-      ...state,
-      fullScenesInformation: [
-        {
-          [state.scene["sceneId"]]: {
-            ...state.scene["config"],
+      props.close(1, {
+        ...state,
+        fullScenesInformation: [
+          {
+            [state.scene["sceneId"]]: {
+              ...state.scene["config"],
+            },
           },
-        },
-      ],
-    });
+        ],
+      });
+    } else {
+      console.log(state.scene["config"]);
+      addScene(state.scene.sceneId, state.scene["config"], addSceneSuccess);
+      props.close(3, "Add Scene Successful !");
+    }
   };
 
   return (

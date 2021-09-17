@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ListItem from "@material-ui/core/ListItem";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  withStyles,
+} from "@material-ui/core/styles";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InfoIcon from "@material-ui/icons/Info";
@@ -17,6 +22,7 @@ import Divider from "@material-ui/core/Divider";
 import Switch from "@material-ui/core/Switch";
 import ComposedIcon from "material-ui-mix-icon";
 import ImageSearchIcon from "@material-ui/icons/ImageSearch";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +36,24 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+const StyledTooltip = withStyles({
+  tooltipPlacementRight: {
+    margin: "0 6px",
+  },
+  tooltip: {
+    fontSize: "0.8em",
+  },
+})(Tooltip);
+
+const StyledTooltips = withStyles({
+  tooltipPlacementRight: {
+    margin: "0 20px",
+  },
+  tooltip: {
+    fontSize: "0.8em",
+  },
+})(Tooltip);
 
 export const MainListItems = (props) => {
   const [state, setState] = useState({
@@ -121,19 +145,35 @@ export const MainListItems = (props) => {
         selected={state.selectedIndex === 0}
         onClick={(event) => handleListItemClick(event, 0)}
       >
-        <ListItemIcon>
-          <InfoIcon fontSize="large" />
-        </ListItemIcon>
-        <ListItemText primary="Add Info" />
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <InfoIcon fontSize="large" />
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="Add Hotspot" placement="right" arrow>
+            <ListItemIcon>
+              <InfoIcon fontSize="large" />
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
+        <ListItemText primary="Add Hotspot" />
       </ListItem>
       <ListItem
         button
         selected={state.selectedIndex === 1}
         onClick={(event) => handleListItemClick(event, 1)}
       >
-        <ListItemIcon>
-          <ViewCarouselIcon fontSize="large" />
-        </ListItemIcon>
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <ViewCarouselIcon fontSize="large" />
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="Add Scene" placement="right" arrow>
+            <ListItemIcon>
+              <ViewCarouselIcon fontSize="large" />
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
         <ListItemText primary="Add Scene" />
       </ListItem>
       <ListItem
@@ -142,9 +182,17 @@ export const MainListItems = (props) => {
         selected={state.selectedIndex === 2}
         onClick={(event) => handleListItemClick(event, 2)}
       >
-        <ListItemIcon>
-          <ImageSearchIcon fontSize="large" />
-        </ListItemIcon>
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <ImageSearchIcon fontSize="large" />{" "}
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="Load Scene" placement="right" arrow>
+            <ListItemIcon>
+              <ImageSearchIcon fontSize="large" />{" "}
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
         <ListItemText primary="Load Scene" />
       </ListItem>
       <Divider />
@@ -154,16 +202,30 @@ export const MainListItems = (props) => {
         selected={state.selectedIndex === 3}
         onClick={(event) => handleListItemClick(event, 3)}
       >
-        <ListItemIcon>
-          <ComposedIcon
-            position="bottom-end"
-            color="inherit"
-            size="medium"
-            icon="info-circle"
-            extraIcon="user-edit"
-          />
-        </ListItemIcon>
-        <ListItemText primary="Edit Info" />
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <ComposedIcon
+              position="bottom-end"
+              color="inherit"
+              size="medium"
+              icon="info-circle"
+              extraIcon="user-edit"
+            />
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="Edit Hotspot" placement="right" arrow>
+            <ListItemIcon>
+              <ComposedIcon
+                position="bottom-end"
+                color="inherit"
+                size="medium"
+                icon="info-circle"
+                extraIcon="user-edit"
+              />
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
+        <ListItemText primary="Edit Hotspot" />
       </ListItem>
       <ListItem
         disabled={props.disable}
@@ -171,15 +233,29 @@ export const MainListItems = (props) => {
         selected={state.selectedIndex === 4}
         onClick={(event) => handleListItemClick(event, 4)}
       >
-        <ListItemIcon>
-          <ComposedIcon
-            position="bottom-end"
-            color="inherit"
-            size="medium"
-            icon="photo-video"
-            extraIcon="user-edit"
-          />
-        </ListItemIcon>
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <ComposedIcon
+              position="bottom-end"
+              color="inherit"
+              size="medium"
+              icon="photo-video"
+              extraIcon="user-edit"
+            />
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="Edit Scene" placement="right" arrow>
+            <ListItemIcon>
+              <ComposedIcon
+                position="bottom-end"
+                color="inherit"
+                size="medium"
+                icon="photo-video"
+                extraIcon="user-edit"
+              />
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
         <ListItemText primary="Edit Scene" />
       </ListItem>
       <Divider />
@@ -189,15 +265,29 @@ export const MainListItems = (props) => {
         selected={state.selectedIndex === 5}
         onClick={(event) => handleListItemClick(event, 5)}
       >
-        <ListItemIcon>
-          <ComposedIcon
-            position="bottom-end"
-            color="inherit"
-            size="medium"
-            icon="info-circle"
-            extraIcon="times"
-          />
-        </ListItemIcon>
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <ComposedIcon
+              position="bottom-end"
+              color="inherit"
+              size="medium"
+              icon="info-circle"
+              extraIcon="times"
+            />
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="Delete Hotspot" placement="right" arrow>
+            <ListItemIcon>
+              <ComposedIcon
+                position="bottom-end"
+                color="inherit"
+                size="medium"
+                icon="info-circle"
+                extraIcon="times"
+              />
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
         <ListItemText primary="Delete Info" />
       </ListItem>
       <ListItem
@@ -206,15 +296,29 @@ export const MainListItems = (props) => {
         selected={state.selectedIndex === 6}
         onClick={(event) => handleListItemClick(event, 6)}
       >
-        <ListItemIcon>
-          <ComposedIcon
-            position="bottom-end"
-            color="inherit"
-            size="medium"
-            icon="photo-video"
-            extraIcon="times"
-          />
-        </ListItemIcon>
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <ComposedIcon
+              position="bottom-end"
+              color="inherit"
+              size="medium"
+              icon="photo-video"
+              extraIcon="times"
+            />
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="Delete Scene" placement="right" arrow>
+            <ListItemIcon>
+              <ComposedIcon
+                position="bottom-end"
+                color="inherit"
+                size="medium"
+                icon="photo-video"
+                extraIcon="times"
+              />
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
         <ListItemText primary="Delete Scene" />
       </ListItem>
       <Divider />
@@ -224,9 +328,17 @@ export const MainListItems = (props) => {
         selected={state.selectedIndex === 7}
         onClick={(event) => handleListItemClick(event, 7)}
       >
-        <ListItemIcon>
-          <CategoryIcon fontSize="large" />
-        </ListItemIcon>
+        {props.isOpenDrawer ? (
+          <ListItemIcon>
+            <CategoryIcon fontSize="large" />
+          </ListItemIcon>
+        ) : (
+          <StyledTooltip title="More" placement="right" arrow>
+            <ListItemIcon>
+              <CategoryIcon fontSize="large" />
+            </ListItemIcon>
+          </StyledTooltip>
+        )}
         <ListItemText primary="More" />
         {state.selectedIndex === 7 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
@@ -236,21 +348,45 @@ export const MainListItems = (props) => {
             <FormGroup>
               <FormControlLabel
                 control={
-                  <Switch
-                    checked={state.isAutoRotate}
-                    onChange={handleListSwitchChange}
-                    name="isAutoRotate"
-                  />
+                  props.isOpenDrawer ? (
+                    <Switch
+                      checked={state.isAutoRotate}
+                      onChange={handleListSwitchChange}
+                      name="isAutoRotate"
+                    />
+                  ) : (
+                    <StyledTooltips title="Auto Rotate" placement="right" arrow>
+                      <Switch
+                        checked={state.isAutoRotate}
+                        onChange={handleListSwitchChange}
+                        name="isAutoRotate"
+                      />
+                    </StyledTooltips>
+                  )
                 }
                 label="Auto Rotate"
               />
               <FormControlLabel
                 control={
-                  <Switch
-                    checked={state.isCompass}
-                    onChange={handleListSwitchChange}
-                    name="isCompass"
-                  />
+                  props.isOpenDrawer ? (
+                    <Switch
+                      checked={state.isCompass}
+                      onChange={handleListSwitchChange}
+                      name="isCompass"
+                    />
+                  ) : (
+                    <StyledTooltips
+                      title="Show Compass"
+                      placement="right"
+                      arrow
+                    >
+                      <Switch
+                        checked={state.isCompass}
+                        onChange={handleListSwitchChange}
+                        name="isCompass"
+                      />
+                    </StyledTooltips>
+                  )
                 }
                 label="Show Compass"
               />

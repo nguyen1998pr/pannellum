@@ -98,7 +98,7 @@ export default function EditSceneDialog(props) {
     if (state.hotSpot["sceneId"] === getCurrentScene()) {
       loadScene(state.hotSpot["sceneId"]);
     }
-    props.close(3);
+    props.close(3, "Edit Scene Successful !");
   };
 
   return (
