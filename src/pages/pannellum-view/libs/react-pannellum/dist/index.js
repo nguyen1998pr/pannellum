@@ -2237,7 +2237,7 @@ var pannellum = (function (window, document, undefined$1) {
     var aboutMsg = document.createElement("span");
     aboutMsg.className = "pnlm-about-msg";
     aboutMsg.innerHTML =
-      '<a href="https://pannellum.org/" target="_blank">Pannellum</a>';
+      '<a href="https://solutions.viettel.vn/vi" target="_blank">Viettel Solution</a>';
     uiContainer.appendChild(aboutMsg);
     dragFix.addEventListener("contextmenu", aboutMessage); // Create info display
 
