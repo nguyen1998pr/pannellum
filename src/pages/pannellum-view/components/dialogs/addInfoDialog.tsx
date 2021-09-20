@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
-import { addHotSpot } from "../../libs/react-pannellum";
+import { addHotSpot } from "../../libs/react-pannellum/dist";
 import { useFormControls } from "../validiations/addInfoValidation";
 import { helperTextStyles } from "../styles";
 
@@ -192,7 +192,7 @@ export default function AddInfoDialog(props) {
                   name="sname"
                   style={{ marginTop: "15px", marginBottom: "10px" }}
                   FormHelperTextProps={{ classes: helperTextStyles() }}
-                  label="Scene Name"
+                  label="Target Scene"
                   variant="outlined"
                   margin="dense"
                   error={errors["sname"]?.length > 0}

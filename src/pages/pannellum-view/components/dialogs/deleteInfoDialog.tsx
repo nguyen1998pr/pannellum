@@ -6,7 +6,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { removeHotSpot } from "../../libs/react-pannellum";
+import { removeHotSpot } from "../../libs/react-pannellum/dist";
 import Button from "@material-ui/core/Button";
 import { useFormControls } from "../validiations/deleteInfoValidation";
 import { helperTextStyles } from "../styles";

@@ -22,7 +22,9 @@ import DeleteSceneDialog from "../components/dialogs/deleteSceneDialog";
 import LoadSceneDialog from "../components/dialogs/loadSceneDialog";
 import EditInfoDialog from "../components/dialogs/editInfoDialog";
 import EditSceneDialog from "../components/dialogs/editSceneDialog";
-import { Box, Button, Input } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
+import { saveAs } from "file-saver";
+import { initialState } from "./default-config";
 import ReactPannellum, {
   mouseEventToCoords,
   changeMouseCursor,
@@ -30,7 +32,9 @@ import ReactPannellum, {
   startAutoRotate,
   stopAutoRotate,
   showCompass,
-} from "../libs/react-pannellum";
+  addScene,
+  destroy,
+} from "../libs/react-pannellum/dist";
 
 const drawerWidth = 240;
 
@@ -124,6 +128,7 @@ const types = [{ title: "info" }, { title: "scene" }];
 
 export default function Mainpage() {
   const classes = useStyles();
+  let fileReader;
 
   const [state, setState] = useState({
     isOpenDrawer: false, // use to open / close the sidebar content
@@ -153,13 +158,15 @@ export default function Mainpage() {
     scenes: [], // use to save / retrieve array of scenes
     isSceneType: false, // use to define "scene" type of hotspot when "Add"
     isInfoType: false, // use to define "info" type of hotspot when "Add"
-    isAddInfo: false, // use to open / close "Add Info" Dialog
+    isAddInfo: false, // use to open / close "Add Hotspot" Dialog
     isAddScene: false, // use to open / close "Add Scene" Dialog
     isLoadScene: false, // use to open / close "Load Scene" Dialog
-    isEditInfo: false,
+    isEditInfo: false, // use to open / close "Edit Hotspot" Dialog
     isEditScene: false,
-    isDeleteInfo: false, // use to open / close "Delete Info" Dialog
+    isDeleteInfo: false, // use to open / close "Delete Hotspot" Dialog
     isDeleteScene: false, // use to open / close "Delete Scene" Dialog
+    isLoadConfig: false,
+    loadState: false,
     config: {
       sceneFadeDuration: 1000,
     }, // config for viewer
@@ -186,7 +193,10 @@ export default function Mainpage() {
         },
       }));
     } else {
-      setState((s) => ({ ...s, fullScenesInformation: getAllScenes() }));
+      setState((s) => ({
+        ...s,
+        fullScenesInformation: getAllScenes(),
+      }));
     }
   }, [
     state.isAddInfo,
@@ -195,6 +205,21 @@ export default function Mainpage() {
     state.isDeleteInfo,
     state.isDeleteScene,
   ]);
+
+  useEffect(() => {
+    if (state.fullScenesInformation.length)
+      setState((s) => ({ ...s, loadState: false }));
+  }, [state.fullScenesInformation.length]);
+
+  useEffect(() => {
+    if (state.fullScenesInformation.length) {
+      const array = [...state.fullScenesInformation.slice(1)];
+      array.map((value, index) => {
+        return addScene(Object.keys(value)[0], Object.values(value)[0]);
+      });
+      setState((s) => ({ ...s, isLoadConfig: false }));
+    }
+  }, [state.loadState]);
 
   const handleDrawerOpen = () => {
     setState((s) => ({ ...s, isOpenDrawer: true }));
@@ -355,6 +380,35 @@ export default function Mainpage() {
     }
   };
 
+  const handleFileRead = (e) => {
+    const content = fileReader.result;
+    destroy();
+    setState((s) => ({
+      ...s,
+      fullScenesInformation: JSON.parse(content),
+    }));
+  };
+
+  const handleFileChosen = (file) => {
+    if (file) {
+      setState((s) => ({
+        ...initialState,
+        fullScenesInformation: [],
+        isLoadConfig: true,
+        loadState: true,
+      }));
+      fileReader = new FileReader();
+      fileReader.onloadend = handleFileRead;
+      fileReader.readAsText(file);
+    }
+  };
+
+  const exportConfig = () => {
+    const config = JSON.stringify(getAllScenes());
+    const blob = new Blob([config], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, "Panorama Tour Data.txt");
+  };
+
   return (
     <div
       className={classes.root}
@@ -393,7 +447,11 @@ export default function Mainpage() {
             DEMO
           </Typography>
           <Box>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => exportConfig()}
+            >
               Save
             </Button>
             <> </>
@@ -401,6 +459,8 @@ export default function Mainpage() {
               style={{ display: "none" }}
               id="contained-button-file"
               type="file"
+              accept=".txt"
+              onChange={(e) => handleFileChosen(e.target.files[0])}
             />
             <label htmlFor="contained-button-file">
               <Button variant="contained" color="primary" component="span">
@@ -455,7 +515,11 @@ export default function Mainpage() {
               imageSource={
                 Object.values(state.fullScenesInformation[0])[0].imageSource
               }
-              config={state.config}
+              config={
+                state.isLoadConfig
+                  ? Object.values(state.fullScenesInformation[0])[0]
+                  : state.config
+              }
             />
           ) : null}
           {!state.fullScenesInformation.length && (

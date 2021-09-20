@@ -6,7 +6,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { addScene } from "../../libs/react-pannellum";
+import { addScene } from "../../libs/react-pannellum/dist";
 import { defaultConfig } from "../../views/default-config";
 import { useFormControls } from "../validiations/addSceneValidation";
 import { helperTextStyles } from "../styles";
@@ -101,7 +101,6 @@ export default function AddSceneDialog(props) {
         ],
       });
     } else {
-      console.log(state.scene["config"]);
       addScene(state.scene.sceneId, state.scene["config"], addSceneSuccess);
       props.close(3, "Add Scene Successful !");
     }

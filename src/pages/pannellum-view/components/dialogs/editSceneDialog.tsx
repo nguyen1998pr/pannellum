@@ -11,7 +11,7 @@ import {
   getCurrentScene,
   loadScene,
   getAllScenes,
-} from "../../libs/react-pannellum";
+} from "../../libs/react-pannellum/dist";
 import { useFormControls } from "../validiations/editSceneValidation";
 import { helperTextStyles } from "../styles";
 import { defaultConfig } from "../../views/default-config";

@@ -56,3 +56,53 @@ export const defaultConfig = {
   cubeMap: [],
   multiRes: {},
 };
+
+export const initialState = {
+  isOpenDrawer: false, // use to open / close the sidebar content
+  openDialog: "", // use to open special dialog
+  isSelect: -1, // use to remove highlight of item of sidebar
+  hotSpot: {
+    // use to save config of hotSpot
+    id: "",
+    sceneId: "",
+    pitch: "",
+    type: "",
+    yaw: "",
+    text: "",
+    URL: "",
+  },
+  scene: {
+    // use to save / retrieve config of scene
+    sceneId: "",
+    config: {
+      type: "equirectangular",
+      text: "",
+      title: "",
+      author: "",
+      imageSource: "",
+    },
+  },
+  scenes: [], // use to save / retrieve array of scenes
+  isSceneType: false, // use to define "scene" type of hotspot when "Add"
+  isInfoType: false, // use to define "info" type of hotspot when "Add"
+  isAddInfo: false, // use to open / close "Add Hotspot" Dialog
+  isAddScene: false, // use to open / close "Add Scene" Dialog
+  isLoadScene: false, // use to open / close "Load Scene" Dialog
+  isEditInfo: false, // use to open / close "Edit Hotspot" Dialog
+  isEditScene: false,
+  isDeleteInfo: false, // use to open / close "Delete Hotspot" Dialog
+  isDeleteScene: false, // use to open / close "Delete Scene" Dialog
+  isLoadConfig: false,
+  loadState: false,
+  config: {
+    sceneFadeDuration: 1000,
+  }, // config for viewer
+  fullScenesInformation: [], // use save / retrieve all scenes information / configs of this view
+  snackbarAction: {
+    // use to show / hide notification
+    isOpen: false,
+    message: "",
+    type: "",
+  },
+  coordinates: {},
+};

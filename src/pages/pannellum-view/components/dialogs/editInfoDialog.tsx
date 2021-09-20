@@ -10,7 +10,7 @@ import {
   addHotSpot,
   removeHotSpot,
   getAllScenes,
-} from "../../libs/react-pannellum";
+} from "../../libs/react-pannellum/dist";
 import Button from "@material-ui/core/Button";
 import { useFormControls } from "../validiations/deleteInfoValidation";
 import { helperTextStyles } from "../styles";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentScene } from "../../libs/react-pannellum";
+import { getCurrentScene } from "../../libs/react-pannellum/dist";
 
 const PostContactForm = async (
   values: any,
