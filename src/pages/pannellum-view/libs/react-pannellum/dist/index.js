@@ -4113,7 +4113,6 @@ var pannellum = (function (window, document, undefined$1) {
           div.onclick = div.ontouchend = function () {
             if (!div.clicked) {
               div.clicked = true;
-              console.log(hs);
               dLastPitch = hs.pitch;
               dLastYaw = hs.yaw;
               dLastHfov = _this.getHfov();
