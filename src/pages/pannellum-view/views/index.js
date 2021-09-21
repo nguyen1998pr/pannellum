@@ -24,7 +24,7 @@ import EditInfoDialog from "../components/dialogs/editInfoDialog";
 import EditSceneDialog from "../components/dialogs/editSceneDialog";
 import { Box, Button } from "@material-ui/core";
 import { saveAs } from "file-saver";
-import { initialState } from "./default-config";
+import { initialState, pinCusor } from "./default-config";
 import ReactPannellum, {
   mouseEventToCoords,
   changeMouseCursor,
@@ -202,6 +202,8 @@ export default function Mainpage() {
     state.isAddInfo,
     state.isAddScene,
     state.isLoadScene,
+    state.isEditInfo,
+    state.isEditScene,
     state.isDeleteInfo,
     state.isDeleteScene,
   ]);
@@ -413,7 +415,7 @@ export default function Mainpage() {
     <div
       className={classes.root}
       style={{
-        cursor: state.isAddInfo ? "crosshair" : "default",
+        cursor: state.isAddInfo ? `url(${pinCusor}), pointer` : "default",
       }}
     >
       <CssBaseline />
